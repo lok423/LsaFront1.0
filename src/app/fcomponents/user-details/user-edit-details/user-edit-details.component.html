@@ -1,0 +1,234 @@
+    <div class="card" styles="margin-top: 25px;">
+      <div class="card-header m2">Details About You</div>
+      <div class="card-body">
+        <div class="l2">User Information</div>
+        <div *ngIf="feedbackMessage" class="s3Blue">{{feedbackMessage}}</div>
+        <form *ngIf="userInfo" [formGroup]="userDetailsForm">
+          <!--First Name-->
+          <div class="card-border-top" (mouseenter)="mouseEnter('First Name')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold nameIcon">First Name</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.first_name}}</span>
+                <div *ngIf="fNameStatus" >
+                  <input type="text" name="firstName" value="{{userInfo.first_name}}" class="form-control inputBox" placeholder="Please enter your first name." formControlName="first_name">
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.first_name.errors?.minlength">First name at least must be 2 characters long.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.first_name.errors?.maxlength">First name can not be more than 30 characters.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.first_name.errors?.pattern">First name contains only characters.</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="fNameStatus = !fNameStatus;changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!--Last Name-->
+          <div class="card-border" (mouseenter)="mouseEnter('Last Name')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold nameIcon">Last Name</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.last_name}}</span>
+                <div *ngIf="lNameStatus" >
+                  <input type="text" name="lastName" value="{{userInfo.last_name}}" class="form-control inputBox" placeholder="Please enter your last name." formControlName="last_name" />
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.last_name.errors?.minlength || (userDetailsForm.controls.last_name.errors?.required && userDetailsForm.controls.last_name.touched)">Last name must be at least 2 characters long.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.last_name.errors?.maxlength || (userDetailsForm.controls.last_name.errors?.required && userDetailsForm.controls.last_name.touched)">Last name can not be more than 30 characters.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.last_name.errors?.pattern">Last name contains only characters.</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="lNameStatus = !lNameStatus;changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!--Phone Number-->
+          <div class="card-border" (mouseenter)="mouseEnter('Phone Number')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold phoneIcon">Phone Number</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.phone_num_pri}}</span>
+                <div *ngIf="pNumberStatus" >
+                  <input type="text" class="form-control inputBox" value="{{userInfo.phone_num_pri}}" name="pNumber" placeholder="Please enter your phone number." formControlName="phone_num_pri" />
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.phone_num_pri.errors?.minlength || (userDetailsForm.controls.phone_num_pri.errors?.required && userDetailsForm.controls.phone_num_pri.touched)">Phone number must be 7 digits long.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.phone_num_pri.errors?.maxlength || (userDetailsForm.controls.phone_num_pri.errors?.required && userDetailsForm.controls.phone_num_pri.touched)">Phone number can not be more than 12 digits.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.phone_num_pri.errors?.pattern">Phone number must be digits.</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="pNumberStatus = !pNumberStatus;changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!--Location-->
+          <div class="card-border" (mouseenter)="mouseEnter('Location')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold locationIcon">Location</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.location}}</span>
+                <div *ngIf="locationStatus" >
+                  <select type="text" name="location" value="{{userInfo.location}}" class="form-control inputBox" formControlName="location">
+                     <option>Auckland Central</option>
+                     <option>Auckland North</option>
+                     <option>Auckland West</option>
+                     <option>Auckland South</option>
+                     <option>Auckland East</option>
+                     <option>Christchurch</option>
+                     <option>Dunedin</option>
+                     <option>Hamilton</option>
+                     <option>Tauranga</option>
+                     <option>Wellington Central</option>
+                     <option>Hutt Valley</option>
+                     <option>Porirua</option>
+                     <option>Kapiti Coast</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="locationStatus = !locationStatus;changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!--Date of birth-->
+          <div class="card-border" (mouseenter)="mouseEnter('Date Of Birth')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold dateIcon">Date Of Birth</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.DOB}}</span>
+                <div *ngIf="DOBStatus">
+                  <input type="date" value="{{userInfo.DOB}}" class="form-control inputBox" formControlName="DOB" value="1950-01-01" min="1950-01-01" max="2019-01-01">
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.DOB.errors?.dob || (userDetailsForm.controls.DOB.errors?.required && userDetailsForm.controls.DOB.touched)" >Year of Birth can not be earlier than 1950.</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="DOBStatus = !DOBStatus;changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!--Gender-->
+          <div class="card-border" (mouseenter)="mouseEnter('Gender')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold genderIcon">Gender</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.gender}}</span>
+                <div *ngIf="genderStatus">
+                  <select type="text" name="gender" value="{{userInfo.gender}}" class="form-control inputBox" formControlName="gender">
+                  <option>Unspecified</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="genderStatus = !genderStatus;changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!--Contact Name-->
+          <div class="card-border" (mouseenter)="mouseEnter('Parent/Guardian/Other contact name')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold pnameIcon">Parent/guardian/<br>other contact name</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.other_contact_name}}</span>
+                <div *ngIf="pNameStatus">
+                  <input type="text" name="pNameStatus" value="{{other_contact_name}}" class="form-control inputBox" placeholder="Please enter your contact name." formControlName="other_contact_name">
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_name.errors?.minlength || (userDetailsForm.controls.other_contact_name.errors?.required && userDetailsForm.controls.other_contact_name.touched)">Name must be 2 characters long.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_name.errors?.maxlength || (userDetailsForm.controls.other_contact_name.errors?.required && userDetailsForm.controls.other_contact_name.touched)">Name can not be more than 15 characters.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_name.errors?.pattern">Name contains only characters.</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="pNameStatus = !pNameStatus; changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+          <!--Contact Phone-->
+          <div class="card-border" (mouseenter)="mouseEnter('Parent/Guardian/Other contact phone')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold pphoneIcon">Parent/guardian/<br>other contact phone</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.other_contact_phone_num}}</span>
+                <div *ngIf="pPhoneStatus" >
+                  <input type="text" name="pPhoneStatus" value="{{userInfo.other_contact_phone_num}}" class="form-control inputBox" placeholder="Please enter your contact phone." formControlName="other_contact_phone_num">
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_phone_num.errors?.minlength || (userDetailsForm.controls.other_contact_phone_num.errors?.required && userDetailsForm.controls.other_contact_phone_num.touched)">Phone number must be 7 digits long.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_phone_num.errors?.maxlength || (userDetailsForm.controls.other_contact_phone_num.errors?.required && userDetailsForm.controls.other_contact_phone_num.touched)">Phone number can not be more than 15 characters.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_phone_num.errors?.pattern">Phone number must be digits.</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="pPhoneStatus = !pPhoneStatus; changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+          <!--Contact Relation-->
+          <div class="card-border-bottom" (mouseenter)="mouseEnter('Parent/Guardian/Other contact relation')">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="s2bold prelationIcon">Parent/guardian/<br>other contact relation</span>
+              </div>
+              <div class="col-md-7">
+                <span style="color:grey;">{{userInfo.other_contact_relation}}</span>
+                <div *ngIf="pRelationStatus" >
+                  <input type="text" name="pRelationStatus" value="{{userInfo.other_contact_relation}}" class="form-control inputBox" placeholder="Please enter your contact relation." formControlName="other_contact_relation">
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_relation.errors?.minlength || (userDetailsForm.controls.other_contact_relation.errors?.required && userDetailsForm.controls.other_contact_relation.touched)">Relation must be 2 characters long.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_relation.errors?.maxlength || (userDetailsForm.controls.other_contact_relation.errors?.required && userDetailsForm.controls.other_contact_relation.touched)">Relation can not be more than 15 characters.</div>
+                  <div class="warning invalid_feedback" *ngIf="userDetailsForm.controls.other_contact_relation.errors?.pattern">Relation must be characters.</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a (click)="pRelationStatus = !pRelationStatus; changeText($event);" style="float: right; padding-left:20px;" class="editIcon pointer">EDIT</a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!--Submit button-->
+          <button *ngIf="DOBStatus===true || locationStatus===true || pNumberStatus===true || lNameStatus || fNameStatus || genderStatus || pNameStatus || pPhoneStatus || pRelationStatus"
+           (click)="onSubmit()" [disabled]="userDetailsForm.invalid" class="btn btn-primary" style="margin-top: 20px;">Save</button>
+
+        </form>
+        <div *ngIf="feedbackMessage" class="s3Blue">{{feedbackMessage}}</div>
+      </div>
+      <!--*ngIf-->
+    </div>
+    <!--card-->

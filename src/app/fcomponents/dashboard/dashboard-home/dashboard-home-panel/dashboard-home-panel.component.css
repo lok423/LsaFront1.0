@@ -1,0 +1,20 @@
+label{
+    margin-bottom: 0;
+}
+
+/* styles about cursor.  */
+.pointer {
+    cursor: pointer;
+}
+
+
+/* style about clicking to show dialog */
+#imgLink{
+    color: #0099FF;
+}
+#imgLink:hover{
+    color: blue;
+}
+#imgProfile:hover{
+    transform: scale(1.08);
+}

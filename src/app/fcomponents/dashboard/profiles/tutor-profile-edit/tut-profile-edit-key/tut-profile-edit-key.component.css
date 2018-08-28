@@ -1,0 +1,71 @@
+  img{
+    border-radius: 100%;
+    width: 180px;
+    cursor: pointer;
+    border:1px solid 
+    #dddddd;
+  }
+  small{
+    position: relative;
+    left:30px;
+  }
+  .file {
+    position: relative;
+    display: inline-block;
+    background: #0099FF;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 30px;
+    margin-top: 10px;
+  }
+
+  .file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .lImage {
+    padding:20px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 10px;
+  }
+
+  pre{
+    font-family: Helvetica;
+    font-size:15px;
+    color:#424242;  
+    white-space: pre-wrap;
+  }
+  .indicator{
+    color: rgb(192, 7, 7); 
+    font-size: 15px;
+  }
+  #a-btn{
+    color:rgb(0, 132, 255);
+    cursor: pointer;
+  }
+  #f-btn{
+    width:75px; 
+  }
+  #f-btn-right {
+    width:75px; 
+    float: right; 
+  }
+  form {
+    padding:20px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 10px;
+  }
+  @media(max-width:768px){
+    .lImage{
+        padding-top: 16px;
+        border-top: 1px solid #e6e6e6; 
+    }
+  }

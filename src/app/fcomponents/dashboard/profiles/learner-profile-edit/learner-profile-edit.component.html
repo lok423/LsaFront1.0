@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <div class="card">
+        <div class="card-header">
+          <p class="l2">Learner profile</p>
+        </div>
+        <div class="card-body">
+          <div class="register-form">
+            <div class="submit_success" [hidden]="!submitted">
+              <p>Submitted Successful.</p>
+            </div>
+            <form [formGroup]="learnersForm" (ngSubmit)="onSubmit()">
+              <div class="input_group">
+                <label>
+                  <input type="checkbox" class="example-margin" [(ngModel)]="iAmLearner" [ngModelOptions]="{standalone: true}">
+                  User of this account is a learner.
+                </label>
+                <!-- <input formControlName="first_name" [disableControl]="disable">-->
+                <div class="form_input" *ngIf="iAmLearner">
+                  <mat-form-field class="field-width" color="primary">
+                    <input matInput id="first_name" formControlName="learner_first_name" name="first_name" type="text"
+                           placeholder="Student first name">
+                    <mat-error
+                      *ngIf="learnersForm.controls.learner_first_name.invalid && (learnersForm.controls.learner_first_name.dirty || learnersForm.controls.learner_first_name.touched)">
+                      Please enter valid name, and required.
+                      <mat-error *ngIf="learnersForm.controls.learner_first_name.errors.minlength">
+                        Name must be at least 1 characters long.
+                      </mat-error>
+                      <mat-error *ngIf="learnersForm.controls.learner_first_name.errors.maxlength">
+                        Name must be at least 50 characters short.
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form_input" *ngIf="!iAmLearner">
+                  <mat-form-field class="field-width">
+                    <input matInput id="diff_first_name" formControlName="learner_first_name" name="first_name"
+                           type="text"
+                           placeholder="Student first name">
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input" *ngIf="iAmLearner">
+                  <mat-form-field class="field-width">
+                    <input matInput id="last_name" formControlName="learner_last_name" name="last_name" type="text"
+                           placeholder="Student last name">
+                    <mat-error
+                      *ngIf="learnersForm.controls.learner_last_name.invalid && (learnersForm.controls.learner_last_name.dirty || learnersForm.controls.learner_last_name.touched)">
+                      Please enter valid name, and required.
+                      <mat-error *ngIf="learnersForm.controls.learner_last_name.errors.minlength">
+                        Name must be at least 1 characters long.
+                      </mat-error>
+                      <mat-error *ngIf="learnersForm.controls.learner_last_name.errors.maxlength">
+                        Name must be at least 50 characters short.
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form_input" *ngIf="!iAmLearner">
+                  <mat-form-field class="field-width">
+                    <input matInput id="diff_last_name" formControlName="learner_last_name" name="last_name"
+                           type="text"
+                           placeholder="Student last name">
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input" *ngIf="iAmLearner">
+                  <mat-form-field class="field-width">
+                    <input matInput [min]="minDOB" [max]="maxDOB" [matDatepicker]="picker" formControlName="learner_DOB"
+                           placeholder="My Date of Birth (DD/MM/YYYY)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="learnersForm.controls.learner_DOB.errors?.required">Date of birth is required &
+                      please enter valid date.
+                    </mat-error>
+                    <!-- <mat-error *ngIf="appForm.controls.DOB.errors?.dFormat">Date of birth should be in MM/DD/YYYY format.</mat-error> -->
+                    <mat-error *ngIf="learnersForm.controls.learner_DOB.errors?.mindob">Year of birth year can not be
+                      earlier than 1930.
+                    </mat-error>
+                    <mat-error *ngIf="learnersForm.controls.learner_DOB.errors?.maxdob">Year of birth year can not be
+                      later than 2020.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form_input" *ngIf="!iAmLearner">
+                  <mat-form-field class="field-width">
+                    <input matInput [min]="minDOB" [max]="maxDOB" [matDatepicker]="picker" formControlName="learner_DOB"
+                           placeholder="My Date of Birth (DD/MM/YYYY)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+                </div>
+                <div class="form_input">
+                  <mat-form-field class="field-width">
+                    <mat-select multiple placeholder="My Subjects" [formControl]="learnersForm.controls['subject']">
+                      <mat-option *ngFor="let subjects of subject_list" [value]="subjects"> {{ subjects }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form_input">
+                  <mat-form-field class="field-width">
+                    <mat-select placeholder="My year level" [formControl]="learnersForm.controls['grade']">
+                      <mat-option *ngFor="let grade of grade_list" [value]="grade"> {{ grade }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form_input">
+                  <mat-form-field class="field-width">
+                    <mat-select multiple placeholder="My Curriculums"
+                                [formControl]="learnersForm.controls['curriculum']">
+                      <mat-option *ngFor="let curriculum of curriculum_list" [value]="curriculum">{{curriculum}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form_input">
+                  <mat-form-field class="field-width">
+                  <textarea matInput #aspirations formControlName="aspiration"
+                            placeholder="My aspirations"></textarea>
+                    <mat-hint align="end">{{aspirations.value?.length || 0}}/50</mat-hint>
+                    <mat-error
+                      *ngIf="learnersForm.controls.aspiration.invalid && (learnersForm.controls.aspiration.dirty || learnersForm.controls.aspiration.touched)">
+                      <mat-error *ngIf="learnersForm.controls.aspiration.errors.required">
+                        Your aspirations is required.
+                      </mat-error>
+                      <mat-error *ngIf="learnersForm.controls.aspiration.errors.minlength">
+                        Your aspirations must be at least 1 characters long.
+                      </mat-error>
+                      <mat-error *ngIf="learnersForm.controls.aspiration.errors.maxlength">
+                        Your aspirations must be at least 50 characters short.
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form_input">
+                  <mat-form-field class="field-width">
+                    <textarea matInput #input formControlName="sp_need" placeholder="Any special Request"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/50</mat-hint>
+                    <mat-error
+                      *ngIf="learnersForm.controls.sp_need.invalid && (learnersForm.controls.sp_need.dirty || learnersForm.controls.sp_need.touched)">
+                      <mat-error *ngIf="learnersForm.controls.sp_need.errors.required">
+                        Special Request is required.
+                      </mat-error>
+                      <mat-error *ngIf="learnersForm.controls.sp_need.errors.minlength">
+                        Special Request must be at least 1 characters long.
+                      </mat-error>
+                      <mat-error *ngIf="learnersForm.controls.sp_need.errors.maxlength">
+                        Special Request must be at least 50 characters short.
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <button type="submit" class="btn btn_blue_large" [disabled]="learnersForm.invalid">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-sm-none d-md-none d-lg-block col-lg-4">
+      <app-side-helper></app-side-helper>
+    </div>
+  </div>
+</div>
+<!-- container -->

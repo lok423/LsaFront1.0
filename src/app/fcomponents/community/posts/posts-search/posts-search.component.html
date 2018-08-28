@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="l1">Articles </div>
+  <button *ngIf="user==3" class="btn btn-primary" routerLink="/app/community/newpost" >Post an article</button>
+  <hr>
+  <div class="row">
+    <div class="col-sm-8">
+      <div *ngIf="errorMessage" class="error-feedback">{{errorMessage}}</div>
+      <div *ngFor="let article of articles" class="card my-4">
+        <a [href]="['http://learnspace.co.nz/app/community/posts/'+article.id]" [routerLink]="['/app/community/posts/'+article.id]" class="article-effect" style="text-decoration: none">
+
+          <div class="card-header bg-white">
+            <img src="{{baseImgUrl}}{{article.author_photo}}" width="30" height="30" style="border-radius: 15px" class="float-left"
+              alt="portrait">
+            <h6 class="text-primary float-left ml-2 py-0 my-0" style="font-size: 12px;">{{article.post_author}}</h6>
+            <br>
+            <p class="text-muted float-left ml-2 py-0 my-0" style="font-size: 10px;">{{article.time}}</p>
+          </div>
+          <img src="{{baseImgUrl}}/community/postpics/{{article.post_image}}" alt="article thumnail" class="card-img-top">
+          <div style="background-image: linear-gradient(116deg,#0699cd,#3bb85c) ; height: 4px;" width="100%"></div>
+          <div class="card-body">
+            <h4 class="card-title text-primary">{{article.post_title}}</h4>
+            <p class="card-text text-dark">{{article.post_des | slice: 0:200}}...</p>
+            <div class="s3">{{article.post_tags | slice: 0:40}}</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card my-3">
+        <div class="card-body">
+          <h3 class="card-title">Articles</h3>
+          <p class="card-text text-secondary">Articles from the Learnspace community.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

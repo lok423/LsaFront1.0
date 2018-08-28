@@ -1,0 +1,23 @@
+[
+  {
+    "pathname": "/app/apply/manager",
+    "cardContent":
+    [{
+      "initHelperMatch": "Application Status",
+      "initHelperText": "Here are some information of your application."
+    },
+    {
+      "helperMatch": "Your application",
+      "helperText": {"firstName": "Enter your <b>first name</b> (It is at least 2 and not more than 15 characters long)", 
+                     "lastName": "Enter your <b>last name</b> (It is at least 2 and not more than 15 characters long)", 
+                     "phone": "Enter your <b>phone</b> (It is at least 7 and not more than 12 digits long)", 
+                     "location": "Select your <b>location</b> of selections given.", 
+                     "Date of Birth": "Enter your <b>date of birth</b> or select date from calendar pop-up and range of <b>birth-year</b> is from <b>1930</b> to <b>2020</b>."}
+    },
+    {
+      "helperMatch": "Next step",
+      "helperText": {"main": "You <b>must</b> select <b>main</b> Subjects and Curriculum from selections given.",
+                     "secondary": "Select secondary Subjects and Curriculum from selections given."}
+    }]
+  }
+]

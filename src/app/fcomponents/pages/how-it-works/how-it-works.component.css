@@ -1,0 +1,9 @@
+.jumbotron{
+    height:180px;
+    padding:10px;
+    background-image:  url("../../../../assets/mainpics/howitworks-header-pic.jpg");
+    background-size: cover;
+    background-position: center;
+    padding-top:44px;
+    
+}

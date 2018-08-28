@@ -1,0 +1,15 @@
+.jumbotron{
+    height:180px;
+    background-image: url("../../../../assets/mainpics/about-header-pic.jpg");
+    z-index: 1;
+    background-position: center ;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin:0px;
+}
+@media (max-width: 768px) { 
+    .jumbotron{
+    background-size: 200%;
+
+    }
+}

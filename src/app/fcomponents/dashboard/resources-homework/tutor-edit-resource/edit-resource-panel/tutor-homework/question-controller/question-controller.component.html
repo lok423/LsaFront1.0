@@ -1,0 +1,66 @@
+<div class="container">
+  <div *ngIf="edit">
+    <div class="d-flex justify-content-start">
+      <div *ngIf="!changeType">
+        <h4>{{typeName}}</h4>
+        <button type="button" class="btn btn-primary" (click)="changeQuestionType()">
+          Change Question Type
+        </button>
+      </div>
+    </div>
+    <div *ngIf="changeType; then questionSelect"></div>
+  </div>
+  <div *ngIf="!edit; then questionSelect"></div>
+  <div class="row">
+    <div style="width: 100%">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<ng-template #questionSelect>
+  <!-- nav type seletion -->
+  <nav id="navbar" class="navbar navbar-expand-sm navbar-dark " style="background-color: #3385ff;">
+    <!-- Brand -->
+    <a class="navbar-brand" href="javascript:void(0)">Question Type</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button id="nacbarToggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="fa fa-caret-down"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <div *ngFor="let type of typeNameMap">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <div *ngIf="type.name=='Short Answer'">
+              <a class="nav-link" href="javascript:void(0)" (click)="selectQuestionType(type.type)">
+                <i class="fa fa-edit"></i>
+                {{type.name}}
+              </a>
+            </div>
+            <div *ngIf="type.name=='Multiple Choice'">
+              <a class="nav-link" href="javascript:void(0)" (click)="selectQuestionType(type.type)">
+                <i class="fa fa-list"></i>
+                {{type.name}}
+              </a>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</ng-template>
+
+<!-- <ng-template #questionSelect>
+  <h5>Select Question Types</h5>
+  <div class="type-selector d-flex justify-content-start col-12">
+    <div *ngFor="let type of typeNameMap">
+      <button type="button" mat-raised-button (click)="selectQuestionType(type.type)">
+        {{type.name}}
+      </button>
+    </div>
+  </div>
+</ng-template> -->

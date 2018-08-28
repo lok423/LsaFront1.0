@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/community/discussions",
+    "cardContent":
+    [{
+      "initHelperMatch": "Discussions Header",
+      "initHelperText": "Discussions Body"
+    },
+    {
+      "helperMatch": "Discussions part 1",
+      "helperText": "Discussions Body 1"
+    },
+    {
+      "helperMatch": "Discussions part 2",
+      "helperText": "Discussions Body 2"
+    },
+    {
+      "helperMatch": "Discussions part 3",
+      "helperText": "Discussions part 3"
+    }]
+  }
+]

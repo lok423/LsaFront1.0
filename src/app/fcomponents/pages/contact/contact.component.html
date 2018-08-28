@@ -1,0 +1,72 @@
+<div class="jumbotron">
+</div>
+  <div style="height:180px;" class="container">
+    <div class="j1">Contact Us</div>
+  </div>
+
+<div class="container">
+  <div class="sectionContent col-12 col-md-8 col-lg-8 col-xl-8">
+    Please feel free to contact us to find out more.
+
+    <p>Phone <a>02102264770</a></p>
+    <p>Email <a href="info@learnspace.co.nz">info@learnspace.co.nz</a></p>
+
+    Or fill out the form below. 
+    <hr>  
+    <div class="hlText1" *ngIf="successMessage">{{successMessage}}</div>
+    <br>    
+    <form class="col-12 col-md-8" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group">  
+           <div class="invalid_feedback" *ngIf="name.errors?.required && name.touched">Please enter your name</div>
+           <div class="invalid_feedback" *ngIf=" name.errors?.minlength && name.touched ">
+              Your name shall be at least 2 characters
+           </div>
+           <input class="form-control" type="name" required minlength="2" name="name" placeholder="Name"
+           [ngClass]="{'is-invalid':name.errors?.required && name.touched}" [(ngModel)]="loginForm.name" #name="ngModel">
+        </div>
+        
+        <div class="form-group">
+           <div class="invalid_feedback" *ngIf="email.errors?.required && email.touched">Please input your E-mail</div>
+           <div class="invalid_feedback" *ngIf="email.errors?.pattern && email.touched">
+              Incorrect email entered
+           </div>
+           <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="E-mail" 
+           [ngClass]="{'is-invalid':email.errors?.required && email.touched}" [(ngModel)]="loginForm.email" #email="ngModel">
+        </div>
+  
+        <div class="form-group">
+            <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please input your Phone number</div>
+            <div class="invalid_feedback" *ngIf="phone.errors?.pattern && phone.touched">
+               Phone number length should at least 7 characters
+            </div>
+            <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone"placeholder="Phone number" 
+            [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="loginForm.phone" #phone="ngModel">
+         </div>
+  
+        <div class="form-group">
+            <div class="invalid_feedback" *ngIf="title.errors?.required && title.touched">Please input your title</div>
+            <div class="invalid_feedback" *ngIf="title.errors?.minlength && title.touched">
+              The character length of your title should be greater 2.
+           </div>
+           <input class="form-control" type="title" required minlength="2" name="title" placeholder="Title message"
+           [ngClass]="{'is-invalid':title.errors?.required && title.touched}" [(ngModel)]="loginForm.tutor_name" #title="ngModel">
+        </div>
+
+        <div class="form-group">
+           <div class="invalid_feedback" *ngIf="message.errors?.required && message.touched">Please input your message</div> 
+           <div class="invalid_feedback" *ngIf="message.errors?.minlength && message.touched">
+              The character length of your message should be greater than 10 characters
+           </div>
+           <textarea class="form-control" type="message" rows="3" required minlength="10" name="message" placeholder="Write your message here!" 
+           [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="loginForm.message" #message="ngModel"></textarea>
+        </div>
+  
+        <div class="invalid_feedback" *ngIf="feedback_message">{{feedback_message}} </div>
+  
+        <button type="submit" value="Submit" class="col-12 btn btn-lg btn-primary">Submit</button>
+        
+      </form>
+  
+
+  </div>
+</div>

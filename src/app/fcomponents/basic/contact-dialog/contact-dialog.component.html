@@ -1,0 +1,57 @@
+<mat-dialog-content>
+  <h2 md-dialog-title style="text-align:center;"> Contact {{data}} </h2>
+  <hr>
+  <div *ngIf="contactForm == true;else success">
+      
+  <div style="text-align:center;" *ngIf="fillAll">
+    <h5>{{fillAll}}</h5>
+      <hr>
+  </div>
+  
+  <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="form-group">
+      <div *ngIf="contactName.errors?.required && contactName.touched" class="invalid_feedback">
+      </div>
+      <div *ngIf="contactName.errors?.minlength && contactName.touched" class="invalid_feedback">
+        Must be at least 2 characters
+        </div>
+        <input type="text" class="form-control" placeholder="Your Name" [(ngModel)]="contactUs.name" name="name" #contactName="ngModel" minlength="2" required
+          [ngClass]="{'is-invalid': contactName.errors?.required && contactName.touched || contactName.errors?.minlength}">
+      </div>
+  
+      <div class="form-group">
+        <div *ngIf="contactEmail.errors?.required && contactEmail.touched" class="invalid_feedback">
+        </div>
+        <div *ngIf="contactEmail.errors?.pattern && contactEmail.touched" class="invalid_feedback">
+          Email is Invalid
+        </div>
+        <input type="text" class="form-control" placeholder="Email" [(ngModel)]="contactUs.email" name="email" #contactEmail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          [ngClass]="{'is-invalid': contactEmail.errors?.required && contactEmail.touched || contactEmail.errors?.pattern}" > 
+      </div>
+
+      <div class="form-group">
+        <div *ngIf="contactPhone.errors?.required && contactPhone.touched" class="invalid_feedback">
+        </div>
+        <div *ngIf="contactPhone.errors?.minlength && contactPhone.touched" class="invalid_feedback">
+          Phone number is Invalid
+        </div>
+        <input type="tel" class="form-control" placeholder="Phone Number" [(ngModel)]="contactUs.phone" name="phone" #contactPhone="ngModel" required minlength="7"  
+          [ngClass]="{'is-invalid': contactPhone.errors?.required && contactPhone.touched || contactPhone.errors?.minlength}" > 
+      </div>
+
+      <div class="form-group">
+        <textarea type="text" class="form-control" placeholder="Enter your message here" id="sp_ques_1" [(ngModel)]="contactUs.message" name="message" rows="3"></textarea>
+      </div>
+      
+      <input type="submit" class="btn btn-info btn-lg btn-block" value="Submit">
+  </form>
+</div>
+
+  <ng-template #success> 
+    <div style="text-align:center; margin-bottom:30px; ">
+      Thank you for your message. We'll get back to you ASAP.
+    </div>
+  </ng-template>
+  
+
+  </mat-dialog-content>

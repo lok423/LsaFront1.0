@@ -1,0 +1,192 @@
+/* ::ng-deep mat-horizontal-stepper .mat-horizontal-content-container{
+  padding: 0px;
+} */
+
+.choose-res {
+  margin: 2rem;
+  text-align: center;
+}
+
+.choose-res button {
+  margin: 1rem;
+}
+
+.tutor-homework {
+  padding: 1rem;
+  /* margin: 0.6rem; */
+  margin-bottom: 0.6rem;
+  margin-left: -24px;
+  margin-right: -24px;
+  /* background-color: rgb(239, 252, 255); */
+}
+
+.required-f {
+
+}
+
+.required-f::after {
+  content: "*";
+  color: red;
+}
+
+
+#homework-form {
+}
+
+#homework-img-preview {
+  text-align: center;
+}
+
+#homework-img-preview img {
+  /* width: 250px;
+  height: 200px; */
+  max-height: 200px;
+}
+
+.btn-style {
+  float: right;
+}
+
+.clickable{
+  cursor:pointer;
+}
+
+.invalid-input {
+  border: 1px solid;
+  box-shadow: 0px 0px 1px 1px red;
+}
+
+.invalid-btn {
+  box-shadow: 0px 0px 1.5px 1.5px red;
+}
+
+.form-error p {
+  font-weight: 400;
+  color: red;
+}
+
+.pageTitle{
+
+}
+
+.mat-horizontal-content-container {
+  padding: 0;
+}
+
+.next-div {
+  text-align: center;
+}
+
+.next-div button {
+  width: 50%;
+}
+
+@media only screen and (max-width: 576px){
+  .pageTitle{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  img{
+    max-width:250px;
+  }
+  .container{
+    padding:0px;
+  }
+}
+
+.pageText{
+  padding-top: 10px;
+}
+
+.err-msg {
+  font-style: italic;
+}
+
+@media only screen and (max-width: 576px){
+  .pageText{
+    padding-top: 5px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .mat-horizontal-stepper-header{
+    padding: 50px;
+    margin-right: 0;
+  }
+  img{
+    max-width:250px;
+  }
+}
+
+@media( max-width: 990px) {
+  img{
+    max-width:150px;
+  }
+  .upload-div{
+    text-align: center;
+  }
+  .next-div{
+    text-align: center;
+  }
+  .savechange-div{
+    text-align: center;
+  }
+}
+@media (min-width: 1201px) {
+  img{
+    max-width:190px;
+  }
+}
+
+
+
+.stepper-form {
+  background-color: yellow;
+}
+
+.step-display {
+  display: none;
+}
+
+.step-icon {
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  color: #1E90FF;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 5px;
+  margin-right: 2px;
+}
+
+.step-icon:hover {
+  color: white;
+  background-color: #A9A9A9;
+}
+
+.step-icon:active {
+  background-color: green;
+}
+
+.stepper-tab div:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  width: 265px;
+  height: 3px;
+  background-color: #ddd;
+  margin-top: 25px;
+  margin-left: 5px;
+}
+
+/* .step-icon::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background-color: #ddd;
+  margin-top: 25px;
+  margin-left: 5px;
+} */

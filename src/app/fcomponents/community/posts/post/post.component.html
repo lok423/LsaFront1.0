@@ -1,0 +1,29 @@
+<div class="container">
+    <div *ngIf="article" class="l2">{{article.post_title}}</div>
+    <div *ngIf="article" class="m2">{{article.post_subTitle}}</div>
+    <br>
+    <div *ngIf="article" class="profile row">
+        <div *ngIf="article.author_photo" class="col-4 col-sm-2 col-md-2 col-lg-1 col-xl-1">
+            <img src="{{baseUrl}}/tutorimg/{{article.author_photo}}" width="80" height="80" style="border-radius: 80px">
+        </div>
+        <div class="col-8 col-sm-9 col-md-8 col-lg-3 col-xl-2">
+            <a href="#">{{article.post_author}}</a>
+            <div class="s2bold">{{article.updated_at | date:'fullDate'}}</div>
+        </div>
+    </div>
+    <br>
+    <div *ngIf="article" class="s3">{{article.post_tags}}</div>
+    <div *ngIf="article" class="s3">{{article.post_des}}</div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 col-xl-2"></div>
+        <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+            <div *ngIf="article" class="card">
+                <img *ngIf="article.post_image" class="card-header" src="http://ls3.api2/community/postpics/{{article.post_image}}">
+                <div class="card-body">
+                    <div innerHTML="{{postBody}}"></div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

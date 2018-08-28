@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/dashboard/tutor/resources",
+    "cardContent":
+    [{
+      "initHelperMatch": "resources Header",
+      "initHelperText": "resources Body"
+    },
+    {
+      "helperMatch": "resources part 1",
+      "helperText": "resources Body 1"
+    },
+    {
+      "helperMatch": "resources part 2",
+      "helperText": "resources Body 2"
+    },
+    {
+      "helperMatch": "resources part 3",
+      "helperText": "resources Body 3"
+    }]
+  }
+]

@@ -1,0 +1,80 @@
+<!-- <div *ngIf="errorMessage" class="error-feedback">{{errorMessage}}</div> -->
+<div class="row ">
+  <!-- left part contains PersonalCard, ProfileHelper, and studentProgress-->
+  <div class="col-md-4 col-lg-4">
+    <!--Personal Card-->
+    <div class="col-12 my-4">
+      <div *ngIf="userInfo" class="card">
+        <div class="card-header p-0 userImg">
+          <img *ngIf="user_profile_photo" type="button" id="imgProfile" class="float-left pointer" (click)="imgDialog()" src={{user_profile_photo}} alt="User Image" width="80" height="80">
+          <div style="padding-top:6px;" class="float-left ml-3 text-left">
+            <label class="s2bold">{{userInfo.first_name}} &nbsp; {{userInfo.last_name}} </label><br>
+            <label class="s3">{{userInfo.location}}</label><br>
+            <a (click)="imgDialog()" id="imgLink" class="pointer">Edit Image</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div *ngIf="uRole=='3'" class="s3bold">Teaches
+            <div class="s4">{{tutorInfo.discipline}}</div>
+            Curriculum
+            <div class="s4">{{tutorInfo.curriculum}}</div>
+          </div>
+          <div *ngIf="uRole=='2'" class="s3bold">Teaches
+            <div class="s4">{{applyInfo.discipline}}</div>
+            Curriculum
+            <div class="s4">{{applyInfo.curriculum}}</div>
+          </div>
+          <div *ngIf="uRole=='1'" class="s3bold">Learning
+            <div class="s4"></div>
+            Teaches
+            <div class="s4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Profile Helper-->
+    <div class="col-12 my-4">
+      <div *ngIf="helpers" class="card">
+        <div class="card-header s2bold">
+          <div *ngIf="uRole=='3'">Complete your teaching profile</div>
+          <div *ngIf="uRole=='1'||uRole=='2'">Complete your profile</div>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let helper of helpers">
+            <a [routerLink]="helper.destination" href="#" class="s3Blue">{{helper.main}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Student progress-->
+    <!-- <div class="col-12 my-4">
+      <div *ngIf="uRole==3" class="card">
+        <div class="card-header s2bold">My student's progress</div>
+        <div class="card-body">
+        </div>
+      </div>
+    </div> -->
+  </div>  <!-- left part column -->
+
+
+  <!-- right part contains Lessons and Posts -->
+  <div class="col-md-8 mol-lg-8">
+
+    <!--Lessons-->
+    <div class="col-12 my-4">
+      <div class="card">
+        <div class="card-header m2">My Lessons</div>
+        <div class="card-body">
+          <div *ngIf="!sessions" class="s3Blue">You have no sessions yet.</div>
+          <app-dashboard-home-sessions (s_indicatorEvent)='receiveMessage($event)' [locations]='tutorInfo.teaching_locations' *ngIf='uRole === 3'></app-dashboard-home-sessions>
+          <app-dashboard-home-sessions (s_indicatorEvent)='receiveMessage($event)' *ngIf='uRole === 1 || uRole === 2'></app-dashboard-home-sessions>
+        </div>
+      </div>
+    </div>
+
+    <!--Posts-->
+
+  </div>   <!--right part column-->
+</div>   <!--row-->

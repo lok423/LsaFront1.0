@@ -1,0 +1,75 @@
+<div class="short-ans">
+  <div class="d-flex flex-column">
+    <div>
+      <p class="m2 quiz-header">Short Answer Questions</p>
+    </div>
+    <div class="quiz-div" [ngClass]="accessType == 'modify' ? 'quiz-modify' : 'quiz-display'">
+      <div *ngIf="accessType == 'display' || accessType == 'overview'">
+        <div *ngFor="let quiz of questionArray">
+          <app-short-answers
+          [viewerType]="viewerType"
+          [accessType]="accessType"
+          [questionInfo]="quiz"
+          ></app-short-answers>
+        </div>
+      </div>
+
+      <div *ngIf="accessType == 'modify'">
+        <div *ngFor="let quiz of questionArray">
+          <div *ngIf="quiz.questionSaveStatus == 'saved'">
+            <app-short-answers
+            [viewerType]="viewerType"
+            [accessType]="accessType"
+            [questionStatus]="'saved'"
+            [questionInfo]="quiz"
+            (collectFormValue)='handleSaveQuestion($event)'
+            (editQuiz)='handleEditQuestion($event)'
+            (deleteQuiz)='handleDeleteQuestion($event)'
+            (discardQuiz)='handleDiscardQuestion($event)'
+            (upQuestion)='handleQuestionChangePosUp($event)'
+            (downQuestion)='handleQuestionChangePosDown($event)'
+            ></app-short-answers>
+          </div>
+          <div *ngIf="quiz.questionSaveStatus == 'init'">
+            <app-short-answers
+            [viewerType]="viewerType"
+            [accessType]="accessType"
+            [questionStatus]="'init'"
+            [questionId]="questionArray.length"
+            [createQuizObj]="getQuestionObj"
+            (collectFormValue)='handleSaveQuestion($event)'
+            (discardQuiz)='handleDiscardQuestion($event)'
+            ></app-short-answers>
+          </div>
+          <div *ngIf="quiz.questionSaveStatus == 'unSaved'">
+            <app-short-answers
+            [viewerType]="viewerType"
+            [accessType]="accessType"
+            [questionStatus]="'saved'"
+            [questionInfo]="quiz"
+            [createQuizObj]="getQuestionObj"
+            (collectFormValue)='handleSaveQuestion($event)'
+            (discardQuiz)='handleDiscardQuestion($event)'
+            ></app-short-answers>
+          </div>
+        </div>
+        <div *ngIf="questionArray.length == 0">
+          <app-short-answers
+          [viewerType]="viewerType"
+          [accessType]="accessType"
+          [questionStatus]="'init'"
+          [questionId]="1"
+          [createQuizObj]="getQuestionObj"
+          (collectFormValue)='handleSaveQuestion($event)'
+          (discardQuiz)='handleDiscardQuestion($event)'
+          ></app-short-answers>
+        </div>
+        <div class="add-btn-div">
+          <button *ngIf="!displayAddQuizBtn()" type="button" mat-button color="primary" class="add-btn" (click)="addQuestion()">
+            <i class="material-icons">add_box</i>Add Question
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

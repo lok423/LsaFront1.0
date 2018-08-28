@@ -1,0 +1,16 @@
+.jumbotron {
+    height: 180px;
+    width:100%;
+    background-size: cover;
+    position: absolute;
+    filter: brightness(70%);    
+    
+    background-image:  url("../../../../assets/mainpics/privacy-header-pic.jpg");
+    background-position: center;
+}
+
+.j1{
+    z-index: 0;
+    position: relative;
+    padding:30px 0px 0px 10px;
+}

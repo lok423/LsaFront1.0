@@ -1,0 +1,111 @@
+
+.pay-form-space {
+    margin-top: 12vh;
+    text-align: center;
+    background-color: #8A2BE2;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #800080;
+    border-radius: 15px;
+  }
+  
+  .pay-form-space {
+    color: white;
+  }
+  
+  .space-header {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    width: 100%;
+    height: 70px;
+  }
+  
+  .space-header img {
+    height: 100%;
+  }
+  
+  .pay-cost {
+    padding: 5px;
+    margin-top: 2px;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 20px;
+    color: #00FF7F;
+  }
+  
+  .pay-form-div {
+    margin-top: 20px;
+  }
+  
+  .pay-form {
+    margin: 10px;
+  }
+  
+  #payment-form {
+    text-align: left;
+    padding-left: 13%;
+    padding-right: 13%;
+  }
+  
+  #payment-form label {
+    font-weight: bold;
+  }
+  
+  
+  .form-btn {
+    margin-bottom: 20px;
+    margin-left: 14%;
+    margin-right: 14%;
+  }
+  
+  .form-btn button {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  
+  /* @@media only screen and (max-width: 600px) {
+  
+    #payment-form {
+      text-align: left;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  
+    .form-btn {
+      margin-bottom: 20px;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+  } */
+  
+  
+  
+  
+  
+  
+  
+  
+  .StripeElement {
+    background-color: white;
+    height: 40px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+  
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+  

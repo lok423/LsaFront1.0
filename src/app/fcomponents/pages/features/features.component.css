@@ -1,0 +1,87 @@
+.jumbotron {
+    margin-bottom: 0;
+  }
+  
+  .row {
+    margin-top: 20px;
+  }
+  
+  .box2 {
+    background-image: url("../../../../assets/mainpics/privacy-header-pic.jpg");
+    padding-left: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+  }
+  
+  .textbox_padding {
+    padding: 30px;
+  }
+  
+  .box3 {
+    background-image: url("../../../../assets/mainpics/privacy-header-pic.jpg");
+    padding-right: 15px;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+  }
+  
+  .box6 {
+    background-image: url("../../../../assets/mainpics/privacy-header-pic.jpg");
+    padding-left: 15px;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+  }
+  
+  .col_l {
+    padding-right: 10px;
+    padding-left: 0;
+  }
+
+  .col_r {
+    padding-left: 10px;
+    padding-right: 0;
+  }
+
+  .box {
+    height: 400px;
+  }
+
+  .box.text {
+    height: 400px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #D3D3D3;
+  }
+  
+  .nopadding {
+    padding: 0 !important;
+    margin-top: 15px !important;
+  }
+  
+  .vcenter {
+    position: relative;
+    transform: translatey(-50%);
+    top: 50%;
+  }
+  
+  @media (max-width: 767px) {
+    .box2 {
+        background-image: url("../../../../assets/mainpics/privacy-header-pic.jpg");
+    }
+    .box3 {
+        background-image: url("../../../../assets/mainpics/privacy-header-pic.jpg");
+    }
+    .box6 {
+        background-image: url("../../../../assets/mainpics/privacy-header-pic.jpg");
+    }
+    .col_l {
+      padding-right: 0;
+      padding-left: 0;
+    }
+    .col_r {
+      padding-left: 0;
+      padding-right: 0;
+      margin-top: 20px;
+    }
+  }
+  

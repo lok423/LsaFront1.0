@@ -1,0 +1,36 @@
+<div class="col-xl-8 col-lg-8 col-12 col-style">
+  <div *ngIf="resAction == 'add'; then addResource; else editResource"></div>
+</div>
+
+<ng-template #addResource>
+  <div class="d-block  display-panel">
+    <!-- <h5>Select Resources To Add</h5> -->
+    <div class="row choose-area">
+      <div *ngFor="let card of displayCardData">
+        <div *ngIf="display.innerWidth <= 576">
+          <app-resources-create-display-card
+          [displayTag]="card.tag"
+          [displayTitle]="card.title"
+          [displayContent]="card.content"
+          [displayImg]="card.img"
+          [smallScreen]=true>
+        </app-resources-create-display-card>
+        </div>
+        <div *ngIf="display.innerWidth > 576">
+          <app-resources-create-display-card
+          [displayTag]="card.tag"
+          [displayTitle]="card.title"
+          [displayContent]="card.content"
+          [displayImg]="card.img"
+          [smallScreen]=false>
+        </app-resources-create-display-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<ng-template #editResource>
+  <router-outlet></router-outlet>
+</ng-template>

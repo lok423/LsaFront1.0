@@ -1,0 +1,32 @@
+<mat-dialog-content>
+    <h2 md-dialog-title class="title"> Learnspace </h2>
+    <div *ngIf="fillAll">
+        <div class="dialog-error">{{fillAll}}</div>
+    </div>
+    <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group">
+            <div *ngIf="userEmail.errors?.required && userEmail.touched" class="invalid_feedback">
+                Email is required
+            </div>
+            <div *ngIf="userEmail.errors?.pattern && userEmail.touched" class="invalid_feedback">
+                Email is Invalid
+            </div>
+            <input type="text" class="form-control" placeholder="Email" [(ngModel)]="user.email" name="email" #userEmail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            [ngClass]="{'is-invalid': userEmail.errors?.required && userEmail.touched || userEmail.errors?.pattern}" > 
+        </div>
+        <div class="form-group">
+            <div *ngIf="password.errors?.required && password.touched" class="invalid_feedback">
+                    Password is required
+            </div>
+            <div *ngIf="password.errors?.pattern && password.touched" class="invalid_feedback">
+                    Must be at least 7 characters with both letters and numbers
+            </div>
+            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" name="password" #password="ngModel"  required pattern="((?=.*\d)(?=.*[a-z]).{7,20})" 
+               [ngClass]="{'is-invalid': password.errors?.required && password.touched || password.errors?.pattern}"> 
+             </div>
+            
+        <input type="submit" class="btn btn_blue_large btn-block" value="Log In">
+    </form>
+    <a class="option1" (click)="setPwd()">Forgot Password</a>
+    <a class="option2" (click)="newUser()">Create New Account</a>
+</mat-dialog-content>

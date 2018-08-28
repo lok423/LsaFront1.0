@@ -1,0 +1,103 @@
+            <!--age group form-->
+            <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Specialised Age Groups')">
+              <div class="card-header">Specialised Age Groups</div>
+              <div class="card-body" *ngIf="tutorprofile">
+                  <div  class="row"><div *ngFor="let age of tutorprofile.age" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 s2">{{age}}</div></div>
+                  <div class="row mt-3">  
+                    <div class="col-12">
+                      <a id="a-btn" *ngIf="tutorprofile.age && !agStatus" (click)="agStatus=true">Edit age group</a>
+                      <form *ngIf="agStatus" [formGroup]="agForm">
+                        <div class="row">
+                          <div *ngFor="let agIndex of agIndex" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 form-check">
+                            <input class="form-check-input" type="checkbox" id="{{agIndex}}" name="{{agIndex}}" formControlName="{{agIndex}}">
+                            <label class="form-check-label s2 ml-4" for="{{agIndex}}">{{agIndex}}</label>
+                          </div>
+                          <div class="col-6 form-group"><button type="submit" id="f-btn" class="btn btn-primary" (click)="agStatus=false" >Cancel</button></div>
+                          <div class="col-6 form-group"><button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="defCheck({name:'agForm',status:'agStatus',type:'age',index:'agIndex'})">Done</button></div>  
+                        </div>
+                      </form>
+                    </div>   
+                  </div> 
+              </div>
+            </div>
+            <!--lesson form-->
+            <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Possible Lesson Structure')">
+              <div class="card-header">Possible Lesson Structure</div>
+              <div class="card-body" *ngIf="leForm&&tutorprofile">
+                  <div *ngIf="leForm.value.var0 ==null && !leStatus"><a id="a-btn" (click)="leStatus=true;leForm.controls['var0'].setValue('')">Add a lesson structure field</a></div>
+                  <div class="row"><div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 s2" *ngFor="let lesson of tutorprofile.lesson">{{lesson}}</div></div>
+                  <div class="row mt-3">  
+                    <div class="col-12">
+                      <a id="a-btn" *ngIf="leForm.value.var0 !=null && !leStatus" (click)="leStatus=true">Edit lesson</a>
+                      <form *ngIf="leStatus" [formGroup]="leForm">
+                        <div class="row">
+                          <div *ngFor="let spIndex of spIndex" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div *ngIf="leForm.value[spIndex]!=null" class="form-group s2">
+                              <input type="text" class="form-control" placeholder="something you'll do in your session" formControlName="{{spIndex}}">
+                              <div *ngIf="leForm.controls[spIndex].invalid && leForm.controls[spIndex].touched" class="indicator" >Content is invalid.</div>
+                            </div>
+                          </div>
+                          <div *ngIf="leForm.value.var9==null" class="col-12">&nbsp;&nbsp;<a id="a-btn" (click)="inputStatus(this.leForm)">Add another</a></div>
+                          <div class="col-12">
+                            <button type="submit" id="f-btn" class="btn btn-primary" (click)="leStatus=false" >Cancel</button>
+                            <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="defineV({name:'leForm',status:'leStatus',index:'lesson'})">Done</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>   
+                  </div> 
+              </div>
+            </div>
+            <!--course focus form-->
+            <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Course Focuses')">
+              <div class="card-header">Course Focuses</div>
+              <div class="card-body" *ngIf="coForm&&tutorprofile" >
+                  <div *ngIf="coForm.value.var0 ==null && !coStatus"><a id="a-btn" (click)="coStatus=true; coForm.controls['var0'].setValue('')">Add a course focus field</a></div>
+                  <div class="row"><div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 s2" *ngFor="let course of tutorprofile.course">{{course}}</div></div>
+                  <div class="row mt-3">  
+                    <div class="col-12">
+                      <a id="a-btn" *ngIf="coForm.value.var0!=null && !coStatus" (click)="coStatus=true">Edit course</a>
+                      <form *ngIf="coStatus" [formGroup]="coForm">
+                        <div class="row">
+                          <div *ngFor="let spIndex of spIndex" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div *ngIf="coForm.value[spIndex]!=null" class="form-group s2">
+                              <input type="text" class="form-control" placeholder="your course may focus on" formControlName="{{spIndex}}">
+                              <div *ngIf="coForm.controls[spIndex].invalid && coForm.controls[spIndex].touched" class="indicator" >Content is invalid.</div>
+                            </div>
+                          </div>
+                          <div *ngIf="coForm.value.var9==null" class="col-12">&nbsp;&nbsp;<a id="a-btn" (click)="inputStatus(this.coForm)">Add another</a></div>
+                          <div class="col-12">
+                            <button type="submit" id="f-btn" class="btn btn-primary" (click)="coStatus=false" >Cancel</button>
+                            <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="defineV({name:'coForm',status:'coStatus',index:'course'})">Done</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>   
+                  </div> 
+              </div>
+            </div>
+            <!--test prep form-->
+            <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Specialised Test Preparation')">
+              <div class="card-header">Specialised Test Preparation</div>
+              <div class="card-body" *ngIf="tutorprofile">
+                  <div  class="row"><div *ngFor="let test of tutorprofile.test" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 s2">{{test}}</div></div>
+                  <div class="row mt-3">  
+                    <div class="col-12">
+                      <a id="a-btn" *ngIf="tutorprofile.test && !testStatus" (click)="testStatus=true">Edit Test Preparation</a>
+                      <form *ngIf="testStatus" [formGroup]="testForm">
+                        <div class="row">
+                          <div *ngFor="let testIndex of testIndex" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 form-check">
+                            <input class="form-check-input" type="checkbox" id="{{testIndex}}" name="{{testIndex}}" formControlName="{{testIndex}}">
+                            <label class="form-check-label s2 ml-4" for="{{testIndex}}">{{testIndex}}</label>
+                          </div>
+                          <div class="col-6 form-group"><button type="submit" id="f-btn" class="btn btn-primary" (click)="testStatus=false" >Cancel</button></div>
+                          <div class="col-6 form-group"><button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="defCheck({name:'testForm',status:'testStatus',type:'test',index:'testIndex'})">Done</button></div>  
+                        </div>
+                      </form>
+                    </div>   
+                  </div> 
+              </div>
+            </div>
+            <!--submit button-->
+            <button class="btn btn-primary" style="margin:15px;" (click)="submitInfo()">Save All Changes</button>
+            <button class="btn btn-danger" style="margin:15px;" (click)="cancelInfo()">Cancel All Changes</button>

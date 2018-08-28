@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/dashboard/student/lessons",
+    "cardContent":
+    [{
+      "initHelperMatch": "lessons Header",
+      "initHelperText": "lessons Body"
+    },
+    {
+      "helperMatch": "lessons part 1",
+      "helperText": "lessons Body 1"
+    },
+    {
+      "helperMatch": "lessons part 2",
+      "helperText": "lessons Body 2"
+    },
+    {
+      "helperMatch": "lessons part 3",
+      "helperText": "lessons Body 3"
+    }]
+  }
+]

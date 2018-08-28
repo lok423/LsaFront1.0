@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="btn-group">
+          <button type="button" (click)="showCalendar()" class="btn btn-primary rounded-left" id="myCalendar">Calendar</button>
+          <button type="button" (click)="showList()" class="btn btn-primary rounded-right" id="myList">List</button>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="col-12">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+[
+  {
+    "pathname": "/app/dashboard/tutor/editprofile/speciality",
+    "cardContent":
+    [{
+      "initHelperMatch": "Teaching Speciality",
+      "initHelperText": "Here is some <b>teaching speciality information</b> of yourself about specialised age groups, possible lesson structure, course focuses, and specialised test preparation."
+    },
+    {
+      "helperMatch": "Specialised Age Groups",
+      "helperText": "You can edit your teaching <b>specialised age groups</b> by selecting options here."
+    },
+    {
+      "helperMatch": "Possible Lesson Structure",
+      "helperText": "You can add or edit your <b>possible lesson structure</b> here."
+    },
+    {
+      "helperMatch": "Course Focuses",
+      "helperText": "You can add or edit your <b>teaching course focuses</b> here."
+    },
+    {
+      "helperMatch": "Specialised Test Preparation",
+      "helperText": "You can edit your <b>specialised test preparation</b> by selecting options here."
+    }]
+  }
+]

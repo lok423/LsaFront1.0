@@ -1,0 +1,46 @@
+[
+  {
+    "pathname": "/app/user/details",
+    "cardContent":
+    [{
+      "initHelperMatch": "User Details",
+      "initHelperText": "You can view your user details and <b>update</b> any item of them if you need"
+    },
+    {
+      "helperMatch": "First Name",
+      "helperText": "Enter your <b>fist name</b> (It is at least 2 and not more than 15 characters long)"
+    },
+    {
+      "helperMatch": "Last Name",
+      "helperText": "Enter your <b>last name</b> (It is at least 2 and not more than 15 characters long)"
+    },
+    {
+      "helperMatch": "Phone Number",
+      "helperText": "Enter your <b>phone</b> (It is at least 7 and not more than 12 digits long)"
+    },
+    {
+      "helperMatch": "Location",
+      "helperText": "Select your <b>location</b> of selections given."
+    },
+    {
+      "helperMatch": "Date Of Birth",
+      "helperText": "Enter your <b>date of birth</b> or select date from calendar pop-up and range of <b>birth-year</b> is from <b>1930</b> to <b>2020</b>."
+    },
+    {
+      "helperMatch": "Gender",
+      "helperText": "Select your <b>gender</b> of selections given."
+    },
+    {
+      "helperMatch": "Parent/Guardian/Other contact name",
+      "helperText": "Enter your <b>contact name</b> (It is at least 2 and not more than 15 characters long)"
+    },
+    {
+      "helperMatch": "Parent/Guardian/Other contact phone",
+      "helperText": "Enter your <b>contact phone</b> (It is at least 7 and not more than 12 digits long)"
+    },
+    {
+      "helperMatch": "Parent/Guardian/Other contact relation",
+      "helperText": "Describe the <b>relation</b> between you and your <b>contact person</b>."
+    }]
+  }
+]

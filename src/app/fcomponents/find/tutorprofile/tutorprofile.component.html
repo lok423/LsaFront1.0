@@ -1,0 +1,179 @@
+<div class="container" >
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 col-md-12">
+          <div *ngIf="tutor" class="card">
+            <div *ngIf="tutor.profile_video" class="embed-responsive embed-responsive-16by9">
+              <iframe *ngIf="tutor.profile_video.length >10" class="embed-responsive-item" [src]="cleanVideo" allowfullscreen></iframe>
+            </div>
+  
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-3 col-md-3">
+                  <img src={{tutor.profile_photo}} width="150" height="150">
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9">
+                  <div class="row content lbox">
+                    <h4 class="col-xl-6 col-md-6 m2">{{tutor.first_name}}  </h4>
+                    <div class="col-xl-6 col-lg-6 col-md-6"></div>
+                    <div class="col-xl-4 col-lg-4 col-md-4">
+                      <div class="card a2 s2"><span class="s3bold">Teaches</span> {{tutor.discipline}}</div> 
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4">
+                      <div class="card a2 s2"><span class="s3bold">Location</span> {{tutor.location}}</div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4">
+                      <div class="card a2 s2"><span class="s3bold">Curriculum</span>{{tutor.curriculum}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <hr>
+                  <h4 class="m2">About {{tutor.first_name}}</h4>
+  
+                  <pre>{{tutor.intro_statement}}</pre>
+  
+            </div>
+          </div>
+          <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
+        </div>
+        
+        <div class="col-xl-4 col-lg-4 col-md-12" id="sideBar">
+          <div class="card" *ngIf="tutorprofile">
+              <div class="card-header m2">Private Lessons</div>
+              <div *ngIf="tutor" class="card-body s2 pb-2">
+                <div class="s2">1 Hour Lesson<span>$ {{tutor.price_1}}/hour</span></div>
+                <div *ngIf="tutor.price_2" class="s2">2 Hours plus Lesson<span>$ {{tutor.price_2}}/hour</span></div>
+                <br/>
+                <button (click)="bookNow()" class="btn btn-primary btn-block">Book Now</button>
+                <div class="phoneNum s2">Call us at &nbsp; <a href="tel:02102264770"> 021 022 64770</a></div> 
+              </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-8 col-lg-8 col-md-12">
+           <div class="card" id="calendar1">
+            <div class="card-header  m1" style="border-bottom:0px">Schedule</div>
+            <div class="card-body"><div id="calendar" style="height:500px;"></div></div>
+          </div>
+        </div>
+  
+  
+        <div class="col-xl-8 col-lg-8 col-md-12" *ngIf="tutorprofile">
+          <div class="card" *ngIf="tutorprofile.sp_ages || tutorprofile.sp_lesson_structure || tutorprofile.sp_course_focus || tutorprofile.sp_experience || tutorprofile.sp_test_prep">
+            <h4 class="card-header m2">Teaching Expertise</h4>
+            <div class="card-body">
+  
+                <div class="row mb-3" *ngIf="tutorprofile.sp_ages?.length>0">
+                  <h5 class="col-12 s1">Specialised Age Groups</h5>
+                  <div class="col-12 px-4">
+                    <div class="row bk1"><div class="col-6 s2" *ngFor="let age of tutorprofile.sp_ages">{{age}}</div></div>
+                  </div><br>
+                </div>
+                <div class="row mb-3" *ngIf="tutorprofile.sp_lesson_structure?.length>0">
+                  <h5 class="col-12 s1">Lessons include</h5>
+                  <div class="col-12 px-4">
+                    <div class="row bk1"><div class="col-6 s2" *ngFor="let lesson of tutorprofile.sp_lesson_structure">{{lesson}}</div></div>
+                  </div><br>
+                </div>
+                <div class="row mb-3" *ngIf="tutorprofile.sp_course_focus?.length>0">
+                  <h5 class="col-12 s1">Course focuses</h5>
+                  <div class="col-12 px-4">
+                    <div class="row bk1"><div class="col-6 s2" *ngFor="let subject of tutorprofile.sp_course_focus">{{subject}}</div></div>
+                  </div><br>
+                </div>
+                <div class="row mb-3" *ngIf="tutorprofile.sp_experience?.length>0">
+                  <h5 class="col-12 s1">Experience</h5>
+                  <div class="col-12 px-4">
+                    <div class="row bk1"><div class="col-6 s2" *ngFor="let experience of tutorprofile.sp_experience">{{experience}}</div></div>
+                  </div><br>
+                </div>
+                <div class="row mb-3" *ngIf="tutorprofile.sp_test_prep?.length>0">
+                  <h5 class="col-12 s1">Specialised Test Preparation</h5>
+                  <div class="col-12 px-4">
+                    <div class="row bk1"><div class="col-6 s2" *ngFor="let preparation of tutorprofile.sp_test_prep">{{preparation}}</div></div>
+                  </div><br>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-xl-8 col-lg-8 col-md-12">
+            <div class="card ">
+              <h4 class="card-header m2" *ngIf="tutorprofile">Résumé</h4>
+              <div class="card-body">
+                <div *ngIf="tutorprofile?.edu_1">
+                  <div class="row">
+                    <h5 class="col-12 s1">Education</h5>
+                      <div class="col-3 s2">{{tutorprofile.edu_1_date}}</div>
+                      <div class="col-9 s2bold">{{tutorprofile.edu_1_detail}}</div><br>
+                      <div class="col-3"></div>
+                      <div class="col-9 s2">{{tutorprofile.edu_1}}</div>
+  
+                      <div class="col-3 s2">{{tutorprofile.edu_2_date}}</div>
+                      <div class="col-9 s2bold">{{tutorprofile.edu_2_detail}}</div><br>
+                      <div class="col-3"></div>
+                      <div class="col-9 s2">{{tutorprofile.edu_2}}</div>
+  
+                      <div class="col-3 s2">{{tutorprofile.edu_3_date}}</div>
+                      <div class="col-9 s2bold">{{tutorprofile.edu_3_detail}}</div><br>
+                      <div class="col-3"></div>
+                      <div class="col-9 s2">{{tutorprofile.edu_3}}</div>
+                    </div>
+                </div>
+  
+                <div *ngIf="tutorprofile?.work_1">
+                  <div class="row">
+                    <h5 class="col-12 s1">Work Experience</h5>
+                    <div class="col-3 s2">{{tutorprofile.work_1_date}}</div>
+                    <div class="col-9 s2bold">{{tutorprofile.work_1_detail}}</div><br>
+                    <div class="col-3"></div>
+                    <div class="col-9 s2">{{tutorprofile.work_1}}</div>
+  
+                    <div class="col-3 s2">{{tutorprofile.work_2_date}}</div>
+                    <div class="col-9 s2bold">{{tutorprofile.work_2_detail}}</div><br>
+                    <div class="col-3"></div>
+                    <div class="col-9 s2">{{tutorprofile.work_2}}</div>
+  
+                    <div class="col-3 s2">{{tutorprofile.work_3_date}}</div>
+                    <div class="col-9 s2bold">{{tutorprofile.work_3_detail}}</div><br>
+                    <div class="col-3"></div>
+                    <div class="col-9 s2">{{tutorprofile.work_3}}</div>
+                  </div>
+                </div>
+  
+                <div *ngIf="tutorprofile?.hobby_1">
+                  <div class="row">
+                    <h5 class="col-12 s1">Interests</h5>
+                    <div class="col-sm-6">
+                      <div class="col-12 s2bold">{{tutorprofile.hobby_1}}</div>
+                      <div class="col-12 s2">{{tutorprofile.hobby_1_detail}}</div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="col-12 s2bold">{{tutorprofile.hobby_2}}</div>
+                      <div class="col-12 s2">{{tutorprofile.hobby_2_detail}}</div>
+                    </div>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+        </div>
+  
+        <div class="col-xl-8 col-lg-8 col-md-12">
+          <div *ngIf="tutorfeedback" class="card">
+            <div class="card-header m2">Feedback</div>
+            <div class="card-body">
+              <div *ngFor="let feedback of tutorfeedback">
+                <img src="{{feedback.photo}}" style="width: 30px;height: 30px;border-radius: 50%">
+                <span class="s2" style="padding: 20px">{{feedback.name}}</span>
+                <p class="s2" style="padding-left: 50px;margin-bottom: 0px">{{feedback.dateTime|date:'MM/yyyy'}}</p>
+                <p class="s2" style="padding-left: 50px;">{{feedback.content}}</p>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>

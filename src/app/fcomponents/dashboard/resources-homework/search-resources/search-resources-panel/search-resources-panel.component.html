@@ -1,0 +1,235 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 res-collection">
+      <div *ngIf="totalResNum == 0; then emptyResources; else hasResources"></div>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyResources>
+  <div class="d-flex flex-column">
+    <div>
+      <app-search-resources-bar [barOwner]="viewerType"
+      (returnSelectedSearchCondition)='handleSearchOption($event)'
+      (returnLearnerSearchCondition)='getLearnerPublicOrHomework($event)'></app-search-resources-bar>
+    </div>
+    <div class="empty-div">
+      <h4>Sorry, we can't find any resources match filter options :(</h4>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #hasResources>
+  <app-search-resources-bar [barOwner]="viewerType"
+  (returnSelectedSearchCondition)='handleSearchOption($event)'
+  (returnLearnerSearchCondition)='getLearnerPublicOrHomework($event)'></app-search-resources-bar>
+  <div class="d-flex flex-column justify-content-start">
+    <mat-paginator
+      class="col-12"
+      [length]="totalResNum"
+      [pageSize]="pageSize"
+      [showFirstLastButtons]=true
+      [hidePageSize]=true
+      [pageIndex]="currentViewIndex - 1"
+      (page)="changed($event)"
+      >
+    </mat-paginator>
+    <!-- <div *ngIf="display.innerWidth > 576; then bigScreen"></div> -->
+    <div *ngIf="true; then bigScreen"></div>
+
+
+    <!-- button bar -->
+    <div *ngIf="display.innerWidth <= 576">
+      <br>
+      <mat-paginator
+        class="col-12"
+        [length]="totalResNum"
+        [pageSize]="pageSize"
+        [showFirstLastButtons]=true
+        [hidePageSize]=true
+        [pageIndex]="currentViewIndex - 1"
+        (page)="changed($event)"
+        >
+      </mat-paginator>
+    </div>
+    <div *ngIf="display.innerWidth > 576">
+      <br>
+      <div class="row footer-div">
+        <div class="d-flex justify-content-center col-12 footer">
+          <button type="button" class="btn btn-link switch-btn mr-2" (click)="goPrevious()"><i class="fa fa-angle-double-left"></i></button>
+          <div class="btn-group" *ngFor="let pindex of headBtnArray">
+            <button class="btn btn-outline-light text-primary rounded"  [ngStyle]="(highlightArray[pindex - 1]) ? ({background: '#a3daff'}) : ({background: 'white'})"
+            (click)="goPage(pindex)">
+              {{pindex}}
+            </button>
+          </div>
+          <div *ngIf="tailBtnArray.length > 0; then hide"></div>
+          <button type="button" class="btn btn-link switch-btn ml-2" (click)="goNext()"><i class="fa fa-angle-double-right"></i></button>
+        </div>
+        <div class="d-flex justify-content-center col-12 footer">
+          <div class="search" style="display: inline-block;">Totally <span class="text-primary">{{totalPage}}</span> page,</div>
+          <div class="search">&nbsp;&nbsp;to page<input id="index-search" type="number" class="search-input" min="1" max="{{totalPage}}"/></div>
+          <button style="position: relative; top:3px; right:6px;" class="btn btn-link rounded" (click)="getIndexInput('index-search')">Go</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- big screen -->
+<ng-template #bigScreen>
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div *ngFor="let resource of currentViewResource" class="col-12">
+          <div class="card"
+          routerLink="{{resourceCardRouterLink}}"
+          [queryParams]="{id: resource.studyResource_id}"
+          (click)="sendPageNumberToSelected()">
+          <div class="row icon_row">
+            <div class="col-left" >
+              <div class="text-center align-middle" *ngIf="resource.resource_type == 1">
+                <i class="material-icons md-36" >
+  assignment
+</i></div>
+            </div>
+            <div class="col-right">
+
+
+                  <div class="row headerText">
+                    <div class="col-7 ig-title ">
+                      {{resource.resource_title}}
+                    </div>
+                    <!--
+                    <div class="row col-5 text-right card-header-right">
+                      <div class="col-12">
+                        <small>{{resource.resource_subject}}</small>
+                      </div>
+                    </div>-->
+                  </div>
+
+
+
+                  <div class="card-desc text-truncate1">{{resource.resource_des}}</div>
+                  <div class="d-flex justify-content-end align-self-center">
+                    <div class="mr-auto" style="margin-left: 4px; ">
+                      <small>{{resource.resource_grade}}</small><span>&nbsp;|&nbsp;</span><small>{{resource.resource_subject}}</small><span>&nbsp;|&nbsp;</span><div *ngIf="resource.isPublic == 1; then public; else private"></div>
+
+                    </div>
+                    <div class="col-3 col-lg-4" style="padding-right: 5px;">
+                      <img class="rounded-circle float-right AuthorImg" [src]="prepareAuthorImage(resource.tutor_id)">
+                    </div>
+                    <div class="text-center">
+                      {{resource.resource_author}}
+                    </div>
+                  </div>
+              </div>
+          </div>
+
+
+          </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- small screen -->
+<ng-template #smallScreen>
+  <div class="row">
+    <div class="col-12">
+      <div *ngFor="let resource of currentViewResource">
+        <div class="card bg-change"
+        routerLink="{{resourceCardRouterLink}}"
+        [queryParams]="{id: resource.studyResource_id}"
+        (click)="sendPageNumberToSelected()">
+          <div class="card-header text-white card-header-position">
+            <div class="row">
+              <div class="col-10">
+                <div>
+                  {{resource.resource_title}}
+                </div>
+                <div>
+                  <span class="badge badge-success" *ngIf="resource.resource_type == 1">Homework</span>
+                </div>
+              </div>
+              <div *ngIf="viewerType == 'tutor'">
+                <div *ngIf="resource.isPublic==1; then publicBadge; else privateBadge"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body py-0 mb-0">
+            <div>
+              <div class="card-text text-truncate2" style="padding: 5px;">{{resource.resource_des}}</div>
+            </div>
+            <div class="card-text">
+              <div class="d-flex justify-content-start pb-0 mb-0">
+                <div style="background-color: rgb(245, 245, 245);">
+                  <div>
+                    {{resource.resource_subject}}
+                  </div>
+                  <div >
+                    <small class="text-muted">
+                      Subject
+                    </small>
+                  </div>
+                </div>
+                <div style="background-color: rgb(245, 245, 245);" class="ml-2 mr-auto">
+                  <div>
+                    {{resource.resource_grade}}
+                  </div>
+                  <div >
+                    <small class="text-muted">
+                      Grade
+                    </small>
+                  </div>
+                </div>
+                <div class="align-self-center">
+                  {{resource.resource_author}}
+                </div>
+                <div class="align-self-center px-1">
+                  <img class="rounded-circle float-right AuthorImg1" [src]="prepareAuthorImage(resource.tutor_id)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #public>
+  <span *ngIf="viewerType == 'tutor'" class="badge badge-success badge-position1">Public</span>
+</ng-template>
+
+<ng-template #private>
+  <span *ngIf="viewerType == 'tutor'" class="badge badge-danger badge-position1">Private</span>
+</ng-template>
+
+<ng-template #publicBadge>
+  <div class="col-2 d-flex justify-content-center">
+    <i class="fa fa-unlock fa-3x"></i>
+  </div>
+</ng-template>
+
+<ng-template #privateBadge>
+  <div class="col-2 d-flex justify-content-center">
+    <i class="fa fa-lock fa-3x"></i>
+  </div>
+</ng-template>
+
+<ng-template #hide>
+  <div class="hide-section">
+    ...
+  </div>
+  <div class="btn-group" *ngFor="let pindex of tailBtnArray">
+    <!-- [ngStyle]="(highlightArray[pindex - 1]) ? ({background: '#3e8e41'}) : ({background: '#4CAF50'})" -->
+    <button (click)="goPage(pindex)" class="btn btn-outline-light text-primary rounded"  [ngStyle]="(highlightArray[pindex - 1]) ? ({background: '#a3daff'}) : ({background: 'white'})">
+      {{pindex}}
+    </button>
+  </div>
+</ng-template>

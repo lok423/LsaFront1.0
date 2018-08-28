@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-md">
+  <div class="container" id="container">
+    <button class="navbar-toggler navbar-toggler-right btn btn-link" type="button"  (click)="collapseStatus=!collapseStatus">
+      <div class="s2bold dashboard categoryIcon" id="category" style="padding-left:30px"> <span>{{Dashboard}}</span> <i *ngIf="collapseStatus"  class="fa fa-caret-up s2bold"></i> <i *ngIf="!collapseStatus" class="fa fa-caret-down s2bold"></i> </div>
+    </button>
+
+    <div *ngIf = "collapseContent()" class="col-sm-12" id="navContent">
+      <ul class="navbar-nav mr-auto xsContainer">
+        <a (click)="onClick2({name:'Dashboard'})"class="nav-link s2bold homeIcon" id="dashboardHome" style="padding-left:30px" href="#" routerLink="/app/dashboard/home">Dashboard <span class="sr-only">(current)</span></a>
+
+        <!-- rolePosition == 3 -->
+        <!-- <a *ngIf="rolePosition == 3" (click)="onClick2({name:'My Students'})" class="nav-link s2bold personIcon" style="padding-left:30px;" href="#" routerLink="/app/dashboard/mylearners">My Students <span class="sr-only">(current)</span></a> -->
+        <li *ngIf="rolePosition == 3" (click)="onClick2({name:'My Schedules'})" class="dropdown">
+          <a class="nav-link dropdown-toggle s2bold scheduleIcon" style="padding-left:30px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Schedules<span class="sr-only">(current)</span></a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item dpitem s3 scheduleIcon" style="padding-left:30px;" routerLink="/app/dashboard/tutor/schedules" href="#">See your schedule</a>
+            <a class="dropdown-item s3 editIcon" style="padding-left:30px;" routerLink="/app/dashboard/tutor/schedules/edit" href="#">Edit schedule</a>
+          </div>
+        </li>
+        <li *ngIf="rolePosition == 3" (click)="onClick2({name:'My Resources'})" class="dropdown">
+          <a class="nav-link dropdown-toggle s2bold resourceIcon" style="padding-left:30px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Resources<span class="sr-only">(current)</span></a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item dpitem resourceIcon s3" style="padding-left:30px;" routerLink="/app/dashboard/tutor/resources/view" [queryParams]="{ page: 1}" href="#">My resources</a>
+            <a class="dropdown-item editIcon s3" style="padding-left:30px;" routerLink="/app/dashboard/tutor/resources/add" href="#">Add a resource</a>
+          </div>
+        </li>
+        <li *ngIf="rolePosition == 3" (click)="onClick2({name:'Teaching Profile'})" class="dropdown">
+          <a class="nav-link dropdown-toggle s2bold profileIcon" style="padding-left:30px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teaching profile<span class="sr-only">(current)</span></a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item dpitem editIcon s3" style="padding-left:30px;" routerLink="/app/dashboard/tutor/editprofile/key" href="#">Edit profile</a>
+            <a class="dropdown-item editIcon s3" style="padding-left:30px;" routerLink="/app/dashboard/tutor/editprofile/cv" href="#">Edit CV</a>
+            <a class="dropdown-item teachingIcon s3" style="padding-left:30px;" routerLink="/app/dashboard/tutor/editprofile/speciality" href="#">Teaching speciality</a>
+          </div>
+        </li>
+
+        <!-- rolePosition == 2 -->
+        <a *ngIf="rolePosition == 2" (click)="onClick2({name:'Tutor Application'})" class="nav-link s2bold teachingIcon" id="tutorApplication" style="padding-left:30px;" href="#" routerLink="/app/apply/manager">Tutor Application <span class="sr-only">(current)</span></a>
+
+        <!-- rolePosition == 1&2 -->
+        <!-- <a  *ngIf="rolePosition == 2||rolePosition == 1" (click)="onClick2({name:'My Teachers'})" id="myTeachers" class="nav-link s2bold personIcon" style="padding-left:30px;" href="#" routerLink="/app/dashboard/mytutors">My Teachers <span class="sr-only">(current)</span></a> -->
+        
+        <a  *ngIf="rolePosition == 2||rolePosition == 1" (click)="onClick2({name:'My Lessons'})" id="myLessons" class="nav-link s2bold scheduleIcon" style="padding-left:30px;" href="#" routerLink="/app/dashboard/learner/lessons">My Lessons <span class="sr-only">(current)</span></a>
+        <a  *ngIf="rolePosition == 2||rolePosition == 1" (click)="onClick2({name:'My Homework'})" id="myHomework" class="nav-link s2bold resourceIcon" style="padding-left:30px;" [queryParams]="{ page: 1}" href="#" routerLink="/app/dashboard/learner/homework/view">My Homework <span class="sr-only">(current)</span></a>
+        
+        <li *ngIf="rolePosition == 2||rolePosition == 1" (click)="onClick2({name:'Learner Profile'})" class="dropdown">
+          <a class="nav-link dropdown-toggle s2bold profileIcon learnerProfile" style="padding-left:30px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learner profile<span class="sr-only">(current)</span></a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item dpitem editIcon s3" style="padding-left:30px;" routerLink="/app/dashboard/learner/profile" href="#">Edit profile</a>
+          </div>
+        </li>
+
+      </ul>
+   </div>
+  </div>
+</nav>

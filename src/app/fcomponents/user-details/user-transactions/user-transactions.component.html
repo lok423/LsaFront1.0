@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header m1">My transactions</div>
+    <div class="card-body">
+        <div>
+            Start date
+            <input type="date" (change)="triggered(startDate.value, endDate.value)" #startDate id="startDate" class="dateInput" value="2017-01-01"
+                min="2017-01-01" max="2020-01-01"> End date
+            <input type="date" (change)="triggered(startDate.value, endDate.value)" #endDate id="endDate" class="dateInput" value="2018-01-01"
+                min="2017-01-01" max="2020-01-01">
+            <span class="warning invalid_feedback" *ngIf="dateStatus === true">Start date should be earlier than End date.</span>
+        </div>
+
+        <table style="width:100%">
+            <tr class="th">
+                <th>id</th>
+                <th>Date of session</th>
+                <th>Student</th>
+                <th>Description</th>
+                <th>Session Status</th>
+                <th>Hourly rate($)</th>
+                <th>Quantity</th>
+                <th class="amount">Amount($)</th>
+            </tr>
+
+            <tr *ngFor="let tran of trans">
+                <td>{{tran.id}}</td>
+                <td>{{tran.date_of_session}}</td>
+                <td>
+                    <a href="https://www.google.com/">{{tran.student}}</a>
+                </td>
+                <td>{{tran.description}}</td>
+                <td>{{tran.session_status}}</td>
+                <td>{{tran.hourly_rate}}</td>
+                <td>{{tran.quantity}} hours</td>
+                <td class="amount">{{tran.amount}}</td>
+            </tr>
+
+        </table>
+    </div>
+</div>

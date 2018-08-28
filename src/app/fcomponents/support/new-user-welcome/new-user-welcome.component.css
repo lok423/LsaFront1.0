@@ -1,0 +1,153 @@
+#ContentBody{
+	padding-top:20px;
+	text-align: center;
+	background: -webkit-linear-gradient(to left to top, #81c7ee,#ececec);
+	background: -o-linear-gradient(to bottom to right,#81c7ee,#ececec);
+	background: -moz-linear-gradient(to bottom to right,#81c7ee,#ececec);
+	background: linear-gradient(to left,#20e639,#36a9d4);
+	animation:myfirst 1.2s;
+	-webkit-animation:myfirst 1.2s; /* Safari and Chrome */
+}
+
+@keyframes myfirst
+{
+	from {opacity:0.4;}
+	to {opacity:1;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	from {opacity:0.4;}
+	to {opacity:1;}
+}
+#YearSelection{
+	border-top-right-radius:8px;
+	border-top-left-radius:8px;
+	text-shadow: 1px 1px  #f8f8f8;
+	position: relative;
+	left:0px;
+	padding-top:60px;
+	background-color: #f8f8f8;
+	animation:myfirstPage 0.6s;
+	-webkit-animation:myfirstPage 0.6s; /* Safari and Chrome */
+}
+mat-form-field{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+mat-option{
+	transition: font-size 0.2s;
+	-webkit-transition: font-size 0.2s;
+}
+mat-option:hover{
+	font-size:18px;
+	color: rgba(0,0,0,.87);
+}
+#YearLevelButton{
+	margin-right:36%;
+	margin-bottom:10px;
+	padding-top: 10px;
+	height:60px;
+}
+#YearLevelButton button{
+	height:45px;
+	width:180px;
+	cursor: pointer;
+}
+
+@keyframes myfirstPage
+{
+	from {opacity:0.4;left:-15px}
+	to {opacity:1;left:0px}
+}
+
+@-webkit-keyframes myfirstPage /* Safari and Chrome */
+{
+	from {opacity:0.4;left:-15px}
+	to {opacity:1;left:0px}
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+img{
+	height:35px;
+	width:35px;
+	transition: height 0.2s;
+	-webkit-transition: height 0.2s;
+	transition: width 0.2s;
+	-webkit-transition: width 0.2s;
+}
+
+/* Card header style */
+#LookingCourse{
+	margin-bottom:15px;
+	background-color:rgba(0,0,0,0.00000005);
+}
+
+.card{
+	border:0;
+	background-color:rgba(0,0,0,0.00000005);
+}
+
+/* Switching table animation */
+.tableAni{
+	animation:table 1s;
+	-webkit-animation:table 1s; /* Safari and Chrome */
+}
+@keyframes table
+{
+	from {opacity:0.4;}
+	to {opacity:1;}
+}
+
+@-webkit-keyframes table /* Safari and Chrome */
+{
+	from {opacity:0.4;}
+	to {opacity:1;}
+}
+
+/* styles of courses table */
+.card-body{
+	border-radius: 3%;
+	background-color: #f8f8f8;
+}
+.TabHover{
+	display:inline-block;
+	postion: relative;
+  left:0;
+	height:50px;
+	padding-top:6px;
+	margin-top:20px;
+  border-radius: 3%;
+	text-shadow: 1px 1px  #f8f8f8;
+	border-left: 0.5px solid #cccccc;
+	border-right: 0.5px solid #cccccc;
+	border-bottom: 0.5px solid #cccccc;
+	box-shadow: 4px 4px 5px #e8e8e8;
+	transition: box-shadow 0.2s;
+	-webkit-transition: box-shadow 0.2s;
+}
+.TabHover img{
+	float: left;
+}
+.TabHover:hover{
+	box-shadow: 5px 7px 5px #e2dbdb;
+}
+.yearIcons{
+	float: right;
+	font-size:10px;
+	text-shadow: 0px 0px;
+}
+
+/* Styles of "skip" and"Apply to teach" */
+.BottomParts{
+	width:100%;
+}
+.BottomParts button{
+	color:white;
+}
+.BottomParts button:nth-child(2){
+	margin-left:40px;
+}

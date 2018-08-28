@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/dashboard/student/learningprofile",
+    "cardContent":
+    [{
+      "initHelperMatch": "learningprofile Header",
+      "initHelperText": "learningprofile Body"
+    },
+    {
+      "helperMatch": "learningprofile part 1",
+      "helperText": "learningprofile Body 1"
+    },
+    {
+      "helperMatch": "learningprofile part 2",
+      "helperText": "learningprofile Body 2"
+    },
+    {
+      "helperMatch": "learningprofile part 3",
+      "helperText": "learningprofile Body 3"
+    }]
+  }
+]

@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-8 nav_space">
+      <div style="margin-bottom:26px;" class="card">
+        <div class="card-header m2">Your application</div>
+        <div class="card-body">
+          <p>Hi, {{first_name}} {{last_name}}</p>
+          <p>Your teaching subjects :<br>{{applicant.discipline}}</p>
+          <p>Your teaching curriculums :<br> {{applicant.curriculum}}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-4 nav_space">
+      <div style="margin-bottom:26px;" class="card">
+        <div class="card-header m2">Application Status</div>
+        <div class="card-body">
+          <div *ngIf="applicant.condition" class="sectionContent">{{status_obj.msg}}.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-8 ">
+      <div class="card">
+        <!--step 1-->
+        <div *ngIf="status_obj.status_code=='update'">
+          <div class="card-header m2">Next step &nbsp; {{fileErrorMsg}}</div>
+          <div class="card-body" >
+
+            <div style="height: 60px;">
+              Please download the NZ Police vetting form here: <br>
+              <a href="http://www.police.govt.nz/sites/default/files/publications/pvs-vetting-request-and-consent-form.pdf" download="police_vetting_form">
+                NZ Police Vetting Form 2018
+              </a>
+              <br> 
+              <div class="s4">Please fill out pages 2 and 3 of the form.</div>
+            </div>
+
+            <br><hr>
+
+            <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+              <div>Upload a formal ID image (must be an government issued ID).</div>
+              <div class="invalid_feedback" *ngIf="fileErrorMsg1">{{fileErrorMsg1}} </div>
+              <input class="input-row" type="file" id="image" required name="file1" accept="image/*">
+              <br><br>
+
+              <div>Upload an most recent academic transcript (can be screenshot).</div>
+              <div class="invalid_feedback" *ngIf="fileErrorMsg2">{{fileErrorMsg2}} </div>
+              <input class="input-row" type="file" id="application" required name="file2" accept="application/pdf,application/msword,image/*,"/>
+              <br><br>
+
+              <div>Upload police vetting form (can be screenshot).</div>
+              <div class="invalid_feedback" *ngIf="fileErrorMsg3">{{fileErrorMsg3}} </div>
+              <input class="input-row" type="file" id="application2" required name="file3" accept="application/pdf,application/msword,image/*,"/>
+              <br><br>
+              
+              <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+
+            <div *ngIf="applicant.condition == 'pending'"> 
+              No further actions required, we aim to get back to you within 7 working days.
+            </div>
+
+            <div *ngIf="applicant.condition == 'approved'">
+              Your application to be a tutor has been approved. Please read and accept the Learnspace tutor agreement.
+                <br><br>
+                <button class="btn btn-outline-primary" (click)="readAgreement()" >Read agreement </button>
+            </div>
+
+            <hr>
+          </div> 
+        </div>
+
+        <!--step 2-->
+        <div *ngIf="status_obj.status_code=='pending1'">
+          <div class="card-header m2">Next step</div>
+          <div class="card-body">
+            No further actions required, we aim to get back to you within 7 working days.
+          </div>
+        </div>
+
+        <!--step 3-->
+        <div *ngIf="status_obj.status_code=='interview'">
+          <div class="card-header m2">Next step</div>
+          <div class="card-body">
+            <div class="card-block">Please select a date and place for your interview:</div> <br>
+            <div class="card-block" *ngIf="interviewDates; then interviewInfo"></div>
+            <button type="submit" class="btn btn-primary btn-position" (click)="confirmInterviewDate();" >Submit</button>
+          </div>
+        </div>
+
+        <!--step 4-->
+        <div *ngIf="status_obj.status_code=='pending2'">
+          <div class="card-header m2">Next step</div>
+          <div class="card-body">
+            <p>Your interview is booked at : <br> {{applicant['interview_time']}}</p> <br>
+            Please bring a Photo Id with you.
+            <br>
+          </div>
+        </div>
+
+        <!--step 5-->
+        <div *ngIf="status_obj.status_code=='approved'">
+          <div class="card-header m2">Next step</div>
+          <div class="card-body" >
+            Your application to be a tutor has been approved.
+            Please read and accept the Learnspace tutor agreement.
+            <br><br>
+            <button class="btn btn-outline-primary" (click)="readAgreement()" >Read agreement </button>
+          </div>
+        </div>
+        
+        <!--step 6-->
+        <div *ngIf="status_obj.status_code=='contract_signed'">
+          <div class="card-header m2">Next step</div>
+          <div class="card-body" >
+            Your application for tutoring has been approved. <br>
+            One of our specialists will get in touch with you ASAP.
+          </div>
+        </div>
+
+        <!--step 7-->
+        <div *ngIf="status_obj.status_code=='declined'">
+          <div class="card-header m2">Next step &nbsp; {{fileErrorMsg}}</div>
+          <div class="card-body" ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template  #interviewInfo >
+  <div *ngFor="let item of interviewDates; let i = index">
+    <input type="radio" value="{{item.dateTime}} {{item.location}}"> 
+      <label><i name="interview_date">{{item.dateTime | date}}, </i></label> 
+      <label name="interview_time">{{item.dateTime | date:'shortTime'}} &nbsp;</label> 
+      <label name="interview_location">{{item.location}}<br></label>
+  </div>
+</ng-template>

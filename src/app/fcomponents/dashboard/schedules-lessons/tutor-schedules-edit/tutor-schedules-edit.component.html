@@ -1,0 +1,40 @@
+
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
+    <div class="card-header" style="border-bottom:0px">
+      <div class="container" class="px-0">
+        <div class="row border-primary">
+            <label class="radio-inline col-sm-3 freetime-left addLabel" (click)="addEvent()"><input type="radio" name="optradio" checked>Add free time</label>
+            <label class="radio-inline col-sm-3 removeLabel" (click)="removeEvent()"><input type="radio" name="optradio">Remove free time</label>
+            <label *ngIf='showSpinner' class="d-inline text-primary col-sm-3"><i class="fa fa-spinner fa-spin text-primary"></i>Loading...</label>
+        </div>
+      </div>
+      <div class="dropdown col-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+          Edit 1 week
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 1 week</button>
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 2 weeks</button>  
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 3 weeks</button>
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 4 weeks</button>
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 5 weeks</button>
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 6 weeks</button>
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 7 weeks</button>
+          <button class="dropdown-item" (click)= "setWeeks($event)">Edit 8 weeks</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body" style="height:500px;" class="px-0 mt-2">  
+      <div id="calendar"></div>
+      <div class="row">
+        <button *ngIf="indicator" type="button" class="btn btn-primary my-3 ml-3" (click)="submit()">Save</button>
+        <div *ngIf="sucMessage" class="my-3 ml-3" style="font-size:21px; color:#525252;"><i class="fa fa-check-circle"></i>&nbsp;{{sucMessage}}</div>
+      </div>
+    </div>
+
+    <br><br><br>
+    <div *ngIf="!indicator" style="position: absolute; font-size:21px; color:#525252; top:128px;"><i class="fa fa-spinner fa-spin"></i>   Loading...</div>
+  </div>
+</div>

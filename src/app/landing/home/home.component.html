@@ -1,0 +1,207 @@
+<nav id="top-navbar" class="navbar navbar-expand-md fixed-top" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'backgColor1 borderColor1':'backgColor2 borderColor2'">
+  <a class="navbar-brand logo" href="index" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">Learnspace</a>
+    <button class="navbar-toggler" type="button" (click)="collapseShow()" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <div class="collapse navbar-collapse" id="navbar-primary">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link navLink" href="https://learnspace.co.nz/app/find-tutor" routerLink="/app/find-tutor" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)? 'fontColor1':'fontColor2'">Find a Teacher <span class="sr-only">(current)</span></a>
+      </li>
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle navLink" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent;" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">Community<span class="sr-only">(current)</span></a>
+        <ul class="dropdown-menu dropdown-menu-user" aria-labelledby="navbarDropdown" [ngClass]="screenStatus?'backgColor2':'backgColor1'">
+          <li><a class="dropdown-item fontColor3 articleIcon dpitem" style="padding-left:30px;" routerLink="/app/community/posts" href="https://learnspace.co.nz/app/community/posts">Articles</a></li>
+          <li *ngIf="rolePosition == 3"><a class="dropdown-item fontColor3 editIcon" style="padding-left:30px;" routerLink="/app/community/newpost" href="https://learnspace.co.nz/app/community/newpost">Add an article</a></li>
+          <li><a class="dropdown-item fontColor3 discussionIcon" style="padding-left:30px;" routerLink="/app/community/discussions" href="https://learnspace.co.nz/app/community/discussions">Discussions</a></li>
+          <li><a class="dropdown-item fontColor3 discussionIcon" style="padding-left:30px;" routerLink="/app/community/newdiscussions" href="https://learnspace.co.nz/app/community/newdiscussions">Ask a question</a></li>
+        </ul>
+      </li> -->
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+        <li *ngIf="!loggedIn" class="nav-item">
+            <a class="nav-link navLink navRight pointer" (click)="loginUser($event)" [ngStyle]="{'color': (screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)? '#0099FF' : 'white'}">Login</a>
+        </li>
+        <li *ngIf="!loggedIn" class="nav-item">
+            <a class="nav-link navLink navRight pointer" (click)="newUser($event)" [ngStyle]="{'color': (screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)? '#0099FF' : 'white'}">Register</a>
+        </li>
+        <li *ngIf="!loggedIn" class="nav-item">
+            <a class="nav-link navLink navRight" href="https://learnspace.co.nz/app/work" routerLink="/work" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">Apply to teach</a>
+        </li>
+
+        <li *ngIf="loggedInUserName" class="nav-item dropdown">
+          <a style="background-color:transparent;" class="nav-link dropdown-toggle navLink" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">
+            <i style="font-size:23px;" class="fa fa-user-circle"></i> &nbsp;{{loggedInUserName}}
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-user dropdown-menu-right" aria-labelledby="navbarDropdown"[ngClass]="screenStatus? 'backgColor2':'backgColor1'">
+            <li> <a class="dropdown-item fontColor3 homeIcon dpitem" style="padding-left:30px;" routerLink="/app/dashboard/home" href="https://learnspace.co.nz/app/dashboard/home">Dashboard</a> </li>
+            <li *ngIf="rolePosition == 1"> <a class="dropdown-item fontColor3 teachingIcon" style="padding-left:30px;" routerLink="/app/apply/teach" href="https://learnspace.co.nz/app/apply/teach">Apply to teach</a> </li>
+            <li><a class="dropdown-item fontColor3 settingIcon" style="padding-left:30px;" routerLink="/app/user/details" href="https://learnspace.co.nz/app/user/details">General details</a></li>
+            <!-- <li><a class="dropdown-item fontColor3 transactionIcon" style="padding-left:30px" routerLink="/app/transaction" href="https://learnspace.co.nz/app/transaction">My transactions</a></li> -->
+            <li><a class="dropdown-item fontColor3 passdIcon" style="padding-left:30px;" routerLink="/app/user/password" href="https://learnspace.co.nz/app/user/password">Change password</a></li>
+              <!-- <li><a class="dropdown-item fontColor3 paymentIcon" style="padding-left:30px;" routerLink="/app/user/payment-info" href="https://learnspace.co.nz/app/user/payment-info">Payment info</a></li> -->
+            <div class="dropdown-divider"></div>
+            <li> <a class="dropdown-item fontColor3 logoutIcon dpitem" style="padding-left:30px;" (click)="onLogoutClick()">Logout</a> </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+  <header id="headerBackground" class="jumbotron" style="margin-bottom:20px; padding-left:0px;" >
+    <div style="margin-top:45px;" class="container">
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div class="j1">Personalised Tutoring for <br> High School</div>
+          <div class="mid1Content">Conquer school learning with a personal teacher who is a professional in the field.</div>
+
+          <div style="margin-top:20px;" class="btn-group">
+              <button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>I'm Studying ... </span>
+              </button>
+              <ul class="dropdown-menu scrollable-menu">
+                <small class="dropdown-header">Popular Subjects</small>
+                <!-- <div *ngIf="isBrowser==true"> -->
+                  <a class="dropdown-item" routerLink="/app/find-tutor/Maths">Maths</a>
+                  <a class="dropdown-item" routerLink="/app/find-tutor/English">English</a>
+                  <a class="dropdown-item" routerLink="/app/find-tutor/Chemistry">Chemistry</a>
+                  <a class="dropdown-item" routerLink="/app/find-tutor/Physics">Physics</a>
+                  <a class="dropdown-item" routerLink="/app/find-tutor/Bio">Biology</a>
+                  <a class="dropdown-item" routerLink="/app/find-tutor/Accounting">Accounting</a>
+                  <a class="dropdown-item" routerLink="/app/find-tutor/Economics">Economics</a>
+                <!-- </div> -->
+                <div *ngIf="isBrowser==false">
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/">Get Started</a>
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/Maths">Maths</a>
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/English">English</a>
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/Chemistry">Chemistry</a>
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/Physics">Physics</a>
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/Bio">Biology</a>
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/Accounting">Accounting</a>
+                  <a class="dropdown-item" href="https://learnspace.co.nz/app/find-tutor/Economics">Economics</a>
+                </div>
+              </ul>
+              <a routerLink="/app/find-tutor/" class="btn btn-primary">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="mid-1" class="container-fluid" >
+    <div class="row" >
+      <div class="col-md-6" style="padding:0px;" >
+        <div id="left-content" class="jumbotron" >
+          <div style="padding-top:10%; " class="mid1Title">Personalised learning for any subject</div>
+          <div class="mid1Content">Personalise the learning experience to suit your unique needs.</div>
+        </div>
+      </div>
+      <div id="right-content-container" class="col-md-6" >
+        <div id="right-content" ></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="mid-works" style="background:#F2F2F2" >
+    <div class="container-fluid" style="text-align:center;">
+      <div class="l2"><br>How Learnspace Works</div><br>
+      <div class="row">
+        <div class="col-md-4 works">
+          <div id="works_icon1"></div> <br>
+          <div class="wordsContent1"> Browse teacher profiles and bios online.</div>
+        </div>
+
+        <div class="col-md-4 works">
+          <div id="works_icon2"></div> <br>
+          <div class="wordsContent1"> Book lessons with the best teachers for your schedule, budget, goals, and learning style.</div>
+        </div>
+
+        <div class="col-md-4 works">
+          <div id="works_icon3"></div> <br>
+          <div class="wordsContent1"> Have the session at a time and place that suits you. </div>
+        </div>
+      </div>
+      <br><br>
+        <a href="https://learnspace.co.nz/app/find-tutor" routerLink="/app/find-tutor" class="btn btn-lg btn-outline-primary">Get Started</a>
+      <br><br><br>
+    </div>
+  </section>
+
+  <section class="mid-gallery" >
+    <div class="container-fluid" style="text-align:center;">
+      <br><div class="l2">See our Teachers</div><br>
+      <div class="row">
+        <a routerLink="/app/find-tutor/Maths" href="https://learnspace.co.nz/app/find-tutor/Maths" class="col-6 col-sm-4 col-lg-2"><div class="imgText">Learn Maths</div><img src="assets/tutorpics/front1.jpg"></a>
+        <a routerLink="/app/find-tutor/Physics" href="https://learnspace.co.nz/app/find-tutor/Physics" class="col-6 col-sm-4 col-lg-2"><div class="imgText">Learn Physics</div><img src="assets/tutorpics/front2.jpg"></a>
+        <a routerLink="/app/find-tutor/Bio" href="https://learnspace.co.nz/app/find-tutor/Bio" class="col-6 col-sm-4 col-lg-2"><div class="imgText">Learn Chemistry</div><img src="assets/tutorpics/front3.jpg"></a>
+        <a routerLink="/app/find-tutor/Chemistry" href="https://learnspace.co.nz/app/find-tutor/Chemistry" class="col-6 col-sm-4 col-lg-2"><div class="imgText">Learn Biology</div><img src="assets/tutorpics/front4.jpg"></a>
+        <a routerLink="/app/find-tutor/English" href="https://learnspace.co.nz/app/find-tutor/English" class="col-6 col-sm-4 col-lg-2"><div class="imgText">Learn English</div><img src="assets/tutorpics/front5.jpg"></a>
+        <a routerLink="/app/find-tutor/Accounting" href="https://learnspace.co.nz/app/find-tutor/Accounting" class="col-6 col-sm-4 col-lg-2"><div class="imgText">Learn Accounting</div><img src="assets/tutorpics/front6.jpg"></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mid-why" style="margin-top:20px; background:#F2F2F2" >
+    <div class="container-fluid" >
+      <div class="l2" style="text-align:center;">Why Learnspace</div>
+      <div class="row">
+
+          <div class="whyContentIcon col-12 col-sm-2 col-lg-1">
+            <i class="fa fa-arrow-circle-up" style="font-size:68px; color:#23DE8A;"aria-hidden="true"></i>
+          </div>
+          <div class="s2 whyContent col-12 col-sm-4 col-lg-3">
+            <div class="m2">Effective</div>
+              The most effective way to learn is by one-on-one tutoring, where you will receive immediate feedback from your personal teacher.
+          </div>
+
+          <div class="whyContentIcon col-12 col-sm-2 col-lg-1">
+            <i class="fa fa-user" style="font-size:68px; color:#23DE8A;"aria-hidden="true"></i>
+          </div>
+          <div class="s2 whyContent col-12  col-sm-4  col-lg-3">
+            <div class="m2">Personalised</div>
+              Learnspace tutors customize lessons and tailor long-term plans for each particular student. Since its one on one, you'll have all the attention.
+          </div>
+
+          <div class="whyContentIcon col-12 col-sm-2 col-lg-1">
+            <i class="fa fa-lightbulb-o" style="font-size:68px; color:#23DE8A;" aria-hidden="true"></i>
+          </div>
+          <div class="s2 whyContent col-12 col-sm-4  col-lg-3">
+            <div class="m2">Inspiring</div>
+            Learnspace tutors will inspire students as to how to learn, ultimately working with students to unlock their full potential.
+          </div>
+
+          <div class="whyContentIcon col-12 col-sm-2 col-lg-1">
+            <i class="fa fa-book" style="font-size:68px; color:#23DE8A;" aria-hidden="true"></i>
+          </div>
+          <div class="s2 whyContent col-12  col-sm-4  col-lg-3">
+            <div class="m2">Professional</div>
+            We ensure every session achieve the best learning outcome for our learners. That’s why we only provide tutors who maintain the highest standards of teaching.
+          </div>
+
+          <div class="whyContentIcon col-12 col-sm-2 col-lg-1">
+            <i class="fa fa-usd" style="font-size:68px; color:#23DE8A;" aria-hidden="true"></i>
+          </div>
+          <div class="s2 whyContent col-12  col-sm-4  col-lg-3">
+            <div class="m2">Affordable</div>
+            Lessons on Learnspace cost an average of $29 per hour—much less than the amount you would spend at a traditional tuition school.
+          </div>
+
+          <div class="whyContentIcon col-12 col-sm-2 col-lg-1">
+            <i class="fa fa-thumbs-o-up" style="font-size:68px; color: #23DE8A;" aria-hidden="true"></i>
+          </div>
+          <div class="s2 whyContent col-12  col-sm-4  col-lg-3">
+            <div class="m2">Convenient</div>
+              The Learnspace system is designed to maximise customer convenience, just a few clicks and you'll scheduled your first lesson.
+          </div>
+        </div>
+
+    </div>
+  </section>
+
+<br>
+<app-footer></app-footer>

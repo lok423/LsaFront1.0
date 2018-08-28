@@ -1,0 +1,75 @@
+.container {
+  background: #f7f7f7;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.submitted_row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*-- main --*/
+.register-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  /*background: #B7BED8;*/
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.input_group{
+  margin-right: 40px;
+  margin-left: 40px;
+}
+.form_input {
+  margin: 0.3em 0 1em 0;
+  padding: 0.5em 0.1em;
+}
+
+.field-width {
+  width: 100%;
+}
+
+
+.btn_blue{
+  margin-top: 10px;
+  position: inherit;
+}
+
+.submit_success{
+  color: red;
+}

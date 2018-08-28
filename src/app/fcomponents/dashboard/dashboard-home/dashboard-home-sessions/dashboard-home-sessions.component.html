@@ -1,0 +1,138 @@
+<div class="container">
+  <div *ngIf="sessionsInfo.length !== 0" style="font-size: 0.9rem;">
+    <!--row block-->
+    <div *ngFor="let session of sessionsInfo">
+      <div class="row border shadow text-center" id="{{session.session_id}}">
+
+          <!-- Photos and Name(when lg) -->
+          <div class="col-lg-2 col-sm-3 personInfo">
+            <!--Tutor role: show learner portal-->
+            <div *ngIf="role === 3" >
+              <img [src]='session.learner_img' class="img-fluid img-thumbnail" alt="learner img"><br>
+              <label class="lgName s3Blue"><b>{{session.learner_name}}</b></label>
+            </div>
+            <!--Learner role: show tutor portal-->
+            <div *ngIf="role === 1 || role === 2">
+              <img [src]='session.tutor_img' class="img-fluid img-thumbnail" alt="tutor img"><br>
+              <label class="lgName s3Blue"><b>{{session.tutor_name}}</b></label>
+            </div>
+          </div>
+
+          <!-- Status, Time, and Date, and Name(when sm & md)-->
+          <div class="col-lg-3 col-sm-9 py-2 mainInfo">
+              <label *ngIf="role === 3" class="smName" style="color: #0099FF;"><b>{{session.learner_name}}</b></label>
+              <label *ngIf="role === 1 || role === 2" class="smName" style="color: #0099FF;"><b>{{session.tutor_name}}</b></label>
+              <label class="smScreen" id="label{{session.session_id}}"><b>{{session.session_status | titlecase}}</b></label>
+              <label class="smScreen" id="timeShow"><b>{{session.session_startTime | lowercase}} - {{session.session_endTime | lowercase}}</b></label>
+              <label class="smScreen"><small>{{session.session_day}}&nbsp;&nbsp;<i>{{session.session_date}}</i></small></label>
+          </div>
+
+          <!-- Location, Subject, and Update Information -->
+          <div class="col-lg-5 col-sm-12 py-2 border-top gap-top">
+            <label>{{session.session_location}}</label><br>
+            <label>{{session.session_subject}}</label>
+            <!--Tutor update-->
+            <div *ngIf='role === 3' class="text-danger">
+                <label *ngIf="(session.session_update === 1 && !session.hasOwnProperty('updated')) || session.hasOwnProperty('updated')">Last update by: {{session.tutor_name}}</label>
+                <label *ngIf="session.session_update === 0 && !session.hasOwnProperty('updated')">Last update by: {{session.learner_name}}</label>
+              </div>
+              <!--Learner update-->
+              <div *ngIf='role === 1 || role === 2' class="text-danger">
+                <label *ngIf="(session.session_update === 1 && !session.hasOwnProperty('updated'))">Last update by: {{session.tutor_name}}</label>
+                <label *ngIf="(session.session_update === 0 && !session.hasOwnProperty('updated')) || session.hasOwnProperty('updated')">Last update by: {{session.learner_name}}</label>
+              </div>
+          </div>
+
+        <!-- Button -->
+        <div class="col-lg-2 col-sm-12 py-3 btns">
+          <!--Options-->
+          <!--cancel and confirm will be removed if changed something in typescript-->
+          <!--Tutor role-->
+          <div *ngIf="role === 3">
+            <!--status is planned-->
+            <div *ngIf="session.session_status === 'planned'">
+              <div class="btn-group w-100 px-2 my-2">
+                <button type="button" class="btn btn-sm btn-primary w-100" id="con{{session.session_id}}" *ngIf="(session.session_update === 0 || session.session_update === null) && !(session.hasOwnProperty('updated'))"
+                  (click)='confirmSession($event)'>CONFIRM</button>
+                <button type="button" class="btn btn-sm btn-primary w-100" id="act{{session.session_id}}" *ngIf="session.session_update === 1 || session.hasOwnProperty('updated')">ACTIONS</button>
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
+                  <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                </div>
+              </div>
+            </div>
+            <!--status is confirmed-->
+            <div *ngIf="session.session_status === 'confirmed'">
+              <div class="btn-group w-100 px-2 my-2">
+                <button type="button" class="btn btn-sm btn-primary w-100" id="act{{session.session_id}}">ACTIONS</button>
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
+                  <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                </div>
+              </div>
+            </div>
+            <!--status is completed-->
+            <div *ngIf="session.session_status === 'completed'">
+              <div class="btn-group w-100 px-2 my-2">
+                <button type="button" class="btn btn-sm btn-primary w-100" id="act{{session.session_id}}">ACTIONS</button>
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item pointer" (click)='generateReport($event)' *ngIf="session.session_status === 'completed'" id="gen{{session.session_id}}">Generate Report</a>
+                  <a class="dropdown-item pointer" (click)='reportIssue($event)' *ngIf="session.session_status === 'completed'" id="iss{{session.session_id}}">Report Issue</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Learner role-->
+          <div *ngIf="role === 1 || role === 2">
+            <!--status is planned-->
+            <div *ngIf="session.session_status === 'planned'">
+              <div class="btn-group w-100 px-2 my-2">
+                <button type="button" class="btn btn-sm btn-primary w-100" id="con{{session.session_id}}" *ngIf="session.session_update === 1 && !(session.hasOwnProperty('updated'))"
+                  (click)='confirmSession($event)'>CONFIRM</button>
+                <button type="button" class="btn btn-sm btn-primary w-100" id="act{{session.session_id}}" *ngIf="(session.session_update === 0 || session.session_update === null) || session.hasOwnProperty('updated')">ACTIONS</button>
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
+                  <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                </div>
+              </div>
+            </div>
+            <!-- status is confirmed-->
+            <div *ngIf="session.session_status === 'confirmed'">
+              <div class="btn-group w-100 px-2 my-2">
+                <button type="button" class="btn btn-sm btn-primary w-100" id="act{{session.session_id}}">ACTIONS</button>
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
+                  <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                </div>
+              </div>
+            </div>
+            <!--status is completed-->
+            <div *ngIf="session.session_status === 'completed'">
+              <div class="btn-group w-100 px-2 my-2">
+                <button type="button" class="btn btn-sm btn-primary w-100" id="act{{session.session_id}}">ACTIONS</button>
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item pointer" (click)='rateLesson($event)' *ngIf="session.session_status === 'completed'" id="gen{{session.session_id}}">Rate Lesson</a>
+                  <a class="dropdown-item pointer" (click)='reportIssue($event)' *ngIf="session.session_status === 'completed'" id="iss{{session.session_id}}">Report Issue</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!--Change session info-->
+        <span id="suc{{session.session_id}}">
+        </span>
+        <br>
+      </div>    <!-- Close tag for class="row" -->
+    </div>    <!-- Close tag for *ngFor -->
+    <br>
+    <p style="color: red;" *ngIf='sucSubmit'>Submitted successfully!</p>
+  </div>      <!-- Close tag for *ngIf -->
+</div>

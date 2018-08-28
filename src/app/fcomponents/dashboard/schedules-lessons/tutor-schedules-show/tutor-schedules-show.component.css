@@ -1,0 +1,9 @@
+.fc-widget-header{
+  background-color:blue;
+}
+div#fullcalendar .fc-header-title h2 {
+color: #0F0;
+}
+.fc-center h2 {
+  font-size: 0.7rem;
+}

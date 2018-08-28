@@ -1,0 +1,125 @@
+<div class="container-fluid" id="ContentBody">
+
+
+<ng-template [ngIf]="YearLevel">
+	<div class="offset-0.000005 offset-sm-3 col-12 col-sm-6" id="YearSelection">
+		<div class="col-12 col-sm-6 offset-sm-3 m2"> Select your year level:</div>
+		<mat-form-field>
+			<mat-select placeholder="Year Level" [(value)]="selected1">
+				<mat-option value="7">Y 7</mat-option>
+				<mat-option value="8">Y 8</mat-option>
+				<mat-option value="9">Y 9</mat-option>
+				<mat-option value="10">Y 10</mat-option>
+				<mat-option value="11">Y 11</mat-option>
+				<mat-option value="12">Y 12</mat-option>
+				<mat-option value="13">Y 13</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<div class="row justify-content-end" id= "YearLevelButton">
+			<button type="button" class="btn btn-outline-primary" (click)="showCourse()">Next</button>
+		</div>
+	</div>
+</ng-template>
+
+
+	<ng-template [ngIf]="CoursePage">
+	<div class="card text-center" id="LookingCourse">
+  	<div class="card-header col-12 m2">Which course are you looking for?</div>
+	</div>
+
+		<div class="card col-12">
+	<div class="card-body col-12 col-lg-7 col-xl-6 col-md-11  offset-xl-3 offset-lg-2 offset-md-1 offset-0.000000001">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<button type="button" class="btn btn-outline-primary col-12 col-md-12" (click)="showHighCourse()">High School Courses</button>
+			<!-- <button type="button" class="btn btn-outline-success col-5 col-md-12"(click)="showUniCourse()">Uni Courses</button> -->
+			<!-- button group used to control display high school courses and uni courses -->
+		</div>
+
+	<ng-template [ngIf]="highCourse">
+	<!-- Content of high school courses -->
+	<div class="col-12 tableAni">
+
+			<a class="col-12 col-md-5 col-lg-6 col-xl-5 m-r-2 TabHover s2bold" routerLink="/app/find-tutor/Maths"><img src="assets/img/math.jpg"/><div style= "margin-left:60px;">Math<span class="badge badge-success yearIcons">Y 7-13</span></div></a>
+			<a class="col-12 col-md-5 col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor/English"><img src="assets/img/english.jpg"/><div style= "margin-left:60px;"><span>English</span><span class="badge badge-success yearIcons">Y 7-13</span></div></a>
+
+			<a class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor"><img src="/assets/img/science.jpg"/><div style= "margin-left:65px;">Science<span class="badge badge-success yearIcons">Y 7-13</span></div></a>
+			<a *ngIf = "selected1>11" class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor"><img src="assets/img/calculus.png"/><div style= "margin-left:65px;">Calculus<span class="badge badge-success yearIcons">Y 12-13</span></div></a>
+
+
+			<a *ngIf = "selected1>9" class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor/Chemistry"><img src="assets/img/chemistry.jpg"/><div style= "margin-left:65px;">Chemistry<span class="badge badge-success yearIcons">Y 10-13</span></div></a>
+			<a *ngIf = "selected1>9"class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor/Physics"><img src="assets/img/physics2.jpg"/><div style= "margin-left:65px;">Physics<span class="badge badge-success yearIcons">Y 10-13</span></div></a>
+
+
+			<a *ngIf = "selected1>9" class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor/Bio"><img src="assets/img/biology.jpg"/><div style= "margin-left:65px;">Biology<span class="badge badge-success yearIcons">Y 10-13</span></div></a>
+			<a *ngIf = "selected1>8" class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor/Economics"><img src="assets/img/economy.jpg"/><div style= "margin-left:65px;" >Economics<span class="badge badge-success yearIcons">Y 9-13</span></div></a>
+
+
+			<a *ngIf = "selected1>8" class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor/Accounting"><img src="assets/img/accounting.jpg"/><div style= "margin-left:65px;">Accounting<span class="badge badge-success yearIcons">Y 9-13</span></div></a>
+			<a class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor"><img src="assets/img/german.jpg"/>German</a>
+
+
+			<a class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor"><img src="assets/img/chinese.jpg"/>Chinese</a>
+			<a class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor"><img src="assets/img/maori.png"/>Maori</a>
+
+
+			<a class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor"><img src="assets/img/spanish.jpg"/>Spanish</a>
+			<a class="col-12 col-md-5  col-lg-6 col-xl-5 TabHover s2bold" routerLink="/app/find-tutor"><img src="assets/img/french.jpg"/>French</a>
+			<br/>
+			<br/>
+			<a class="s3Blue" routerLink="/app/find-tutor">Skip</a>
+	</div>
+	</ng-template>
+
+					<!-- <ng-template [ngIf]="uniCourse">
+						<!-- content of university courses -->
+					<!-- <div  class="col-12 tableAni">
+							<div class="row justify-content-around">
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/accounting.png"/><a routerLink="/app/find-tutor/Accounting">Accounting</a></div>
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/biology.png"/><a routerLink="/app/find-tutor/Bio">Biology</a></div>
+						</div>
+							<div class="row justify-content-around">
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/chemistry.jpg"/><a routerLink="/app/find-tutor/Chemistry">Chemistry</a></div>
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/cs.png"/><a routerLink="/app/find-tutor">Computer</a></div>
+						</div>
+							<div class="row justify-content-around">
+							<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/economy.png"/><a routerLink="/app/find-tutor/Economics">Economics</a></div>
+							<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/engineering.svg"/><a routerLink="/app/find-tutor">Engineering</a></div>
+						</div>
+							<div class="row justify-content-around">
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/english.png"/><a routerLink="/app/find-tutor">English</a></div>
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/finance.png"/><a routerLink="/app/find-tutor">Finance</a></div>
+						</div>
+						<div class="row justify-content-around">
+							<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/german.png"/><a routerLink="/app/find-tutor">German</a></div>
+							<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/history.png"/><a routerLink="/app/find-tutor">History</a></div>
+						</div>
+							<div class="row justify-content-around">
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"> <img src="assets/img/marketing.png"/><a routerLink="/app/find-tutor">Marketing</a></div>
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/math.png"/><a routerLink="/app/find-tutor/Maths">Math</a></div>
+							</div>
+							<div class="row justify-content-around">
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"> <img src="assets/img/medicine.png"/><a routerLink="/app/find-tutor">MedicalTech</a></div>
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/physics2.png"/><a routerLink="/app/find-tutor/Physics">Physics</a></div>
+						</div>
+							<div class="row justify-content-around">
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/psychology.png"/><a routerLink="/app/find-tutor">Psychology</a></div>
+								<div class="col-12 col-md-4  col-lg-6 col-xl-4 TabHover"><img src="assets/img/spanish.png"/><a routerLink="/app/find-tutor">Spanish</a></div>
+						</div>
+					</div>
+				</ng-template> -->
+				</div>
+
+		</div>
+	</ng-template>
+	<br/>
+			<div class="BottomParts">
+				<button type="button" class="btn btn-outline-dark m-l-1">Apply to teach</button>
+			</div>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+
+		</div>

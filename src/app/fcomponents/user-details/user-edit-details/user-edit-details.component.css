@@ -1,0 +1,108 @@
+/* styles about card */
+.card{
+  padding-bottom: 10px;
+}
+.card-border-top{
+  border-top: 1px solid grey;
+  border-bottom: 0.5px solid lightgrey;
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+.card-border{
+  border-bottom: 0.5px solid lightgrey;
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+.card-border-bottom{
+  border-bottom: 1px solid grey;
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+.inputBox{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.dateBox{
+  margin-top: 10px;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+
+/* styles about pointer */
+.pointer{
+  cursor: pointer;
+}
+
+/* styles about icon */
+.editIcon {
+  background-image: url("../../../../assets/icons/edit.png");
+  background-position: left center;
+  background-size: 15px;
+  background-repeat: no-repeat;
+}
+.warning{
+  background-image: url("../../../../assets/icons/dangerIcon.png");
+  background-position: left center;
+  background-size: 8px;
+  background-repeat: no-repeat;
+  padding-left:12px;
+}
+.nameIcon{
+  background-image: url("../../../../assets/icons/nameIcon.png");
+  background-position: left center;
+  background-size: 15px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}
+.phoneIcon{
+  background-image: url("../../../../assets/icons/phoneIcon.png");
+  background-position: left center;
+  background-size: 15px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}
+.locationIcon{
+  background-image: url("../../../../assets/icons/locationIcon.png");
+  background-position: left center;
+  background-size: 15px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}
+.dateIcon{
+  background-image: url("../../../../assets/icons/dateIcon.png");
+  background-position: left center;
+  background-size: 15px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}
+.genderIcon{
+  background-image: url("../../../../assets/icons/genderIcon.png");
+  background-position: left center;
+  background-size: 18px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}
+.pnameIcon{
+  background-image: url("../../../../assets/icons/nameIcon.png");
+  background-position: left center;
+  background-size: 18px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}
+.pphoneIcon{
+  background-image: url("../../../../assets/icons/parentPhoneIcon.png");
+  background-position: left center;
+  background-size: 18px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}
+.prelationIcon{
+  background-image: url("../../../../assets/icons/contactRelationIcon.png");
+  background-position: left center;
+  background-size: 18px;
+  background-repeat: no-repeat;
+  padding-left:20px;
+}

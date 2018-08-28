@@ -1,0 +1,162 @@
+button{
+  width:100%;
+}
+.dashboard{
+  float:left;
+  text-transform:capitalize;
+  position: relative;
+}
+
+/* gaps and spaces thing */
+.container{
+  padding-top: 0;
+}
+#category{
+  margin-bottom: 0.5rem;
+}
+.s2bold {
+  position: relative;
+}
+
+
+/* navbar content */
+.navbar{
+  background-color:#f2f2f2;
+}
+.nav-link{
+  padding-left:30px;
+}
+.nav-link:hover{
+  background-color: lightgrey;
+  border-radius: 5px 5px 5px 5px;
+}
+
+/* dropdown content */
+.dropdown-menu{
+  max-width: 90px;
+}
+.dropdown-item{
+  padding-left: 5px;
+}
+.dropdown-item:hover{
+  background-color: lightgrey;
+}
+
+/* Icons content */
+.fa{
+  float:right;
+  position: relative;
+}
+.categoryIcon{
+background-image: url("/../../assets/icons/categoryIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+}
+.homeIcon{
+background-image: url("/../../assets/icons/homeIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+margin-right: 10px;
+}
+.transactionIcon{
+background-image: url("/../../assets/icons/transactionIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+margin-right: 10px;
+}
+.personIcon{
+background-image: url("/../../assets/icons/personIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+margin-right: 10px;
+}
+.scheduleIcon{
+background-image: url("/../../assets/icons/scheduleIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+margin-right: 10px;
+}
+.resourceIcon{
+background-image: url("/../../assets/icons/resourceIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+margin-right: 10px;
+}
+.profileIcon{
+background-image: url("/../../assets/icons/profileIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+margin-right: 10px;
+}
+.editIcon{
+background-image: url("/../../assets/icons/edit.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+}
+.teachingIcon{
+background-image: url("/../../assets/icons/teachingIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+}
+.passdIcon{
+background-image: url("/../../assets/icons/passdIcon.png");
+background-position: left center;
+background-size: 25px;
+background-repeat: no-repeat;
+}
+
+
+@media(max-width:767px){
+  .container{
+    border-bottom: 1px solid #cccccc;
+    padding-top: 0;
+  }
+  .nav-link:hover{
+    transform: scale(1.006);
+  }
+  .dropdown-menu{
+    max-width: 98%;
+    border:0px;
+    outline:0px;
+    background-color: #f2f2f2;
+  }
+  .dpitem{
+    margin-top: -18px;
+  }
+  .dashboard{
+    width:100%;
+  }
+  .dashboard span{
+    float:left;
+  }
+}
+@media(min-width:768px) {
+  .navbar{
+    border-bottom: 1px solid #cccccc;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+@media(min-width:992px) {
+  .nav-link:hover{
+    transform: scale(1.04);
+  }
+}
+
+@media(min-width:768px) and (max-width: 991px){
+  .navbar{
+    border-bottom: 1px solid #cccccc;
+  }
+}
+
+
+

@@ -1,0 +1,160 @@
+.form-row>.col {
+    padding: 0;
+}
+
+/* styles about Buttons and Dropdown */
+.btn-sm {
+    color: white;
+    background-color: #0099FF;
+    /* padding: 0.15rem 0.2rem 0.15rem 0.2rem; */
+}
+.btn-sm:hover{
+    transform: scale(1.02);
+    border-radius: 5px 5px 5px 5px;
+}
+.dropdown-menu{
+    min-width: 0;
+}
+.dropdown-item:hover{
+    background-color: lightgrey;
+}
+
+/* styles about Personal Information */
+.img-thumbnail{
+    border-radius: 50% 50% 50% 50%;
+    margin-top: 0.2rem;
+    padding-bottom: 0;
+    height: 60px;
+    width: 60px;
+}
+.smName{
+    display: none;
+}
+.personInfo{
+    text-align: center;
+}
+
+
+/* styles about border, divider, shadow */
+.border{
+    border: 1px solid  #BCBEC0;
+}
+.shadow{
+    border: 1px solid #BCBEC0;
+    padding: 0px;
+    box-shadow: 3px 5px 10px #BCBEC0;
+    border-radius: 5px 5px 5px 5px;
+}
+
+
+
+/* Gaps and Spaces thing*/
+.container{
+    padding-top: 0;
+}
+.gaps{
+    margin-bottom: 5px;
+}
+label{
+    margin-bottom: 0;
+}
+.row{
+    margin-bottom: 1rem;
+}
+.form-row{
+    display: -webkit-box;
+}
+.btns{
+    padding-left: 0;
+}
+
+
+/* styles about cursor.  */
+.pointer {
+    cursor: pointer;
+}
+small, i{
+    pointer-events: none;   /* make element small&i cannot react to pointer events */
+}
+
+
+/* styles about font */
+.status{
+    font-weight: bold;
+    margin-right: 20px;
+}
+#location{
+    font-family: Georgia;
+}
+#subject{
+    font-family: Comic Sans MS;
+}
+
+
+@media (max-width: 575px) {
+    .personInfo{
+        text-align: left;
+    }
+    .mainInfo{
+        margin-top: -5.2rem;
+        padding-left: 4rem;
+    }
+}
+@media (max-width: 991px) {
+    .smScreen{
+        display: block;
+    }
+    .lgName{
+        display: none;
+    }
+    .smName{
+        display: block;
+        padding-top: 5px;
+    }
+    .py-2 {
+       padding-top: 0 !important;
+       padding-bottom: 0 !important;
+   }
+    .py-3 {
+       padding-top: 5px !important;
+       padding-bottom: 0 !important;
+    }
+    .img-thumbnail{
+        border-radius: 50% 50% 50% 50%;
+        margin-top: 0.2rem;
+        padding-bottom: 0;
+        height: 80px;
+        width: 80px;
+    }
+    .btn-sm{
+        max-width: 100%;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .btns{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .border-top{
+        border-top: 1px solid #cccccc;
+        margin-top: 5px;
+    }
+    .gap-top{
+        padding-top: 5px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .text-center{
+        text-align: left !important;
+    }
+    .border-top{
+        border-top: 0 !important;
+    }
+    .btn-sm{
+        padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+        font-size: 12px;
+        font-weight: 600;
+    }
+}

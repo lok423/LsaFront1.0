@@ -1,0 +1,10 @@
+.pre{
+    font-family: Arial;
+    white-space:pre-wrap;
+}
+
+.card-header{
+    padding:0px;
+    max-height: 320px;
+    
+}

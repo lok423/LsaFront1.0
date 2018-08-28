@@ -1,0 +1,40 @@
+[
+  {
+    "pathname": "/app/apply/teach",
+    "cardContent":
+    [{
+      "initHelperMatch": "Teacher Application Profile",
+      "initHelperText": "Please fill out your application."
+    },
+    {
+      "helperMatch": "Profile General Information",
+      "helperText": {"firstName": "Enter your <b>first name</b> (It is at least 2 and not more than 15 characters long)", 
+                     "lastName": "Enter your <b>last name</b> (It is at least 2 and not more than 15 characters long)", 
+                     "phone": "Enter your <b>phone</b> (It is at least 7 and not more than 12 digits long)", 
+                     "location": "Select your <b>location</b> of selections given.", 
+                     "Date of Birth": "Enter your <b>date of birth</b> or select date from calendar pop-up and range of <b>birth-year</b> is from <b>1930</b> to <b>2020</b>."}
+    },
+    {
+      "helperMatch": "Subjects and Curriculum",
+      "helperText": {"main": "You <b>must</b> select <b>main</b> Subjects and Curriculum from selections given.",
+                     "secondary": "Select secondary Subjects and Curriculum from selections given."}
+    },
+    {
+      "helperMatch": "Experiences",
+      "helperText": {"history": "Describe your teaching experience like <b>workplace</b> and <b>role</b>.",
+                     "workyear": "Enter your <b>work</b> start and end <b>year</b> which defines a range from <b>1950</b> to <b>2019</b>."}
+    },
+    {
+      "helperMatch": "Resume",
+      "helperText": "Tell us more about your <b>education</b>, <b>relevant work experience</b> and any <b>certifications</b>. Please upload your resume here."
+    },
+    {
+      "helperMatch": "Other Questions",
+      "helperText": "Describe your background more detailed, your opinion on <b>education</b> and methods of <b>motivating students</b>. Also you <b>must</b> provide <b>criminal records</b> or any charges."
+    },
+    {
+      "helperMatch": "Verify Email",
+      "helperText": "Please <b>verify</b> your <b>email account first</b> please."
+    }]
+  }
+]

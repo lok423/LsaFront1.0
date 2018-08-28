@@ -1,0 +1,299 @@
+<div class="container">
+  <div *ngIf="viewerType == 'tutor' && accessType == 'modify'">
+    <div *ngIf="questionStatus == 'init'; then formStyle; else savedStyle"></div>
+  </div>
+  <div *ngIf="viewerType == 'tutor' && accessType == 'display'">
+    <div *ngIf="questionStatus == 'init'; then formStyle; else savedStyle"></div>
+  </div>
+  <div *ngIf="viewerType == 'tutor' && accessType == 'overview'; then overview"></div>
+  <div *ngIf="viewerType == 'learner' && accessType == 'display'; then quizStyle"></div>
+</div>
+<ng-template #formStyle>
+  <mat-card>
+    <form [formGroup]="questionForm">
+      <div>
+        <i class="material-icons">face</i>
+        <div>
+          <label>
+          <mat-form-field style="width:100%;">
+          <input matInput placeholder="Question Title (Option)" formControlName="questionTitle">
+        </mat-form-field>
+        </label>
+        </div>
+        <div>
+          <label>
+          <mat-form-field style="width:100%;">
+          <textarea matInput placeholder="Question Text"  formControlName="questionText"></textarea>
+        </mat-form-field>
+
+        </label>
+        </div>
+        <div formArrayName="questionOption">
+          <div *ngFor="let option of questionForm.get('questionOption').controls; let i = index;" [formGroupName]="i">
+            <div class="form-group option">
+              <div class="row">
+
+                <div class="col ">
+                  <mat-checkbox style="margin-right:10px;" formControlName="correct"></mat-checkbox>
+                  <mat-form-field class="checkbox-input">
+                    <input matInput formControlName="choiceText" placeholder="Choice {{i+1}}">
+                  </mat-form-field>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <hr>
+          </div>
+          <div class="row">
+
+
+            <div class="option-btn" style="margin-right:5px;">
+              <button type="button" mat-raised-button (click)="addOption()">
+                <i class="material-icons">
+                add
+                </i>Add Option</button>
+            </div>
+
+            <div class="option-btn" style="margin-right:5px;">
+              <button type="button" mat-raised-button (click)="deleteOption()">
+                <i class="material-icons">
+                remove
+              </i>Delete Option</button>
+            </div>
+
+          </div>
+          <hr>
+
+          <div class="form-btn-div">
+            <button type="button" mat-button color="warn" class="styled-btn" (click)="discardQuestion()"><i class="material-icons">
+                delete_sweep</i>Discard
+              </button>
+            <button type="button" mat-button color="primary" class="styled-btn" (click)="saveQuestion()">
+                <i class="material-icons">save_alt</i>Save
+              </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+
+
+  <!--
+  <p>Form value: {{ questionForm.value | json }}</p>
+  <p>Form status: {{ questionForm.status | json }}</p>
+
+  <p>Form value: {{ questionForm.controls["questionOption"].value | json }}</p>
+  <p>Form value: {{ questionForm.controls["questionOption"].status | json }}</p>
+-->
+</ng-template>
+
+<ng-template #savedStyle>
+  <div class="card d-block saved-quiz">
+    <div *ngIf="questionInfo.questionSaveStatus == 'saved'; else formStyle">
+      <mat-card>
+        <div class="pos-btn">
+          <button type="button" class="btn btn-outline-secondary" (click)="moveQuestionUp()">Up</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="moveQuestionDown()">Down</button>
+        </div>
+        <mat-card-content>
+          <div class="saved-quiz col ">
+            <div class="saved-quiz-title">
+              <p>
+                <b>{{questionInfo.questionContent.questionTitle}}</b>
+              </p>
+            </div>
+            <div class="saved-quiz-text">
+              <div class="row" style="">
+                <div class="question-col col-col-sm-md-lg-auto">
+                  <h5>{{questionInfo.questionId}}.</h5>
+                </div>
+                <div class="question-col col-10">
+                  <h5 class="question">{{questionInfo.questionContent.questionText}}</h5>
+                </div>
+              </div>
+            </div>
+            <div class="saved-quiz-ans">
+              <div *ngFor="let option of questionInfo.questionContent.questionOption;let i = index;">
+                <div class="row optionrow" *ngIf="option.correct == true" style="background-color: #b3ffb3;">
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">{{str[i]}}:</p>
+                  </div>
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">&nbsp;&nbsp;{{option.choiceText}}</p>
+                  </div>
+                </div>
+                <div class="row optionrow" *ngIf="option.correct == false">
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">{{str[i]}}:</p>
+                  </div>
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">&nbsp;&nbsp;{{option.choiceText}}</p>
+                  </div>
+                </div>
+                <div *ngIf="i!=questionInfo.questionContent.questionOption.length-1">
+                  <hr style="margin:1px; background:#f2f2f2;">
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="float-right">
+          <div class="row">
+            <button type="button" color="primary" mat-button (click)="editQuestion()">
+              <i class="material-icons">
+               create
+              </i>Edit</button>
+            <button type="button" color="warn" mat-button (click)="deleteQuestion()">
+              <i class="material-icons">
+               delete
+              </i>Delete</button>
+          </div>
+        </mat-card-actions>
+        <br>
+      </mat-card>
+    </div>
+  </div>
+  <br>
+</ng-template>
+
+
+
+<ng-template #quizStyle>
+  <div class="container quiz">
+    <div class="row">
+      <div class="col">
+        <div>
+          <form id="quizForm" [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+            <mat-accordion>
+
+              <div formArrayName="result">
+                <div *ngIf="showAns==true">
+                  <p><i class="material-icons text-center" style="border: solid 2px;width:40px; color:transparent;vertical-align:middle;border-color: lightgreen;border-radius: 5px;">
+                  done
+                </i> represents the correct answer.&nbsp;&nbsp;
+                    <i class="material-icons text-center" style="border: solid 2px;width:40px; color:transparent;vertical-align:middle;border-color: red;border-radius: 5px;">
+                  done
+                </i> represents the incorrect answer.</p>
+                </div>
+
+                <div *ngFor="let question of getQuestion(questionForm); let i=index;" [formGroupName]="i">
+                  <mat-card>
+                  <mat-card-subtitle>
+                    <h5>{{quizArray[i].questionContent.questionTitle}}</h5>
+                  </mat-card-subtitle>
+                  <!--
+                      <div *ngIf="questionNotAns.length!=0">
+                        <div *ngFor="let number of questionNotAns">
+                          <div *ngIf="number == i">
+                            <mat-card-subtitle style="padding-right:10px; color:red;">* required</mat-card-subtitle>
+                          </div>
+                        </div>
+                      </div>
+                    -->
+                  <mat-card-content>
+                    <h5>{{quizArray[i].questionId}}. {{questionInfo[i].questionContent.questionText}}</h5>
+                  </mat-card-content>
+
+
+                  <div formArrayName="ans">
+                    <div *ngFor="let option of getOptionContent(question); let j=index" [formGroupName]="j">
+                      <div class="row">
+                        <mat-checkbox class="s-color" color="primary" formControlName="correct"> {{str.charAt(j)}}. {{option.value.option}}</mat-checkbox>
+                        <div style="position:absolute;height:32px;border:solid red;border-radius: 5px;color: transparent;" id="incorrect" *ngIf="showAns && inputAns.includes(option.value.option) && option.value.ans==false">
+                          hell{{str.charAt(j)}}. {{option.value.option}}
+                        </div>
+                        <div style="position:absolute;height:32px;border:solid lightgreen;border-radius: 5px;color: transparent;" id="incorrect" *ngIf="showAns && option.value.ans==true">
+                          hell{{str.charAt(j)}}. {{option.value.option}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+                <br>
+              </div>
+              </div>
+            </mat-accordion>
+          </form>
+        </div>
+        <br>
+        <div class="bottomButton" style="text-align: center;">
+          <div *ngIf="showAns==false">
+            <button mat-raised-button color="primary" (click)="collectAnswer()">Check answer</button>
+          </div>
+          <div *ngIf="showAns==true">
+            <button mat-raised-button color="primary" (click)="refleshQuiz()">Do quiz again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+      {{questionForm.value | json}}
+      <hr> {{ansArray | json}}
+      <hr> {{finalArray | json}}
+    -->
+  </div>
+</ng-template>
+
+<ng-template #overview>
+  <div class="row">
+    <div class="col">
+      <p><i class="material-icons text-center" style="background-color:lightgreen;width:50px; color:lightgreen;vertical-align:middle;">
+      done
+      </i> is the correct answer.</p>
+      <div *ngFor="let quiz of questionInfo">
+        <div class="card d-block saved-quiz">
+          <mat-card>
+            <!-- <button type="button">UP</button>
+            <button type="button">DOWN</button> -->
+
+            <div class="saved-quiz-title">
+              <p>
+                <b>{{quiz.questionContent.questionTitle}}</b>
+              </p>
+            </div>
+            <div class="saved-quiz-text">
+              <div class="row" style="">
+                <div class="question-col col-col-sm-md-lg-auto">
+                  <h5>{{quiz.questionId}}.</h5>
+                </div>
+                <div class="question-col col-10">
+                  <h5 class="question">{{quiz.questionContent.questionText}}</h5>
+                </div>
+              </div>
+            </div>
+            <div class="saved-quiz-ans">
+              <div *ngFor="let option of quiz.questionContent.questionOption; let i=index">
+                <div class="row optionrow" *ngIf="option.correct == true" style="background-color: #b3ffb3;">
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">{{str[i]}}:</p>
+                  </div>
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">&nbsp;&nbsp;{{option.choiceText}}</p>
+                  </div>
+                </div>
+                <div class="row optionrow" *ngIf="option.correct == false">
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">{{str[i]}}:</p>
+                  </div>
+                  <div class="col-xs|sm|md|lg|xl-1-12">
+                    <p class="options">&nbsp;&nbsp;{{option.choiceText}}</p>
+                  </div>
+                </div>
+                <div *ngIf="i!=quiz.questionContent.questionOption.length-1">
+                  <hr style="margin:1px; background:#f2f2f2;">
+                </div>
+              </div>
+              <br>
+            </div>
+          </mat-card>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,99 @@
+<div class="container">
+  <div *ngIf="resource">
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 col-12">
+        <div class="row">
+          <div class="col-lg-10 col-sm-12 col-style">
+            <div class="l2 title_class">
+              <p>
+                {{resource.resource_title}}
+              </p>
+            </div>
+          </div>
+          <div id="privacy-tag" class="col-lg-2 col-sm-12 resource_type_class2">
+            <div *ngIf="resourcePrivacy == 1" class="resource_type_class public_class">
+              <a>Public</a>
+            </div>
+            <div *ngIf="resourcePrivacy == 0" class="resource_type_class private_class">
+              <a>Private</a>
+            </div>
+          </div>
+        </div>
+        <div class="row desc_class">
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-5 col-md-5 col-sm-12 col-style author-info">
+                <div class="row">
+                  <div class="col-2">
+                    <img class="rounded_image_class" [src]="prepareAuthorImage(resourceOwnerId)" />
+                  </div>
+                  <div class="col-8 author">
+                    <span class="m2">{{resource.resource_author}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-7 col-sm-12 detail_class" id="detail_info">
+                <div class="resource_detail_class">
+                  <p class="detail_value_font_class common_detail_font_class">{{resource.resource_subject}}</p>
+                  <p class="common_detail_font_class detail_content_space">Subject</p>
+                </div>
+                <div class="resource_detail_class div2">
+                  <p class="detail_value_font_class common_detail_font_class">{{resource.resource_grade}}</p>
+                  <p class="common_detail_font_class detail_content_space">Grade</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="d-flex flex-column">
+                <p class="m2 resource_desc_class">Description: </p>
+                <p class="s1 resource_desc">
+                  {{resource.resource_des}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 resource_info3">
+            <img class="pic_show" [src]="resourceImage" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 col-12 col-style">
+        <div *ngIf="resourceType == 'homework'; then homework; else other"></div>
+        <div *ngIf="viewerType == 'tutor'">
+          <div id="func-btn" class="d-flex">
+            <div class="mr-auto">
+              <button mat-stroked-button *ngIf="isOwner" type="button" class="btn btn-outline-success" (click)="editResource()">Edit</button>
+            </div>
+            <div>
+              <button mat-raised-button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="viewerType == 'learner'">
+          <button mat-raised-button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #homework>
+  <div class="row">
+    <div class="col-12 col-style">
+      <div *ngIf="resourceContent.questionType == 'short'">
+        <app-short-answers-parent [questionData]="resourceContent.questionCollection">
+        </app-short-answers-parent>
+        </div>
+      <div *ngIf="resourceContent.questionType == 'multi'">
+        <app-multiple-choice-parent [questionData]="resourceContent.questionCollection">
+        </app-multiple-choice-parent>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #other>
+  <h4>Other Resources</h4>
+</ng-template>

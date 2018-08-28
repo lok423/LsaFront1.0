@@ -1,0 +1,21 @@
+  /* Card content */
+  .card{
+    margin-top:25px; 
+    width: 21rem;
+  }
+  ul{
+    margin-left: -15px;
+  }
+
+/* ngClass Content*/
+.position1{
+    position: fixed;
+    top: 10px;
+  }
+  .position2{
+    position: relative;
+  }
+  
+
+
+  

@@ -1,0 +1,176 @@
+<mat-horizontal-stepper [linear]="stepperLinear" #stepper>
+  <mat-step [completed]="stepperOneValid">
+    <ng-template matStepLabel>
+      <div class="stepperText d-none d-sm-block">
+        <div *ngIf="display.innerWidth > 1200">
+          Homework Information
+        </div>
+        <div *ngIf="display.innerWidth <= 770">
+          Homework
+        </div>
+      </div>
+    </ng-template>
+    <div id="homework-form-div" class="d-block tutor-homework">
+      <div *ngIf="!isEdit">
+        <h2 class="pageTitle">Create a new homework</h2>
+      </div>
+      <div *ngIf="isEdit">
+        <h2>Edit homework</h2>
+      </div>
+      <a class="err-msg">Please fill the form to create basic homework information.</a>
+      <div id="form-error" *ngIf="formStatus == 'invalid'">
+        <a class="pageText" style="color:red;">
+          Please finish the required part of this form!
+        </a>
+      </div>
+      <div class="row">
+        <form id="homework-form" class="col-12 col-lg-8 col-xl-8" [formGroup]="tutorHomeWorkForm">
+          <div class="form-group">
+            <div>
+              <label class="center-block pageText required-f">Title</label>
+              <input class="col-12 form-control" [ngClass]="formStatus == 'invalid' ? 'form-control invalid-input' : 'form-control'" formControlName="title">
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label class="pageText required-f">Subject</label>
+                <select [ngClass]="formStatus == 'invalid' ? 'form-control invalid-input' : 'form-control'" formControlName="subject">
+                  <!-- <option disabled="true">
+                    Test
+                  </option> -->
+                  <option *ngFor="let subject of hwSubjectData" [value]="subject.name">
+                    {{subject.name}}
+                  </option>
+                </select>
+
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label class="pageText required-f">Level</label>
+                <select [ngClass]="formStatus == 'invalid' ? 'form-control invalid-input' : 'form-control'" formControlName="grade">
+                  <option *ngFor="let level of hwDifficultyLevel" [value]="level.name">
+                    {{level.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label class="center-block pageText required-f">Privacy</label>
+                <select [ngClass]="formStatus == 'invalid' ? 'form-control invalid-input' : 'form-control'" formControlName="view">
+                  <option *ngFor="let privacy of hwPrivacy" [value]="privacy.id">
+                    {{privacy.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label class="center-block pageText">Days to finish (Optional)</label>
+                <input class="form-control" formControlName="timeDuration">
+              </div>
+            </div>
+            <div>
+              <label class="center-block pageText">Homework Description (Optional)</label>
+              <textarea class="form-control" rows="5" formControlName="description" placeholder="At least 2 characters. No more than 120 characters."></textarea>
+            </div>
+
+          </div>
+        </form>
+        <div id="homework-img-preview" class="col-xl-4 col-lg-4 col-12">
+          <img style="display:none;" *ngIf="!isEdit" id="output" />
+          <img *ngIf="isEdit" id="output" [src]="img4Edit" />
+        </div>
+      </div>
+      <div class="upload-div required-f">
+        <button mat-stroked-button color="primary" [ngClass]="!homeworkHasImage && nextIsClicked ? 'btn s3Blue clickable invalid-btn' : 'btn s3Blue clickable'"
+        (click)="imageEditorDia()">
+          Upload Homework Image (Required)
+        </button>
+      </div>
+    </div>
+    <div class="next-div"*ngIf="!isEdit">
+      <button id="next-btn" disabled type="button" class="btn btn-success"  mat-button matStepperNext (click)="saveHomeworkBasicInfo()">
+        Next
+      </button>
+    </div>
+    <div class="savechange-div" *ngIf="isEdit">
+      <button type="button" mat-raised-button matStepperNext (click)="saveHomeworkBasicInfo()">
+        Save Changes
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step [completed]="stepperTwoValid">
+    <ng-template matStepLabel>
+      <div *ngIf="!isEdit">
+        <div *ngIf="display.innerWidth > 1200">
+          Ceate Questions
+        </div>
+        <div *ngIf="display.innerWidth <= 770">
+          Quiz
+        </div>
+      </div>
+      <div *ngIf="isEdit">
+        <div *ngIf="display.innerWidth > 1200">
+          Edit Question
+        </div>
+        <div *ngIf="display.innerWidth <= 770">
+          Quiz
+        </div>
+      </div>
+    </ng-template>
+
+    <app-question-controller
+    [edit]="isEdit"
+    (questionTypeSelected)="handleQuestionSelection($event)"
+    (questionTypeChanged)="handleQuestionChange($event)"
+    >
+  </app-question-controller>
+    <br>
+    <hr>
+    <div class="text-center">
+      <button class="btn btn-primary" mat-button matStepperPrevious>Back</button>
+      <button id="collect-quiz-btn" disabled class="btn btn-success" mat-button matStepperNext (click)="getHomeworkQuestion()">Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <div *ngIf="isEdit">
+        <div *ngIf="display.innerWidth > 1200">
+          Save Changes
+        </div>
+        <div *ngIf="display.innerWidth <= 770">
+          Save
+        </div>
+      </div>
+      <div *ngIf="!isEdit">
+        <div *ngIf="display.innerWidth > 1200">
+          Save New Homework
+        </div>
+        <div *ngIf="display.innerWidth <= 770">
+          Save
+        </div>
+      </div>
+    </ng-template>
+    <div class="text-center">
+      <br>
+      <button type="button" mat-raised-button color="primary" (click)="collectAllHomeworkInfo()">
+  <div *ngIf="isEdit">
+    Save All Changes
+  </div>
+  <div *ngIf="!isEdit">
+    Save Homework
+  </div>
+</button>
+    </div>
+    <br>
+    <hr>
+    <div class="text-center">
+      <button class="btn btn-primary" mat-button matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+
+
+<!-- <ng-template>
+
+</ng-template> -->

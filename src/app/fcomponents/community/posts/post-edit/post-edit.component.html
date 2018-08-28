@@ -1,0 +1,53 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-8">
+      <div class="card">
+        <div class="card-header">New article post</div>
+        <div class="card-body">
+          <form novalidate [formGroup]="postForm">
+            <label class="s2bold">Post type</label>
+            <select name="WWW" class="form-control" placeholder="Select one" formControlName="postType">
+              <option value='1'>Article post</option>
+              <option value='2'>Study resource</option>
+            </select>
+
+            <br>
+
+            <label class="s2bold">Post Title</label>
+            <input class="form-control" id="title" type="text" placeholder="Title" formControlName="title" />
+            <div class="invalid_feedback" *ngIf="postForm.controls.title.invalid && postForm.controls.title.touched">Title shall be less than 80 characters.</div>
+            <br>
+            <label class="s2bold">Sub title</label>
+            <input class="form-control" id="title" type="text" placeholder="Sub title" formControlName="subTitle" />
+            <div class="invalid_feedback" *ngIf="postForm.controls.subTitle.invalid && postForm.controls.subTitle.touched">Sub title shall be less than 80 characters.</div>
+            <br>
+            <label class="s2bold">Description</label>
+            <textarea class="form-control" id="description" type="text" placeholder="Description" formControlName="description"></textarea>
+            <div class="invalid_feedback" *ngIf="postForm.controls.description.invalid && postForm.controls.description.touched">Description shall be less than 80 characters.</div>
+            <br>
+            <label class="s2bold">Tags</label>
+            <input class="form-control" id="tags" type="text" placeholder="Enter the tags for this post" formControlName="tags"/>
+            <div class="invalid_feedback" *ngIf="postForm.controls.tags.invalid && postForm.controls.tags.touched">Tags shall be less than 80 characters.</div>
+            <br>
+
+            <label class="s2bold">Post photo</label><br>
+            <img (click)="imageEditorDia()" class="clickable" src={{post_image}}>
+            <div class="s3Blue clickable" (click)="imageEditorDia()">Upload a new picture</div>
+            <br>
+            <div class="form-group">
+              <textarea name="editor1" id="editor1" rows="14" cols="80"></textarea>
+            </div>
+
+            <br><br>
+
+            <input type="checkbox" style="width: 20px; height:20px;" formControlName="publish"> Publish this post
+
+            <br><br>
+
+            <input type="submit" class="btn btn-primary" value="Save" (click)="savePost()"><div *ngIf="errorMessage" class="invalid_feedback">{{errorMessage}}</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>   -->

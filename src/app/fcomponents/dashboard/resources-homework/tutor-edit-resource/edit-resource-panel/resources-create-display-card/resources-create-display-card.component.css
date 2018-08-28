@@ -1,0 +1,47 @@
+.display-card {
+  width: 330px;
+  /* height: 140px; */
+  margin: 0.5rem;
+  transition-duration: .3s;
+}
+
+.display-card:hover {
+  -ms-transform: scale(1.1, 1.1); /* IE 9 */
+  -webkit-transform: scale(1.1, 1.1); /* Safari */
+  transform: scale(1.05, 1.05);
+}
+
+.display-card img {
+  width: 100%;
+  height: 100%;
+}
+
+.card-content {
+  text-align: left;
+}
+
+.homework-card {
+  padding: 5px;
+  background-color: #1E90FF;
+  cursor: pointer;
+}
+
+.homework-card p, h3 {
+  color: white;
+}
+
+.resource2-card {
+  cursor: pointer;
+  background-color: white;
+  padding: 5px;
+}
+
+.resource3-card {
+  cursor: pointer;
+  background-color: white;
+  padding: 5px;
+}
+
+.top-btn {
+  font-weight: bold;
+}

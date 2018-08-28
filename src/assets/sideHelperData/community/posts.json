@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/community/posts",
+    "cardContent":
+    [{
+      "initHelperMatch": "posts Header",
+      "initHelperText": "posts Body"
+    },
+    {
+      "helperMatch": "posts part 1",
+      "helperText": "posts Body 1"
+    },
+    {
+      "helperMatch": "posts part 2",
+      "helperText": "posts Body 2"
+    },
+    {
+      "helperMatch": "posts part 3",
+      "helperText": "posts part 3"
+    }]
+  }
+]

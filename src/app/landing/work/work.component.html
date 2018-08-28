@@ -1,0 +1,150 @@
+<nav id="top-navbar" class="navbar navbar-expand-md fixed-top" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'backgColor1 borderColor1':'backgColor2 borderColor2'">
+  <a class="navbar-brand logo" href="index" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">Learnspace</a>
+    <button class="navbar-toggler" type="button" (click)="collapseShow()" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <div class="collapse navbar-collapse" id="navbar-primary">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link navLink" href="http://learnspace.co.nz/app/find-tutor" routerLink="/app/find-tutor" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)? 'fontColor1':'fontColor2'">Find a Teacher <span class="sr-only">(current)</span></a>
+      </li>
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle navLink" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent;" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">Community<span class="sr-only">(current)</span></a>
+        <ul class="dropdown-menu dropdown-menu-user" aria-labelledby="navbarDropdown" [ngClass]="screenStatus?'backgColor2':'backgColor1'">
+          <li><a class="dropdown-item fontColor3 articleIcon dpitem" style="padding-left:30px;" routerLink="/app/community/posts" href="http://learnspace.co.nz/app/community/posts">Articles</a></li>
+          <li *ngIf="rolePosition == 3"><a class="dropdown-item fontColor3 editIcon" style="padding-left:30px;" routerLink="/app/community/newpost" href="http://learnspace.co.nz/app/community/newpost">Add an article</a></li>
+          <li><a class="dropdown-item fontColor3 discussionIcon" style="padding-left:30px;" routerLink="/app/community/discussions" href="http://learnspace.co.nz/app/community/discussions">Discussions</a></li>
+          <li><a class="dropdown-item fontColor3 discussionIcon" style="padding-left:30px;" routerLink="/app/community/newdiscussions" href="http://learnspace.co.nz/app/community/newdiscussions">Ask a question</a></li>
+        </ul>
+      </li> -->
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+        <li *ngIf="!loggedIn" class="nav-item">
+            <a class="nav-link navLink navRight pointer" (click)="loginUser($event)" [ngStyle]="{'color': (screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)? '#0099FF' : 'white'}">Login</a>
+        </li>
+        <li *ngIf="!loggedIn" class="nav-item">
+            <a class="nav-link navLink navRight pointer" (click)="newUser($event)" [ngStyle]="{'color': (screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)? '#0099FF' : 'white'}">Register</a>
+        </li>
+        <li *ngIf="!loggedIn" class="nav-item">
+            <a class="nav-link navLink navRight" href="http://learnspace.co.nz/app/work" routerLink="/work" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">Apply to teach</a>
+        </li>
+
+        <li *ngIf="loggedInUserName" class="nav-item dropdown">
+          <a style="background-color:transparent;" class="nav-link dropdown-toggle navLink" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [ngClass]="(screenStatus && (navStatus || collapseStatus) ) || (!screenStatus && navStatus)?'fontColor1':'fontColor2'">
+            <i style="font-size:23px;" class="fa fa-user-circle"></i> &nbsp;{{loggedInUserName}}
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-user dropdown-menu-right" aria-labelledby="navbarDropdown"[ngClass]="screenStatus? 'backgColor2':'backgColor1'">
+            <li> <a class="dropdown-item fontColor3 homeIcon dpitem" style="padding-left:30px;" routerLink="/app/dashboard/home" href="http://learnspace.co.nz/app/dashboard/home">Dashboard</a> </li>
+            <li *ngIf="rolePosition == 1"> <a class="dropdown-item fontColor3 teachingIcon" style="padding-left:30px;" routerLink="/app/apply/teach" href="http://learnspace.co.nz/app/apply/teach">Apply to teach</a> </li>
+            <li><a class="dropdown-item fontColor3 settingIcon" style="padding-left:30px;" routerLink="/app/user/details" href="http://learnspace.co.nz/app/user/details">General details</a></li>
+            <!-- <li><a class="dropdown-item fontColor3 transactionIcon" style="padding-left:30px" routerLink="/app/transaction" href="http://learnspace.co.nz/app/transaction">My transactions</a></li> -->
+            <li><a class="dropdown-item fontColor3 passdIcon" style="padding-left:30px;" routerLink="/app/user/password" href="http://learnspace.co.nz/app/user/password">Change password</a></li>
+              <!-- <li><a class="dropdown-item fontColor3 paymentIcon" style="padding-left:30px;" routerLink="/app/user/payment-info" href="http://learnspace.co.nz/app/user/payment-info">Payment info</a></li> -->
+            <div class="dropdown-divider"></div>
+            <li> <a class="dropdown-item fontColor3 logoutIcon dpitem" style="padding-left:30px;" (click)="onLogoutClick()">Logout</a> </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<header style="margin-bottom:0px;" class="jumbotron jumbotron-fluid">
+<div class="container">
+  <div style="margin-top:40px;" class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <div class="j1">Apply to Teach</div>
+      <div class="wordsContent1" style="font-size: 20px; color:white;">
+        Earn money through teaching your speciality subjects. </div>
+      <br>
+      <button (click)="newUser()" class="btn btn_blue_large">Apply Now</button>
+    </div>
+  </div>
+</div>
+</header>
+
+<section id="mid-1" class="container-fluid">
+<div class="row">
+  <div class="col-md-6" id="left-content">
+    <div class="container">
+      <div class="carousel" id="demo" data-ride="carousel">
+        <div class="carousel-inner col-md-12 col-lg-10">
+          <div class="carousel-item active">
+            <br/> Education is the most powerful weapon which you can use to change the world.
+            <br>
+            <br>
+            <span>- Nelson Mandela </span>
+            <br/>
+            <br/>
+          </div>
+          <div class="carousel-item"> Democracy cannot succeed unless those who express their choice are prepared to choose wisely. The real safeguard
+            of democracy, therefore, is education.
+            <br>
+            <br>
+            <span>- Franklin D. Roosevelt</span>
+          </div>
+        </div>
+        <ol class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" id="right-content"></div>
+</div>
+</section>
+
+<section id="mid2" class="container-fluid">
+<div class="container" style="text-align:center;">
+  <div class="m1">Why teach with us?
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-lg-4 whyObject">
+      <i class="fa fa-clock-o" style="font-size:60px; color:#23DE8A;" aria-hidden="true"></i>
+      <div class="m2">Teach Anytime</div>
+      <div class="s2">Adjust your personal availability anytime on your calendar.</div>
+    </div>
+
+    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-lg-4 whyObject">
+      <i class="fa fa-random" style="font-size:60px; color:#23DE8A;" aria-hidden="true"></i>
+      <div class="m2">Flexibility</div>
+      <div class="s2">Teach in any capacity: full-time, part-time, or just causally.</div>
+    </div>
+
+    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-lg-4 whyObject">
+      <i class="fa fa-graduation-cap" style="font-size:60px; color:#23DE8A;" aria-hidden="true"></i>
+      <div class="m2">Great Experiences</div>
+      <div class="s2">Learn more through teaching the subjects that you love. </div>
+    </div>
+
+    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-lg-4 whyObject">
+      <i class="fa fa-usd" style="font-size:60px; color:#23DE8A;" aria-hidden="true"></i>
+      <div class="m2">Great Earnings</div>
+      <div class="s2">Set your own hourly rates and pricing packages.</div>
+    </div>
+
+    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-lg-4 whyObject">
+      <i class="fa fa-map-signs" style="font-size:60px; color:#23DE8A;" aria-hidden="true"></i>
+      <div class="m2">Become a Mentor</div>
+      <div class="s2">Your chance at helping and shaping the lives of your students.</div>
+    </div>
+
+    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-lg-4 whyObject">
+      <i class="fa fa-users" style="font-size:60px; color:#23DE8A;" aria-hidden="true"></i>
+      <div class="m2">Make Friends</div>
+      <div class="s2">Connect with your students, build up your own network.</div>
+    </div>
+
+  </div>
+  <br>
+  <button (click)="newUser()" class="btn btn_blue_large">Apply Now</button>
+
+  <br><br><br>
+</div>
+</section>
+
+<app-footer></app-footer>

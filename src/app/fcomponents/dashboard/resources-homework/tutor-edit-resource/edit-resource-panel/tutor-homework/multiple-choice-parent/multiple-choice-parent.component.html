@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="multi-choice">
+    <h4>Multiple Choice Questions</h4>
+    <div *ngIf="accessType == 'display' || accessType == 'overview'">
+        <app-multiple-choice
+        [viewerType]="viewerType"
+        [accessType]="accessType"
+        [questionInfo]="questionArray"
+        ></app-multiple-choice>
+
+    </div>
+
+    <div *ngIf="accessType == 'modify'">
+      <div *ngFor="let quiz of questionArray">
+        <div *ngIf="quiz.questionSaveStatus == 'saved'">
+          <app-multiple-choice
+          [viewerType]="viewerType"
+          [accessType]="accessType"
+          [questionStatus]="'saved'"
+          [questionInfo]="quiz"
+          (collectFormValue)='handleSaveQuestion($event)'
+          (editQuiz)='handleEditQuestion($event)'
+          (deleteQuiz)='handleDeleteQuestion($event)'
+          (discardQuiz)='handleDiscardQuestion($event)'
+          (upQuestion)='handleQuestionChangePosUp($event)'
+          (downQuestion)='handleQuestionChangePosDown($event)'
+          ></app-multiple-choice>
+        </div>
+        <div *ngIf="quiz.questionSaveStatus == 'init'">
+          <app-multiple-choice
+          [viewerType]="viewerType"
+          [accessType]="accessType"
+          [questionStatus]="'init'"
+          [questionId]="questionArray.length"
+          [createQuizObj]="getQuestionObj"
+          (collectFormValue)='handleSaveQuestion($event)'
+          (discardQuiz)='handleDiscardQuestion($event)'
+          ></app-multiple-choice>
+        </div>
+        <div *ngIf="quiz.questionSaveStatus == 'unSaved'">
+          <app-multiple-choice
+          [viewerType]="viewerType"
+          [accessType]="accessType"
+          [questionStatus]="'saved'"
+          [questionInfo]="quiz"
+          [createQuizObj]="getQuestionObj"
+          (collectFormValue)='handleSaveQuestion($event)'
+          (discardQuiz)='handleDiscardQuestion($event)'
+          ></app-multiple-choice>
+        </div>
+      </div>
+      <div *ngIf="questionArray.length == 0">
+        <app-multiple-choice
+        [viewerType]="viewerType"
+        [accessType]="accessType"
+        [questionStatus]="'init'"
+        [questionId]="1"
+        [createQuizObj]="getQuestionObj"
+        (collectFormValue)='handleSaveQuestion($event)'
+        (discardQuiz)='handleDiscardQuestion($event)'
+        ></app-multiple-choice>
+      </div>
+      <br>
+      <div class="add-btn-div">
+        <button *ngIf="!displayAddQuizBtn()" type="button" mat-button color="primary" class="add-btn" (click)="addQuestion()">
+          <i class="material-icons">add_box</i>Add Question
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+</div>

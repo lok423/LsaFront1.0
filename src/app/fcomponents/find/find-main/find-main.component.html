@@ -1,0 +1,68 @@
+<div class="col-md-12">
+
+  <form (ngSubmit)="searchTutor(discipline, location)" class="row">
+    <select class="col-12 col-sm-5 col-md-4 form-control searchZone" [(ngModel)]="discipline" name="discipline" >
+      <option value="">All tutors</option>
+      <option value="Eng">English </option>
+      <option value="Maths">Maths </option>
+      <option value="Physics">Physics </option>
+      <option value="Chemistry">Chemistry </option>
+      <option value="Bio">Biology </option>
+      <option value="Economics">Economics </option>
+      <option value="Science">Science </option>
+      <option value="Accounting">Accounting </option>
+    </select>
+      <br><br>
+    <select class="col-12 col-sm-5 col-md-4 form-control searchZone" [(ngModel)]="location" name="location">
+      <option value="">At all locations</option>
+      <option>Wellington</option>
+      <option>Auckland</option>
+    </select>
+      <br><br>
+    <input class="btn btn-info" type="submit" value="Search">
+  </form>
+</div>
+
+<div *ngIf="tutors;else noTutors">
+  <div *ngIf="tutors.length>0;else noTutors">
+    <div *ngFor="let tutor of tutors" class="card template">
+      <div *ngIf=""></div>
+      <a [routerLink] ="['/app/find-tutor/profile/'+tutor.tutor_id]">
+      <div class="row">
+        
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6 img">
+          <img [src]="commonSupport.findUserImg(tutor.user_id)" width="150" height="150">
+          <br>
+          <div class="s2blue" >${{tutor.price_1}}/ hour</div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 fake"></div>
+        <!-- Below class for SSR purposes only -->
+        <h4 *ngIf="isBrowser==false" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6 m2 name"><a [href]="['https://www.learnspace.co.nz/app/find-tutor/profile/'+tutor.tutor_id]">{{tutor.first_name}}</a></h4>
+        
+        <h4 class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6 m2 name">{{tutor.first_name}}</h4>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3"></div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+          <button class="btn_blue"><p>Book Now<p></button>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3"></div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 box1 box">
+          <div class="card1 s2"><span class="s3bold">Teaches</span> <p>{{tutor.discipline}}</p></div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 box">
+          <div class="card1 s2"><span class="s3bold">Location</span><p>{{tutor.location}}</p></div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 box3 box">
+          <div class="card1 s2"><span class="s3bold">Curriculum</span><p>{{tutor.curriculum}}</p></div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3"></div>
+        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 statement s3">
+          {{tutor.intro_statement | slice:0:210}} <i class="readmore">... read more</i>
+        </div>
+      </div>
+      </a>
+    </div>
+    </div>
+  </div>
+  <ng-template #noTutors>
+    <h3 class="m2">{{searchInfo}} </h3>
+  </ng-template>

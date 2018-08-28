@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/dashboard/tutor/editprofile/key",
+    "cardContent":
+    [{
+      "initHelperMatch": "Profile",
+      "initHelperText": "Here is your <b>profile information</b>, which contains your profile image, teaching locations, and introduction statement."
+    },
+    {
+      "helperMatch": "Profile image",
+      "helperText": "You can edit your <b>profile image</b> by uploading it here."
+    },
+    {
+      "helperMatch": "Teaching locations",
+      "helperText": "You can add, edit or delete your <b>teaching location</b> details here."
+    },
+    {
+      "helperMatch": "Introduction statement",
+      "helperText": "You can edit <b>introduction statement</b> about yourself here."
+    }]
+  }
+]

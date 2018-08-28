@@ -1,0 +1,15 @@
+.jumbotron{
+    height:180px;
+    width: 100%;
+    filter: brightness(70%);    
+    background-size: cover;
+    background-position: center;
+    background-image:  url("../../../../assets/mainpics/contactus-header-pic.jpg");
+    margin:0px;
+    position: absolute;
+}
+.j1{
+    z-index: 0;
+    position: relative;
+    padding:30px 0px 0px 10px;
+}

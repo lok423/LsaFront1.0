@@ -1,0 +1,46 @@
+.custom-control-indicator{
+  width:20px;
+  height:20px;
+}
+.dropdown{
+  position: absolute;
+  right: 0px;
+  top:  11px;
+}
+.freetime-left{
+  margin-left:60px;
+}
+#dropdownMenuButton{
+  height:2.1em;
+  width: 125px;
+  background-color: #0099FF;
+  font-weight: bold;
+  font-size: 15px;
+  border-width: 0px;
+}
+@media(max-width:768px){
+  .freetime-left{
+    margin-left:0px;
+    position: relative;
+    top: 2.5em;
+  }
+  .freetime-right{
+    position: absolute;
+    top: 3.2em;
+    right: 1em;
+  }
+  /* .card-header{
+    height: 5em;
+  } */
+  .dropdown{
+    position: absolute;
+    right: 70px;
+    top:  11px;
+  }
+  .addLabel {
+    margin-bottom: 1.0rem;
+  }
+  .removeLabel {
+    margin-top: 1.3rem;
+  }
+}

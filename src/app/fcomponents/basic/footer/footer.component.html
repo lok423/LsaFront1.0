@@ -1,0 +1,63 @@
+<div style="background-color:#212121;" class="modal-footer footer-div">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <h5 >Learnspace</h5>
+        <div *ngIf="isBrowser==true">
+          <p class="footer_list"><a routerLink="/app/about">About us</a></p>
+          <p class="footer_list"><a routerLink="/app/find-tutor">Find a tutor</a></p>
+          <p class="footer_list"><a routerLink="/app/contact">Contact us</a></p>
+          <p class="footer_list"><a routerLink="/app/terms">Terms</a></p>
+          <!-- <p class="footer_list"><a href="#" routerLink="/app/blog">Blog</a></p>
+          <p class="footer_list"><a href="#" routerLink="/app/investor">Investor</a></p> -->
+        </div>
+        
+        <!-- Below class for SSR purposes only -->
+        <div *ngIf="isBrowser==false">
+          <p class="footer_list"><a href="https://www.learnspace.co.nz">Home</a></p>
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/app/about">About us</a></p>
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/app/find-tutor">Find a tutor</a></p>
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/app/contact">Contact us</a></p>
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/app/terms">Terms</a></p>
+          <!-- <p class="footer_list"><a href="#" routerLink="/app/blog">Blog</a></p>
+          <p class="footer_list"><a href="#" routerLink="/app/investor">Investor</a></p> -->
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <h5>Support</h5>
+        <div *ngIf="isBrowser==true">
+          <p class="footer_list"><a routerLink="/app/howitworks">How it Works</a></p>
+          <p class="footer_list"><a routerLink="/app/privacy">Privacy</a></p>
+          <!-- <p class="footer_list"><a routerLink="/app/help/home">Help</a></p> -->
+        </div>
+
+        <!-- Below class for SSR purposes only -->
+        <div *ngIf="isBrowser==false">
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/app/howitworks">How it Works</a></p>
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/app/privacy">Privacy</a></p>
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/app/help/home">Help</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <h5>Work</h5>
+        <div *ngIf="isBrowser==true">
+          <p class="footer_list"><a routerLink="/work">Apply To Teach</a></p>
+        </div>
+
+        <!-- Below class for SSR purposes only -->
+        <div *ngIf="isBrowser==false">
+          <p class="footer_list"><a href="https://www.learnspace.co.nz/work">Apply To Teach</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <h5>Social</h5>
+        <p><a href="httpss://www.facebook.com/LearnspaceNZ/"><i class="fa fa-facebook-f"></i> Facebook</a></p>
+        <p><small>One-on-one tutoring for high school in Wellington and Auckland </small></p>
+        <p><small> &copy;	Learnspace 2018</small></p>
+        <small>Proprius Ltd, Wellington &copy;	 2018</small>
+      </div>
+    </div>
+  </div>
+</div>

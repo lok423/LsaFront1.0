@@ -1,0 +1,19 @@
+<mat-dialog-content style="text-align:center;">
+  <div md-dialog-title class="m2"> Upload </div>
+  <div *ngIf="errorMessage" class="error-feedback">{{errorMessage}}</div>
+  <hr>
+  <img [ngStyle]="{'height':'160px'}" *ngIf="imageOutput && !croppedImage" id="output" src={{imageOutput}}>
+  <br>
+    <div *ngIf="naStatus">
+      <image-cropper style="height:160px;" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="aspectCons" [imageQuality]="95" [resizeToWidth]="380"  format="jpeg" (imageCropped)="imageCropped($event)"(imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+    </div>
+    <div class="s3">
+      <i class="fa fa-check-circle-o">&nbsp; &nbsp;The type should be jpg/jpeg/png/bmp.</i><br>
+      <i class="fa fa-close">&nbsp; &nbsp;The size should be small than 1.5MB</i>
+    </div>
+    <label class="file btn btn-block">Upload image from computer
+      <input type="file" name="image" (click)="status=true" (change)="fileChangeEvent($event)" />
+    </label>
+
+  <button *ngIf="status" class="btn btn-outline-primary btn-block" (click)="subImage()">Done</button>
+</mat-dialog-content>

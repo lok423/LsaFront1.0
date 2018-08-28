@@ -1,0 +1,14 @@
+<div class="jumbotron">
+    <div class="container">
+      <div class="j2">Learnspace Support</div>
+    </div>
+</div>
+
+<div class="container">
+
+  <div class="s3"><a routerLink="/app/help/home">Support</a>{{currentRoutePosition}}</div>
+  <div *ngIf="!isBrowser" class="s3"><a href="https://learnspace.co.nz/app/help/home">Support</a>{{currentRoutePosition}}</div>  
+  <br>
+  <router-outlet></router-outlet>
+  <br>
+</div>

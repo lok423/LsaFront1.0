@@ -1,0 +1,14 @@
+[
+  {
+    "pathname": "/app/dashboard/tutor/schedules",
+    "cardContent":
+    [{
+      "initHelperMatch": "Tutor Schedule",
+      "initHelperText": "The schedule can be shown by month, week, list three ways. It tells you what <b>time</b> need to teach which <b>student</b> about what <b>course</b>"
+    },
+    {
+      "helperMatch": "Schedule",
+      "helperText": "That is your schedule showing."
+    }]
+  }
+]

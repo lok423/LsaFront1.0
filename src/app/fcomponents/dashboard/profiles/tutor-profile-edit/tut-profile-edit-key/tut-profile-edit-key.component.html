@@ -1,0 +1,78 @@
+<div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Profile image')">
+    <div class="card-header">Profile image</div>
+    <div class="card-body">
+      <div class="row">
+        <div *ngIf="tutor" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <label class="s2bold">Profile photo</label><br>
+          <img (click)="imageEditorDia()" class="clickable" src={{profile_photo}}>
+          <div class="s3Blue clickable" (click)="imageEditorDia()">Click image to Edit</div>
+          <div *ngIf="errorMessage2" class="error-feedback">{{errorMessage2}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--location form-->
+  <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Teaching locations')">
+    <div class="card-header">Teaching locations</div>
+    <div class="card-body pb-0" *ngIf="tutor">
+        <div *ngIf="tutor.teaching_locations[0].city===''&&!locationStatus[0]"><a id="a-btn" (click)="locationStatus[0]=true">Add an address where you can teach</a></div>
+        <ul *ngFor="let location of tutor.teaching_locations; let i=index">
+          <li class="row" *ngIf="location.city!==''">
+            <span class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 s2">{{location.number}},{{location.street}},{{location.suburb}}&nbsp;——&nbsp;{{location.city}}</span>
+            <span class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+              <a id="a-btn" *ngIf="!locationStatus[i]" (click)="locationStatus[i]=true">Edit</a>&nbsp;&nbsp;
+              <a id="a-btn" *ngIf="!locationStatus[i]" (click)="DeleteForm(i)">Delete</a>
+            </span>
+          </li>
+          <form class="row s2" *ngIf="locationStatus[i]" [formGroup]="locationForms[i]">
+            <span class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+              <input type="text" class="form-control" placeholder="Street or level number" formControlName="number">
+              <div *ngIf="locationForms[i].controls.number.invalid && locationForms[i].controls.number.touched" class="indicator" >Need to have at least 1 character.</div>
+            </span>
+            <span class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+              <input type="text" class="form-control" placeholder="Street or landmark name" formControlName="street">
+              <div *ngIf="locationForms[i].controls.street.invalid && locationForms[i].controls.street.touched" class="indicator" >Need to have at least 2 characters.</div>
+            </span>
+            <span class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+              <input type="text" class="form-control" placeholder="Suburb details" formControlName="suburb">
+              <div *ngIf="locationForms[i].controls.suburb.invalid && locationForms[i].controls.suburb.touched" class="indicator" >Need to have at least 2 characters.</div>
+            </span>
+            <span class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+              <input type="text" class="form-control" placeholder="City or region name" formControlName="city">
+              <div *ngIf="locationForms[i].controls.city.invalid && locationForms[i].controls.city.touched" class="indicator" >Need to have at least 3 characters.</div>
+            </span>
+            <span class="col-12 m-2">
+              <div class="indicator" *ngIf="loFeedback">{{loFeedback}}</div>
+              <button type="submit" id="f-btn" class="btn btn-primary" (click)="loFeedback=null;locationStatus[i]=false" >Cancel</button>
+              <button type="submit" id="f-btn-right" class="btn btn-primary mr-4"  (click)="submitLocations({name: locationForms[i], index: i})">Done</button>
+            </span>
+          </form>
+        </ul>
+        <div class="row" *ngIf="tutor.teaching_locations[0].city!==''&&tutor.teaching_locations[3].city===''" class="col-12 m-3">&nbsp;&nbsp;<a id="a-btn" (click)="loStatus()">Add another</a></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Introduction statement')">
+    <div class="card-header">Introduction statement</div>
+    <div *ngIf="tutor" class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <pre *ngIf="tutor.intro_statement">{{tutor.intro_statement}}</pre>
+          <div *ngIf="!tutor.intro_statement && !stStatus">
+            <a id="a-btn" (click)="stStatus=true">Add your introduction statement</a>
+          </div>
+          <a *ngIf="tutor.intro_statement && !stStatus" id="a-btn" (click)="stStatus=true">Edit</a>
+        </div>
+        <div class="col-12 lImage" *ngIf="stStatus">
+          <form [formGroup]="stateForm">
+            <div class="indicator">{{errorMessage3}}</div>
+            <textarea type="text" class="form-control" placeholder="Length should be at the range of [20-3000] characters" name="statement"
+              rows="12" formControlName="state"></textarea>
+            <br>
+            <button type="submit" id="f-btn" class="btn btn-primary" (click)="errorMessage3='';stStatus=false">Cancel</button>
+            <button type="submit" id="f-btn-right" class="btn btn-primary" (click)="defState()">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,378 @@
+      <!--education form-->
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Education background')">
+          <div class="card-header">Education background</div>
+            <div *ngIf="tProfile" class="card-body">
+              <div *ngIf="!tProfile.edu_1 && !e1Status"><a id="a-btn" (click)="e1Status=true">Add an educational field</a></div>
+              <div class="row">
+                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12">
+                  <p *ngIf="tProfile.edu_1">{{tProfile.edu_1_date}}</p>
+                  <div class="example" *ngIf="!tProfile.edu_1 && e1Status"><span class="s2Blue">Example</span><br><span class="s4Blue">Start - End</span><br><span class="s3">2001—2004</span></div>
+                </div>
+                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12">
+                  <div *ngIf="tProfile.edu_1">{{tProfile.edu_1}}</div>
+                  <div class="example" *ngIf="!tProfile.edu_1 && e1Status"><br><span class="s4Blue">Name of institute</span><br><span class="s3">Auckland University</span></div><br>
+                  <div *ngIf="tProfile.edu_1">{{tProfile.edu_1_detail}}</div>
+                  <div class="example" *ngIf="!tProfile.edu_1 && e1Status"><span class="s4Blue">Qualifications gained</span><br><span class="s3">Bachelor of Science Majoring in Astrophysics (Honors)</span></div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <a id="a-btn" *ngIf="tProfile.edu_1 && !e1Status" (click)="e1Status=true">Edit</a>
+                  <br/><a id="a-btn" *ngIf="tProfile.edu_1 && !e1Status" (click)="dlEduWork({title:'edu_1', year:'edu_1_date', des:'edu_1_detail'})">Delete</a>
+                  <form *ngIf="e1Status" [formGroup]="edu1Form">
+                    <div class="row">
+                      <div class="col-5 form-group">
+                        <div class="s2">Start year</div>
+                        <input type="number" class="form-control" placeholder="Start year" name="sYear" formControlName="sYear">
+                        <div *ngIf="edu1Form.controls.sYear.invalid && edu1Form.controls.sYear.touched" class="indicator" >[1950-2018] only.</div>
+                      </div>
+                      <div class="col-2"><br> &mdash; </div>
+                      <div class="col-5 form-group">
+                        <div class="s2">End year</div>
+                        <input type="number" class="form-control" placeholder="End year" name="eYear" formControlName="eYear">
+                        <div *ngIf="edu1Form.controls.eYear.invalid && edu1Form.controls.eYear.touched" class="indicator" >[1950-2018] only.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Name of institute</div>
+                        <input type="text" class="form-control" placeholder="Name of school" name="edu" formControlName="edu">
+                        <div *ngIf="edu1Form.controls.edu.invalid && edu1Form.controls.edu.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Qualifications gained</div>
+                        <textarea type="text" class="form-control" placeholder="Details of qualifications gained" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                        <div *ngIf="edu1Form.controls.eDetail.invalid && edu1Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <button type="submit" id="f-btn" class="btn btn-primary" (click)="e1Status=false" >Cancel</button>
+                        <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="eduWork({status:'e1Status',form:'edu1Form',title:'edu_1', year:'edu_1_date', des:'edu_1_detail'})">Done</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <hr *ngIf="tProfile.edu_1">
+
+              <div><a *ngIf="!tProfile.edu_2 && tProfile.edu_1 && !e2Status" id="a-btn" (click)="e2Status=true">Add an educational field</a></div>
+              <div class="row">
+                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12"><p *ngIf="tProfile.edu_2">{{tProfile.edu_2_date}} </p></div>
+                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12"><p *ngIf="tProfile.edu_2">{{tProfile.edu_2}}</p><p *ngIf="tProfile.edu_2">{{tProfile.edu_2_detail}}</p></div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <a id="a-btn" *ngIf="tProfile.edu_2 && !e2Status" (click)="e2Status=true">Edit</a>
+                  <br/><a id="a-btn" *ngIf="tProfile.edu_2 && !e2Status" (click)="dlEduWork({title:'edu_2', year:'edu_2_date', des:'edu_2_detail'})">Delete</a>
+                  <form *ngIf="e2Status" [formGroup]="edu2Form">
+                    <div class="row">
+                      <div class="col-5 form-group">
+                        <div class="s2">Start year</div>
+                        <input type="number" class="form-control" placeholder="Start year" name="sYear" formControlName="sYear">
+                        <div *ngIf="edu2Form.controls.sYear.invalid && edu2Form.controls.sYear.touched" class="indicator" >[1950-2018] only.</div>
+                      </div>
+                      <div class="col-2"><br> &mdash; </div>
+                      <div class="col-5 form-group">
+                        <div class="s2">End year</div>
+                        <input type="number" class="form-control" placeholder="End year" name="eYear" formControlName="eYear">
+                        <div *ngIf="edu2Form.controls.eYear.invalid && edu2Form.controls.eYear.touched" class="indicator" >[1950-2018] only.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Name of institute</div>
+                        <input type="text" class="form-control" placeholder="Name of school" name="edu" formControlName="edu">
+                        <div *ngIf="edu2Form.controls.edu.invalid && edu2Form.controls.edu.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Qualifications gained</div>
+                        <textarea type="text" class="form-control" placeholder="Details of qualifications gained" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                        <div *ngIf="edu2Form.controls.eDetail.invalid && edu2Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <button type="submit" id="f-btn" class="btn btn-primary" (click)="e2Status=false" >Cancel</button>
+                        <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="eduWork({status:'e2Status',form:'edu2Form',title:'edu_2', year:'edu_2_date', des:'edu_2_detail'})">Done</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <hr *ngIf="tProfile.edu_2">
+
+              <div><a *ngIf="!tProfile.edu_3 && tProfile.edu_2 && !e3Status" id="a-btn" (click)="e3Status=true">Add an educational field</a></div>
+              <div class="row">
+                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12"><p *ngIf="tProfile.edu_3">{{tProfile.edu_3_date}} </p></div>
+                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12"><p *ngIf="tProfile.edu_3">{{tProfile.edu_3}}</p><p *ngIf="tProfile.edu_3">{{tProfile.edu_3_detail}}</p></div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <a id="a-btn" *ngIf="tProfile.edu_3 && !e3Status" (click)="e3Status=true">Edit</a>
+                  <br/><a id="a-btn" *ngIf="tProfile.edu_3 && !e3Status" (click)="dlEduWork({title:'edu_3', year:'edu_3_date', des:'edu_3_detail'})">Delete</a>
+                  <form *ngIf="e3Status" [formGroup]="edu3Form">
+                    <div class="row">
+                      <div class="col-5 form-group">
+                        <div class="s2">Start year</div>
+                        <input type="number" class="form-control" placeholder="Start year" name="sYear" formControlName="sYear">
+                        <div *ngIf="edu3Form.controls.sYear.invalid && edu3Form.controls.sYear.touched" class="indicator" >[1950-2018] only.</div>
+                      </div>
+                      <div class="col-2"><br> &mdash; </div>
+                      <div class="col-5 form-group">
+                        <div class="s2">End year</div>
+                        <input type="number" class="form-control" placeholder="End year" name="eYear" formControlName="eYear">
+                        <div *ngIf="edu3Form.controls.eYear.invalid && edu3Form.controls.eYear.touched" class="indicator" >[1950-2018] only.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Name of institute</div>
+                        <input type="text" class="form-control" placeholder="Name of school" name="edu" formControlName="edu">
+                        <div *ngIf="edu3Form.controls.edu.invalid && edu3Form.controls.edu.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Qualifications gained</div>
+                        <textarea type="text" class="form-control" placeholder="Details of qualifications gained" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                        <div *ngIf="edu3Form.controls.eDetail.invalid && edu3Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <button type="submit" id="f-btn" class="btn btn-primary" (click)="e3Status=false" >Cancel</button>
+                        <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="eduWork({status:'e3Status',form:'edu3Form',title:'edu_3', year:'edu_3_date', des:'edu_3_detail'})">Done</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+          </div>
+        </div>
+
+        <!--work form-->
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Work experience')">
+        <div class="card-header">Work experience</div>
+        <div *ngIf="tProfile" class="card-body">
+          <div *ngIf="!tProfile.work_1 && !w1Status"><a id="a-btn" (click)="w1Status=true">Add an work field</a></div>
+          <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12">
+              <p *ngIf="tProfile.work_1">{{tProfile.work_1_date}}</p>
+              <div class="example" *ngIf="!tProfile.work_1 && w1Status"><span class="s2Blue">Example</span><br><span class="s4Blue">Start - End</span><br><span class="s3">2005—2009</span></div>
+            </div>
+            <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12">
+              <p *ngIf="tProfile.work_1">{{tProfile.work_1}}</p>
+              <div class="example" *ngIf="!tProfile.work_1 && w1Status"><br><span class="s4Blue">Name of organization</span><br><span class="s3">Auckland Grammar School</span></div><br>
+              <p *ngIf="tProfile.work_1">{{tProfile.work_1_detail}}</p>
+              <div class="example" *ngIf="!tProfile.work_1 && w1Status"><span class="s4Blue">Work experience</span><br><span class="s3">Anniversary best IB Maths teacher（in 2007）</span></div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <a id="a-btn" *ngIf="tProfile.work_1 && !w1Status" (click)="w1Status=true">Edit</a>
+              <br/><a id="a-btn" *ngIf="tProfile.work_1 && !w1Status" (click)="dlEduWork({title:'work_1', year:'work_1_date', des:'work_1_detail'})">Delete</a>
+              <form *ngIf="w1Status" [formGroup]="work1Form">
+                <div class="row">
+                  <div class="col-5 form-group">
+                    <div class="s2">Start year</div>
+                    <input type="number" class="form-control" placeholder="Start year" name="sYear" formControlName="sYear">
+                    <div *ngIf="work1Form.controls.sYear.invalid && work1Form.controls.sYear.touched" class="indicator" >[1950-2018] only.</div>
+                  </div>
+                  <div class="col-2"><br> &mdash; </div>
+                  <div class="col-5 form-group">
+                    <div class="s2">End year</div>
+                    <input type="number" class="form-control" placeholder="End year" name="eYear" formControlName="eYear">
+                    <div *ngIf="work1Form.controls.eYear.invalid && work1Form.controls.eYear.touched" class="indicator" >[1950-2018] only.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <div class="s2">Name of organization</div>
+                    <input type="text" class="form-control" placeholder="Name of company" name="edu" formControlName="edu">
+                    <div *ngIf="work1Form.controls.edu.invalid && work1Form.controls.edu.touched" class="indicator" >Content is invalid.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <div class="s2">Work experience</div>
+                    <textarea type="text" class="form-control" placeholder="Details of Work experience" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                    <div *ngIf="work1Form.controls.eDetail.invalid && work1Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <button type="submit" id="f-btn" class="btn btn-primary" (click)="w1Status=false" >Cancel</button>
+                    <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="eduWork({status:'w1Status',form:'work1Form',title:'work_1', year:'work_1_date', des:'work_1_detail'})">Done</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <hr *ngIf="tProfile.work_1">
+
+          <div><a *ngIf="!tProfile.work_2 && tProfile.work_1 && !w2Status" id="a-btn" (click)="w2Status=true">Add an work field</a></div>
+          <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12"><p *ngIf="tProfile.work_2">{{tProfile.work_2_date}} </p></div>
+            <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12"><p *ngIf="tProfile.work_2">{{tProfile.work_2}}</p><p *ngIf="tProfile.work_2">{{tProfile.work_2_detail}}</p></div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <a id="a-btn" *ngIf="tProfile.work_2 && !w2Status" (click)="w2Status=true">Edit</a>
+              <br/><a id="a-btn" *ngIf="tProfile.work_2 && !w2Status" (click)="dlEduWork({title:'work_2', year:'work_2_date', des:'work_2_detail'})">Delete</a>
+              <form *ngIf="w2Status" [formGroup]="work2Form">
+                <div class="row">
+                  <div class="col-5 form-group">
+                    <div class="s2">Start year</div>
+                    <input type="number" class="form-control" placeholder="Start year" name="sYear" formControlName="sYear">
+                    <div *ngIf="work2Form.controls.sYear.invalid && work2Form.controls.sYear.touched" class="indicator" >[1950-2018] only.</div>
+                  </div>
+                  <div class="col-2"><br> &mdash; </div>
+                  <div class="col-5 form-group">
+                    <div class="s2">End year</div>
+                    <input type="number" class="form-control" placeholder="End year" name="eYear" formControlName="eYear">
+                    <div *ngIf="work2Form.controls.eYear.invalid && work2Form.controls.eYear.touched" class="indicator" >[1950-2018] only.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <div class="s2">Name of organization</div>
+                    <input type="text" class="form-control" placeholder="Name of company" name="edu" formControlName="edu">
+                    <div *ngIf="work2Form.controls.edu.invalid && work2Form.controls.edu.touched" class="indicator" >Content is invalid.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <div class="s2">Work experience</div>
+                    <textarea type="text" class="form-control" placeholder="Details of Work experience" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                    <div *ngIf="work2Form.controls.eDetail.invalid && work2Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <button type="submit" id="f-btn" class="btn btn-primary" (click)="w2Status=false" >Cancel</button>
+                    <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="eduWork({status:'w2Status',form:'work2Form',title:'work_2', year:'work_2_date', des:'work_2_detail'})">Done</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <hr *ngIf="tProfile.work_2">
+
+          <div><a *ngIf="!tProfile.work_3 && tProfile.work_2 && !w3Status" id="a-btn" (click)="w3Status=true">Add an work field</a></div>
+          <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12"><p *ngIf="tProfile.work_3">{{tProfile.work_3_date}} </p></div>
+            <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12"><p *ngIf="tProfile.work_3">{{tProfile.work_3}}</p><p *ngIf="tProfile.work_3">{{tProfile.work_3_detail}}</p></div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <a id="a-btn" *ngIf="tProfile.work_3 && !w3Status" (click)="w3Status=true">Edit</a>
+              <br/><a id="a-btn" *ngIf="tProfile.work_3 && !w3Status" (click)="dlEduWork({title:'work_3', year:'work_3_date', des:'work_3_detail'})">Delete</a>
+              <form *ngIf="w3Status" [formGroup]="work3Form">
+                <div class="row">
+                  <div class="col-5 form-group">
+                    <div class="s2">Start year</div>
+                    <input type="number" class="form-control" placeholder="Start year" name="sYear" formControlName="sYear">
+                    <div *ngIf="work3Form.controls.sYear.invalid && work3Form.controls.sYear.touched" class="indicator" >[1950-2018] only.</div>
+                  </div>
+                  <div class="col-2"><br> &mdash; </div>
+                  <div class="col-5 form-group">
+                    <div class="s2">End year</div>
+                    <input type="number" class="form-control" placeholder="End year" name="eYear" formControlName="eYear">
+                    <div *ngIf="work3Form.controls.eYear.invalid && work3Form.controls.eYear.touched" class="indicator" >[1950-2018] only.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <div class="s2">Name of organization</div>
+                    <input type="text" class="form-control" placeholder="Name of company" name="edu" formControlName="edu">
+                    <div *ngIf="work3Form.controls.edu.invalid && work3Form.controls.edu.touched" class="indicator" >Content is invalid.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <div class="s2">Work experience</div>
+                    <textarea type="text" class="form-control" placeholder="Details of Work experience" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                    <div *ngIf="work3Form.controls.eDetail.invalid && work3Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                  </div>
+                  <div class="col-12 form-group">
+                    <button type="submit" id="f-btn" class="btn btn-primary" (click)="w3Status=false" >Cancel</button>
+                    <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="eduWork({status:'w3Status',form:'work3Form',title:'work_3', year:'work_3_date', des:'work_3_detail'})">Done</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+
+        </div>
+      </div>
+
+      <!--hobby form-->
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Hobbies and Interests')">
+          <div class="card-header">Hobbies and Interests</div>
+            <div *ngIf="tProfile" class="card-body">
+              <div *ngIf="!tProfile.hobby_1 && !h1Status"><a id="a-btn" (click)="h1Status=true">Add an interest or hobby of yours</a></div>
+              <div class="row">
+                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12">
+                  <p *ngIf="tProfile.hobby_1">{{tProfile.hobby_1}}</p>
+                  <div class="example" *ngIf="!tProfile.hobby_1 && h1Status"><span class="s2Blue">Example</span><br><span class="s4Blue">Interest</span><br><span class="s3">Chess</span></div>
+                </div>
+                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12">
+                  <p *ngIf="tProfile.hobby_1">{{tProfile.hobby_1_detail}}</p>
+                  <div class="example" *ngIf="!tProfile.hobby_1 && h1Status"><br><span class="s4Blue">Interest specification</span><br><span class="s3">I enjoy playing chess, and I started a chess club for the elderly in my community.</span></div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <a id="a-btn" *ngIf="tProfile.hobby_1 && !h1Status" (click)="h1Status=true">Edit</a>
+                  <br/><a id="a-btn" *ngIf="tProfile.hobby_1 && !h1Status" (click)="dlQuoHobby({title:'hobby_1', des:'hobby_1_detail'})">Delete</a>
+                  <form *ngIf="h1Status" [formGroup]="hobby1Form">
+                    <div class="row">
+                      <div class="col-12 form-group">
+                        <div class="s2">Interest</div>
+                        <input type="text" class="form-control" placeholder="Title of interest" name="hobby" formControlName="hobby">
+                        <div *ngIf="hobby1Form.controls.hobby.invalid && hobby1Form.controls.hobby.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Interest specification</div>
+                        <textarea type="text" class="form-control" placeholder="Details of interest" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                        <div *ngIf="hobby1Form.controls.eDetail.invalid && hobby1Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <button type="submit" id="f-btn" class="btn btn-primary" (click)="h1Status=false" >Cancel</button>
+                        <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="quoHobby({status:'h1Status',form:'hobby1Form',title:'hobby_1', des:'hobby_1_detail'})">Done</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <hr *ngIf="tProfile.hobby_1">
+
+              <div><a *ngIf="!tProfile.hobby_2 && tProfile.hobby_1 && !h2Status" id="a-btn" (click)="h2Status=true">Add an interest or hobby of yours</a></div>
+              <div class="row">
+                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-12"><p *ngIf="tProfile.hobby_2">{{tProfile.hobby_2}} </p></div>
+                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-7 col-12"><p *ngIf="tProfile.hobby_2">{{tProfile.hobby_2_detail}}</p></div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <a id="a-btn" *ngIf="tProfile.hobby_2 && !h2Status" (click)="h2Status=true">Edit</a>
+                  <br/><a id="a-btn" *ngIf="tProfile.hobby_2 && !h2Status" (click)="dlQuoHobby({title:'hobby_2', des:'hobby_2_detail'})">Delete</a>
+                  <form *ngIf="h2Status" [formGroup]="hobby2Form">
+                    <div class="row">
+                      <div class="col-12 form-group">
+                        <div class="s2">Interest</div>
+                        <input type="text" class="form-control" placeholder="Title of interest" name="hobby" formControlName="hobby">
+                        <div *ngIf="hobby2Form.controls.hobby.invalid && hobby2Form.controls.hobby.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Interest specification</div>
+                        <textarea type="text" class="form-control" placeholder="Details of interest" row="2" name="eDetail" formControlName="eDetail"></textarea>
+                        <div *ngIf="hobby2Form.controls.eDetail.invalid && hobby2Form.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <button type="submit" id="f-btn" class="btn btn-primary" (click)="h2Status=false" >Cancel</button>
+                        <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="quoHobby({status:'h2Status',form:'hobby2Form',title:'hobby_2', des:'hobby_2_detail'})">Done</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+          </div>
+      </div>
+
+      <!--quote form-->
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Favorite quote')">
+          <div class="card-header">Favorate quote</div>
+            <div *ngIf="tProfile" class="card-body">
+              <div *ngIf="!tProfile.quote && !qStatus"><a id="a-btn" (click)="qStatus=true">Add an favourite quote of yours</a></div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p *ngIf="tProfile.quote&&tProfile.quote!=' '">{{tProfile.quote}}&nbsp;&mdash;&mdash;&nbsp;{{tProfile.quote_author}}</p>
+                  <div class="example" *ngIf="!tProfile.quote && qStatus">
+                    <span class="s2Blue">Example</span><br><br><span class="s4Blue">Quote</span><br><span class="s3">Education is the most powerful weapon which you can use to change the world. </span>
+                    <br><span class="s4Blue">Quote author</span><br><span class="s3">——Nelson Mandela</span>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <a id="a-btn" *ngIf="tProfile.quote && !qStatus" (click)="qStatus=true">Edit</a>
+                  <br/><a id="a-btn" *ngIf="tProfile.quote && !qStatus" (click)="dlQuoHobby({title:'quote', des:'quote_author'})">Delete</a>
+                  <form *ngIf="qStatus" [formGroup]="quoteForm">
+                    <div class="row">
+                      <div class="col-12 form-group">
+                        <div class="s2">Quote</div>
+                        <textarea type="text" class="form-control" placeholder="Detail of quote" row="2" name="hobby" formControlName="hobby"></textarea>
+                        <div *ngIf="quoteForm.controls.hobby.invalid && quoteForm.controls.hobby.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <div class="s2">Quote author</div>
+                        <input type="text" class="form-control" placeholder="Name of quote author" name="eDetail" formControlName="eDetail">
+                        <div *ngIf="quoteForm.controls.eDetail.invalid && quoteForm.controls.eDetail.touched" class="indicator" >Content is invalid.</div>
+                      </div>
+                      <div class="col-12 form-group">
+                        <button type="submit" id="f-btn" class="btn btn-primary" (click)="qStatus=false" >Cancel</button>
+                        <button type="submit" id="f-btn-right" class="btn btn-primary"  (click)="quoHobby({status:'qStatus',form:'quoteForm',title:'quote', des:'quote_author'})">Done</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="margin:15px;" (click)="submitInfo()">Save All Changes</button>
+        <button class="btn btn-danger" style="margin:15px;" (click)="cancelInfo()">Reset All Changes</button>

@@ -1,0 +1,34 @@
+.card-body{
+    padding-bottom: 0px;
+}
+.indicator{
+    color: rgb(192, 7, 7); 
+    font-size: 15px;
+}
+#a-btn{
+    color:rgb(0, 132, 255);
+    cursor: pointer;
+}
+#f-btn{
+    width:75px; 
+}
+#f-btn-right {
+    width:75px; 
+    float: right;
+    
+}
+.example{
+    font-style: italic;
+    color:#0099FF;
+}
+form {
+    padding:20px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 10px;
+}
+@media(max-width:768px){
+    form{
+        padding-top: 16px;
+        border-top: 1px solid #e6e6e6; 
+    }
+}

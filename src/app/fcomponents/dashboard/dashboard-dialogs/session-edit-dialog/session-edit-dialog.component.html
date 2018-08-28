@@ -1,0 +1,34 @@
+<mat-dialog-content>
+  <!--Edit time-->
+  <div class="card">
+    <div class="card-header s1" style="font-weight: bold;">Edit Time</div>
+    <div class="card-body" style="height:360px;">
+      <div id="calendar" class="text-center"></div>
+    </div>
+  </div>
+
+  <div class="row gaps">
+    <div class="col-md-6 col-sm-12">
+      <!--Edit location-->
+      <div class="card">
+        <div class="card-header s1" style="font-weight: bold;">Edit Location</div>
+        <div class="card-body" style="padding: 0.1rem 0.1rem;">
+          <select class="btn-btn-primary" id="myLocation">
+            <option value="{{sessionData.session_location}}" selected hidden>{{sessionData.session_location}}</option>
+            <option *ngFor='let location of locations' value="{{location}}">{{location}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 py-3">
+      <!--Buttons-->
+      <div class="text-center">
+        <button type="button" class="btn btn-primary btn" (click)="cancel()" style="margin-right: 1rem;">CANCEL</button>&nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary btn" (click)="save()" style="margin-left: 1rem;">SAVE</button>
+      </div>
+    </div>
+    <div class="col-12" *ngIf='withinTwelveHours'>
+      <p class="text-danger"><em>* Rescheduling a lesson that's set to start within 12 hours may incur charges.</em></p>
+    </div>
+  </div>
+</mat-dialog-content>

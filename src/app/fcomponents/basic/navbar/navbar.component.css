@@ -1,0 +1,108 @@
+/* navbar content */
+.navbar{
+  background-color: white;
+  border: 1px solid #cccccc;
+}
+.navbar .logo{
+    color: #0099FF;
+    font-size:21px;
+    padding: 0px;
+    padding-right: 0.8rem;
+    font-family: Arial;
+}
+.navbar-nav .nav-item .navLink{
+    color:#0099FF;
+    font-size: 16px;
+}
+.navbar-nav .nav-item .navLink:hover{
+    color:#0099FF;
+}
+.navbar-nav .nav-item .navRight{
+  margin-left: 5px;
+}
+
+
+
+/* dropdown content */
+.dropdown-item{
+    font-size:15px;
+    font-weight:bold;
+}
+.dropdown-item:hover{
+    background-color: lightgrey;
+}
+
+
+
+
+
+/* icons content */
+.homeIcon{
+  background-image: url("/../../assets/icons/homeIcon.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.teachingIcon{
+  background-image: url("/../../assets/icons/teachingIcon.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.settingIcon{
+  background-image: url("/../../assets/icons/settingIcon.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.transactionIcon{
+  background-image: url("/../../assets/icons/transactionIcon.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.passdIcon{
+  background-image: url("/../../assets/icons/passdIcon.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.logoutIcon{
+  background-image: url("/../../assets/icons/logout.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.articleIcon{
+  background-image: url("/../../assets/icons/articleIcon.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.discussionIcon{
+  background-image: url("/../../assets/icons/discussionIcon.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+.editIcon{
+  background-image: url("/../../assets/icons/edit.png");
+  background-position: left center;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+
+
+@media(max-width:768px){
+  .navbar-nav .nav-item .navRight{
+    margin-left: 20px;
+  }
+  .dropdown-menu{
+    max-width: 98%;
+    border:0px;
+    outline:0px;
+  }
+  .dpitem{
+    margin-top: -10px;
+  }
+}

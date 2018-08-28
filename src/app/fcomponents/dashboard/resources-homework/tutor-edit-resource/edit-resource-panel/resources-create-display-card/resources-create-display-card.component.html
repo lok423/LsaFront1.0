@@ -1,0 +1,69 @@
+<div *ngIf="displayTag == 'homework'; then createHomework"></div>
+
+<ng-template #createHomework>
+  <div *ngIf="smallScreen == true">
+    <button type="button" class="btn btn-outline-primary top-btn" routerLink="homework">
+      Homework
+    </button>
+  </div>
+
+  <div *ngIf="smallScreen == false">
+    <div class="homework-card card display-card" routerLink="homework">
+      <div class="row">
+        <div class="col-5">
+          <img [src]="displayImg" />
+        </div>
+        <div class="col-7">
+          <div class="col-12">
+            <h3>{{displayTitle}}</h3>
+          </div>
+          <div class="col-12 card-content">
+            <p>
+              {{displayContent}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #createResource2>
+  <div class="resource2-card card display-card">
+    <div class="row">
+      <div class="col-5">
+        <img [src]="displayImg" />
+      </div>
+      <div class="col-7">
+        <div class="col-12">
+          <h3>{{displayTitle}}</h3>
+        </div>
+        <div class="col-12 card-content">
+          <p>
+            {{displayContent}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #createResource3>
+  <div class="resource3-card card display-card">
+    <div class="row">
+      <div class="col-5">
+        <img [src]="displayImg" />
+      </div>
+      <div class="col-7">
+        <div class="col-12">
+          <h3>{{displayTitle}}</h3>
+        </div>
+        <div class="col-12 card-content">
+          <p>
+            {{displayContent}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

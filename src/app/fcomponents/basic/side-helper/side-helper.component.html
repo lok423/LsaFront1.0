@@ -1,0 +1,11 @@
+<div class="card" [ngClass]="scrollStatus? 'position1' : 'position2'">
+  <div class="card-header">{{helperMatch}}</div>
+  <div class="card-body">
+    <div class="card-block" *ngIf ="!textList" [innerHTML]="helperText"></div>
+    <div class="card-block">
+      <ul *ngIf ="textList">
+        <li *ngFor ="let key of objectKeys(textObj)" [innerHTML]="textObj[key]"></li>
+      </ul>
+    </div>
+  </div>
+</div>

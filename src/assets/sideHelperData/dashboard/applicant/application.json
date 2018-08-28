@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/dashboard/applicant/application",
+    "cardContent":
+    [{
+      "initHelperMatch": "application Header",
+      "initHelperText": "application Body"
+    },
+    {
+      "helperMatch": "application part 1",
+      "helperText": "application Body 1"
+    },
+    {
+      "helperMatch": "application part 2",
+      "helperText": "application Body 2"
+    },
+    {
+      "helperMatch": "application part 3",
+      "helperText": "application Body 3"
+    }]
+  }
+]

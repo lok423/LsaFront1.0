@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-6 offset-lg-3">
+      <div *ngIf="showCost; then costCard; else paymentCard"></div>
+    </div>
+  </div>
+</div>
+
+<ng-template #paymentCard>
+  <div class="pay-form-space">
+    <div class="space-header">
+      <img src="../../assets/favicon.ico" />
+    </div>
+    <h5>Learnspace Payment</h5>
+    <div class="pay-cost">
+      <a>Total Cost: ${{costMoney}}NZ</a>
+    </div>
+    <div class="pay-form-div">
+      <h5>Payment Details</h5>
+      <div class="pay-form">
+        <form id="payment-form" [formGroup]="paymentFormGroup">
+          <div class="d-flex flex-column">
+            <label>CARD HOLDER NAME
+              <input id="card-holder" class="form-control" formControlName="cardHolder">
+            </label>
+            <label>CARD NUMBER
+              <div id="payment-cardnumber"></div>
+            </label>
+            <div class="d-flex">
+              <div class="mr-auto">
+                <label>CARD EXPIRY DATE
+                  <div id="payment-cardexp"></div>
+                </label>
+              </div>
+              <div>
+                <label>CVV CODE
+                  <div id="payment-cardcvc"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div id="card-errors" role="alert"></div>
+      </div>
+      <div class="form-btn">
+        <button type="submit" form="payment-form" class="btn btn-primary" [disabled]=false>Confirm Payment</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #costCard>
+  <div class="pay-form-space">
+    cost card
+  </div>
+  <button type="button" class="btn btn-primary" (click)="showCostDetails()">Go to Pay</button>
+</ng-template>

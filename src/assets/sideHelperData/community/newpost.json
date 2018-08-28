@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/community/newpost",
+    "cardContent":
+    [{
+      "initHelperMatch": "newpost Header",
+      "initHelperText": "newpost Body"
+    },
+    {
+      "helperMatch": "newpost part 1",
+      "helperText": "newpost Body 1"
+    },
+    {
+      "helperMatch": "newpost part 2",
+      "helperText": "newpost Body 2"
+    },
+    {
+      "helperMatch": "newpost part 3",
+      "helperText": "newpost part 3"
+    }]
+  }
+]

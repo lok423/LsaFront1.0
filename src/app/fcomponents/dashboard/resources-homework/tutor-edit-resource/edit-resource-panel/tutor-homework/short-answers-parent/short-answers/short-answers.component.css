@@ -1,0 +1,96 @@
+.saved-quiz {
+  /* margin-top: 0.5rem;
+  margin-bottom: 0.5rem; */
+  /* margin-left: 0.3rem;
+  margin-right: 0.3rem; */
+}
+
+.saved-quiz-header {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.saved-quiz-title {
+  color:grey;
+}
+
+.saved-quiz-text{
+  margin: 12px;
+  border-radius: 5px;
+}
+
+.saved-quiz-ans {
+  padding: 2px;
+  padding-left:30px;
+}
+
+.saved-quiz-ans a {
+  font-weight: bold;
+  color: #32CD32;
+}
+
+.ans-div {
+  padding: 2px;
+  margin-top: 2px;
+}
+
+.ans-div a {
+  font-weight: bold;
+}
+
+.answer-btn-div {
+  margin-top: 0.5rem;
+  padding: 2px;
+  text-align: right;
+}
+
+.display-answer-div {
+  padding: 2px;
+}
+
+.display-answer-div a {
+  font-weight: bold;
+  color: #32CD32;
+}
+
+.form-btn-div {
+  padding: 2px;
+  text-align: right;
+}
+
+.form-btn-div button {
+  margin-left: 0.5rem;
+}
+
+.saved-title {
+  background-color: #DCDCDC;
+}
+
+.pos-btn {
+  padding: 3px;
+  text-align: right;
+}
+
+.pos-btn button {
+  margin-right: 5px;
+}
+
+.btn-edit-option {
+  padding: 3px;
+}
+
+.btn-edit-option button {
+  margin-right: 3px;
+}
+
+.styled-btn {
+  font-size: 16px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 2px;
+}
+
+.styled-btn i {
+  margin-right: 2px;
+  margin-top: -4px;
+}

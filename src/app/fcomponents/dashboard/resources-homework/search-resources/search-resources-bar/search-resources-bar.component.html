@@ -1,0 +1,122 @@
+<div class="container">
+  <div *ngIf="barOwner == 'tutor'">
+    <div class="row">
+      <div class="col-12 search-bar">
+        <div class="row">
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+            Public/Personal
+            <select id="public-own" class="filter form-control-sm" (change)="getSelectedPrivacy()">
+              <option value="" selected disabled hidden>
+                Resource Privacy
+              </option>
+              <option value="all">
+                All Resources
+              </option>
+              <option value disabled>—————————————</option>
+              <option value=1>
+                Public
+              </option>
+              <option value=0>
+                Personal
+              </option>
+            </select>
+          </div>
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+            Subject
+            <select id="subject" class="filter form-control-sm" (change)="getSelectedSubject()">
+              <option value="" selected disabled hidden>
+                Select Subject
+              </option>
+              <option value="all">
+                All Subjects
+              </option>
+              <option value disabled>—————————————</option>
+              <option *ngFor="let subject of subjectArray"
+              [value]="subject">
+                {{subject}}
+              </option>
+            </select>
+          </div>
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+            Grade
+            <select id="grade" class="filter form-control-sm" (change)="getSelectedGrade()">
+              <option value="" selected disabled hidden>
+                Select Grade
+              </option>
+              <option value="all">
+                All Grades
+              </option>
+              <option value disabled>—————————————</option>
+              <option *ngFor="let grade of gradeArray"
+              [value]="grade">
+                {{grade}}
+              </option>
+            </select>
+          </div>
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+            Type
+            <select id="type" class="filter form-control-sm">
+              <option value="" selected disabled hidden>
+                Select Type
+              </option>
+              <option value="1" selected>
+                Homework
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="barOwner == 'learner'">
+    <div class="row">
+      <div class="col-12 search-bar">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            Resource type
+            <select id="resOrHomework" class="filter form-control-sm" (change)="getLearnerResourceType()">
+              <option value="1" selected>
+                My Homework
+              </option>
+              <option value="2">
+                Public Resources
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            Subject
+            <select id="subject" class="filter form-control-sm" (change)="getSelectedSubject()">
+              <option value="" selected disabled hidden>
+                Select Subject
+              </option>
+              <option value="all">
+                All Subjects
+              </option>
+              <option value disabled>—————————————</option>
+              <option *ngFor="let subject of subjectArray"
+              [value]="subject">
+                {{subject}}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            Grade
+            <select id="grade" class="filter form-control-sm" (change)="getSelectedGrade()">
+              <option value="" selected disabled hidden>
+                Select Grade
+              </option>
+              <option value="all">
+                All Grades
+              </option>
+              <option value disabled>—————————————</option>
+              <option *ngFor="let grade of gradeArray"
+              [value]="grade">
+                {{grade}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

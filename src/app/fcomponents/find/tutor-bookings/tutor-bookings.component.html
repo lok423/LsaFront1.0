@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+      <div class="card-header header1" style="border-bottom:0px;">
+        <div style="display: inline;">
+          <div>
+            <div class="dropdown">
+              <button class="set2 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown">
+                {{locations[0]}}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                <div *ngFor='let location of locations'>
+                  <button class="dropdown-item" (click)="setInfo({btn:'#dropdownMenuButton3',item:'location'})">{{location}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="dropdown">
+              <button class="set btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown">
+                {{subjects[0]}}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <div *ngFor='let subject of subjects'>
+                  <button class="dropdown-item" (click)="setInfo({btn:'#dropdownMenuButton1',item:'subject'})">{{subject}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="dropdown">
+              <button class="set btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
+                {{curriculums[0]}}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                <div *ngFor='let curriculum of curriculums'>
+                  <button class="dropdown-item" (click)="setInfo({btn:'#dropdownMenuButton2',item:'curriculum'})">{{curriculum}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p *ngIf='showWarningMes' style="font-size: 14px; color: red;">Single lesson should be longer than 30 minutes...</p>
+      <p *ngIf='eightLimitMes' style="font-size: 14px; color: red;">You can only choose 8 sessions every time...</p>
+      <div class="card-body" style="height:500px;">
+        <div id="calendar"></div>
+      </div>
+      <span *ngIf="!indicator" style="position: absolute; font-size:21px; color:#525252; top:128px;">
+        <i class="fa fa-spinner fa-spin"></i> Loading...</span>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-xl-4 col-lg-4 ">
+      <div style="top:20px; z-index:0;" class="card sticky-top">
+        <div class="card-block">
+          <div class="card-header m2">
+            <div style="font-size: 20px;" class="clearfix">
+              <p class="float-left pb-0 mb-0"><i class="fa fa-book" style="position: relative; right:5px"></i>
+                Lesson</p>
+              <p class="float-right pb-0 mb-0">Price</p>
+            </div>
+          </div>
+            <!-- <i style="font-size: 25px;" class="fa fa-cart-plus"></i>&nbsp;&nbsp;Confirm your lesson</div> -->
+          <div class="card-body p-0" style="font-size: 20px;">
+            <div *ngFor="let session of sessions" class="s2 m-2 p-1 bg-light">
+              <div class="clearfix">
+                <div class="float-left" style="width: 80%">
+                  <i style="color:red;" class="fa fa-remove" (click)="deleLesson(session.s_date,session.s_duration)"></i>&nbsp;&nbsp;
+                  <span>{{session.s_date | date:'MMM/dd y, hh:mma'}}</span>&nbsp;
+                  <span>{{session.s_duration}}-hour</span>
+                  <select style="border-radius: 0px;" (change)="change({date:session.s_date, item:session.s_subject})">
+                    <option disabled>{{session.s_subject}}</option>
+                    <option *ngFor='let subject of subjects' [ngValue]="subject">{{subject}}</option>
+                  </select>
+                  <select style="border-radius: 0px;" (change)="change({date:session.s_date, item:session.s_curriculum})">
+                    <option disabled>{{session.s_curriculum}}</option>
+                    <option *ngFor='let curriculum of curriculums' [ngValue]="curriculum">{{curriculum}}</option>
+                  </select>
+                  <select style="width:125px" (change)="change({date:session.s_date, item:session.s_location})">
+                    <option disabled>{{session.s_location | slice:0:13}}</option>
+                    <option *ngFor='let location of locations' [ngValue]="location">{{location}}</option>
+                  </select>
+                </div>
+                
+                <div class="float-right">
+                  <span *ngIf="session.s_duration>=2">${{session.s_duration*tutorPrice[1]}}
+                  </span>
+                  <span *ngIf="session.s_duration<2">${{session.s_duration*tutorPrice[0]}}</span>
+                </div>
+
+                <span *ngIf="session.s_duration>=2" style="position: relative; top:4px; float: right;font-size: 12px; font-style: italic; color:#6ccc84;">saved ${{session.s_duration*(tutorPrice[0]-tutorPrice[1])}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="clearfix">
+              <div class="float-left">
+                  {{sessions.length}}
+                  <span class="s2"> lessons selected</span>
+              </div>
+              <div class="float-right">
+                  <span *ngIf="savedBillNum>0" style="font-size: 12px; font-style: italic; color:#6ccc84;">saved ${{savedBillNum}}!</span>      
+                  Total:&nbsp;${{billNum}}
+              </div>
+            </div>
+            
+            <p *ngIf='feedback' style="font-size: 14px; color: red;">&nbsp;&nbsp;{{feedback}}</p>
+            <button (click)="checkOut()" class="btn btn-primary btn-block mt-1" style="background-color:#0099FF;font-weight: bold;">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

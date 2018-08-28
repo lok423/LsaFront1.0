@@ -1,0 +1,14 @@
+[
+  {
+    "pathname": "/app/user/transactions",
+    "cardContent":
+    [{
+      "initHelperMatch": "User Transactions",
+      "initHelperText": "View Transactions"
+    },
+    {
+      "helperMatch": "My transactions",
+      "helperText": "My Transactions Body"
+    }]
+  }
+]

@@ -1,0 +1,217 @@
+<div style="padding-top:20px;" class="container">
+  <h2>Teacher Application</h2>
+  <div class="font1">Thank you for applying to teach on Learnspace !</div>
+  <div class="h6">Please keep in mind: </div>
+
+  <ul>
+    <li>Teachers/tutors set their own hourly rates, earn up to 90% of their hourly rate for each lesson they teach, and are paid each fortnight via various payout methods in your local currency.</li>
+    <li>Accepted applicants will be contacted within one week of submitting their application. Unfortunately, we cannot contact rejected applicants, but we appreciate your interest in teaching on Learnspace!</li>
+  </ul>
+
+  <div *ngIf="errorMessage" style="color:red;">{{errorMessage}}</div>
+  <div class="row">
+    <form *ngIf="userInfo" [formGroup]="appForm" class="col-12 col-md-9 col-lg-8">
+
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Profile General Information')">
+        <div class="card-header">
+          <h5>Profile General Information</h5> Please enter your general information here
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="legal_name">First Name</label>
+            <input type="text" id="first_name" value="{{userInfo.first_name}}" class="form-control" formControlName="first_name">
+            <div class="invalid_feedback" *ngIf="appForm.controls.first_name.errors?.required && appForm.controls.first_name.touched || appForm.controls.first_name.errors?.required &&  errorMessage">First Name is required</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.first_name.errors?.minlength">First name must be 2 characters long.</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.first_name.errors?.maxlength">First name can not be more than 30 characters.</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.first_name.errors?.pattern">First name contains only characters.</div>
+          </div>
+          <div class="form-group">
+            <label for="legal_name">Last Name</label>
+            <input type="text" id="last_name" value="{{userInfo.last_name}}" class="form-control" formControlName="last_name">
+            <div class="invalid_feedback" *ngIf="appForm.controls.last_name.errors?.required && appForm.controls.last_name.touched || appForm.controls.last_name.errors?.required &&  errorMessage">Last Name is required</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.last_name.errors?.minlength">Last name must be 2 characters long.</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.last_name.errors?.maxlength">Last name can not be more than 30 characters.</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.last_name.errors?.pattern">Last name contains only characters.</div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" value="{{userInfo.phone_num_pri}}" class="form-control" formControlName="phone_num_pri">
+            <div class="invalid_feedback" *ngIf="appForm.controls.phone_num_pri.errors?.required && appForm.controls.phone_num_pri.touched || appForm.controls.phone_num_pri.errors?.required &&  errorMessage">Phone number is required</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.phone_num_pri.errors?.minlength">Phone number must be 7 digits long.</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.phone_num_pri.errors?.maxlength">Phone number can not be more than 12 digits.</div>
+            <div class="invalid_feedback" *ngIf="appForm.controls.phone_num_pri.errors?.pattern">Phone number must be digits.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="location">Where are you based (Location)</label>
+            <select type="text" id="location" class="form-control" formControlName="location" required>
+               <option disabled value="">---Please select a location---</option>
+               <option *ngFor="let location of locations" [ngValue]="location">{{location}}</option>
+            </select>
+            <div class="invalid_feedback" *ngIf="appForm.controls.location.errors?.required && appForm.controls.location.touched || appForm.controls.location.errors?.required && errorMessage"> Location is required </div>
+          </div>
+
+          <div class="form-group">
+            <label for="date_birth">Date of birth</label>
+            <div style="margin-top:-18px;">
+              <mat-form-field class="example-full-width">
+                <input matInput [min]="minDOB" [max]="maxDOB" [matDatepickerFilter]="DatePopUp" [matDatepicker]="picker" formControlName="DOB" >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker ></mat-datepicker>
+                <mat-error *ngIf="appForm.controls.DOB.errors?.required">Date of birth is required</mat-error>
+                <!-- <mat-error *ngIf="appForm.controls.DOB.errors?.dFormat">Date of birth should be in MM/DD/YYYY format.</mat-error> -->
+                <mat-error *ngIf="appForm.controls.DOB.errors?.mindob">Year of birth year can not be earlier than 1930.</mat-error>
+                <mat-error *ngIf="appForm.controls.DOB.errors?.maxdob">Year of birth year can not be later than 2020.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <!--form-group-->
+        </div>
+        <!-- card-body -->
+      </div>
+      <!-- card -->
+
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Subjects and Curriculum')">
+        <div class="card-header">
+          <h5>Subjects and Curriculum</h5> What subject and curriculum would you like to teach
+        </div>
+        <div class="card-body">
+          <div class="row">
+
+            <div class="form-group col-6">
+              <label for="subject_1">Main subject and discipline </label>
+              <select type="text" id="subject_1" class="form-control" formControlName="discipline_1" required>
+                <option disabled value="">---Please select a main subject---</option>
+                <option *ngFor="let discipline of disciplines" [ngValue]="discipline">{{discipline}}</option>
+              </select>
+              <div class="invalid_feedback" *ngIf="appForm.controls.discipline_1.errors?.required && appForm.controls.discipline_1.touched || appForm.controls.discipline_1.errors?.required && errorMessage">Main subject is required</div>
+            </div>
+            <div class="form-group col-6">
+              <label for="subject_2">Secondary subject and discipline (optional) </label>
+              <select type="text" id="subject_2" class="form-control" formControlName="discipline_2">
+                <option disabled value="">---Please select a Secondary subject---</option>
+                <option *ngFor="let discipline of disciplines" [ngValue]="discipline">{{discipline}}</option>
+              </select>
+            </div>
+            <!-- <input hidden type="text" value="{{discipline_1}} &nbsp;  {{discipline_2}}" id="subjects"> -->
+
+            <div class="form-group col-6">
+              <label for="curriculum_1">Main Curriculum</label>
+              <select type="text" id="curriculum_1" class="form-control" formControlName="curriculum_1" required>
+                <option disabled value="">---Please select a main curriculum---</option>
+                <option *ngFor="let curriculum of curriculums" [ngValue]="curriculum">{{curriculum}}</option>
+              </select>
+              <div class="invalid_feedback" *ngIf="appForm.controls.curriculum_1.errors?.required && appForm.controls.curriculum_1.touched || appForm.controls.curriculum_1.errors?.required &&  errorMessage">Main curriculum is required</div>
+            </div>
+            <div class="form-group col-6">
+              <label for="curriculum_2">Secondary Curriculum (optional) </label>
+              <select type="text" id="curriculum_2" class="form-control" formControlName="curriculum_2">
+                <option disabled value="">---Please select a secondary curriculum---</option>
+                <option *ngFor="let curriculum of curriculums" [ngValue]="curriculum">{{curriculum}}</option>
+              </select>
+            </div>
+            <!-- <input hidden type="text" value="{{curriculum_1}}  &nbsp;  {{curriculum_2}}" id="curriculums"> -->
+          </div>
+          <!-- row -->
+        </div>
+        <!-- card-body -->
+      </div>
+      <!-- card -->
+
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Experiences')">
+        <div class="card-header">
+          <h5>Experiences</h5> Your teaching history &nbsp; &nbsp; <i>(optional)</i>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-12">
+              <label for="work_1">Name of teaching workplace</label>
+              <input type="text" id="work_1" value="{{work_1}}" class="form-control" formControlName="work_1">
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_1.errors?.minlength">Must be at least 3 characters</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_1.errors?.maxlength">Must be not greater than 50 characters</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_1.errors?.pattern">It contains only characters and spaces.</div>
+            </div>
+            <div class="form-group col-12">
+              <label for="work_1_detail">Description of teaching role</label>
+              <input type="text" id="work_1_detail" value="{{work_1_detail}}" class="form-control" formControlName="work_1_detail">
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_1_detail.errors?.minlength">Must be at least 8 characters</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_1_detail.errors?.maxlength">Must be not greater than 150 characters</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_1_detail.errors?.pattern">It contains only characters and spaces.</div>
+            </div>
+            <div class="form-group col-6">
+              <label for="work_start">Start Year</label>
+              <input type="text" id="work_start" value="{{work_start}}" class="form-control" formControlName="work_start">
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_start.errors?.pattern">Must be numbers and 4 digits long</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_start.errors?.min">Start year can not be earlier than 1950.</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_start.errors?.max">Start year can not be later than 2019.</div>
+
+            </div>
+            <div class="form-group col-6">
+              <label for="work_end">End Year</label>
+              <input type="text" id="work_end" value="{{work_end}}" class="form-control" formControlName="work_end">
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_end.errors?.pattern">Must be numbers and 4 digits long.</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_end.errors?.min">End year can not be earlier than 1950.</div>
+              <div class="invalid_feedback" *ngIf="appForm.controls.work_end.errors?.max">End year can not be later than 2019.</div>
+              <div class="invalid_feedback" *ngIf="appForm.errors?.not && appForm.controls.work_end.touched">End year is supposed to be later than Start year.</div>
+
+            </div>
+            <input hidden type="text" value="{{work_start}} &nbsp; -  {{work_end}}" id="workDate">
+          </div>
+          <!-- row -->
+        </div>
+        <!-- card-body -->
+      </div>
+      <!-- card -->
+
+
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Resume')">
+        <div class="card-header">
+          <h5>Resume</h5> Upload your resume or C.V here
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="cv">Upload <small>PDF; Docx only</small> and file size not exceeds <small>2MB</small>. </label>
+            <input type="file" id="cv" (change)="fileValidation()" class="btn btn-primary btn-block form-control" formControlName="cv">
+            <div class="invalid_feedback" *ngIf="appForm.controls.cv.errors?.required && appForm.controls.cv.touched || appForm.controls.cv.errors?.required &&  errorMessage ">CV File is required</div>
+            <div class="invalid_feedback" *ngIf="fileValidator.fileTips">{{fileValidator.fileTips}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 25px;" (mouseenter)="mouseEnter('Other Questions')">
+        <div class="card-header">
+          <h5>Other Questions</h5> Your background
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="sp_question_1">How would you motivate a student? &nbsp; (optional) </label>
+            <textarea type="text" id="sp_question_1" value="{{sp_ques_1}}" class="form-control" formControlName="sp_ques_1" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sp_question_2">What do you think is the purpose of education? &nbsp; (optional) </label>
+            <textarea type="text" id="sp_question_2" value="{{sp_ques_2}}" class="form-control" formControlName="sp_ques_2" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="criminal_record">Do you have any criminal records or criminal charges against you (please specify if you do)  </label>
+            <input type="text" id="criminal_record" value="{{criminal_record}}" class="form-control" formControlName="criminal_record">
+            <div class="invalid_feedback" *ngIf="appForm.controls.criminal_record.errors?.required && appForm.controls.criminal_record.touched || appForm.controls.criminal_record.errors?.required &&  errorMessage ">Criminal Record is Required</div>
+          </div>
+        </div>
+        <!-- card-body -->
+      </div>
+      <!-- card -->
+
+
+      <button (click)="onSubmit()" class="btn btn-primary" style="margin-top: 25px;">Submit</button>
+    </form>
+
+    <div class="d-none d-sm-none d-md-none d-lg-block col-lg-4">
+      <app-side-helper></app-side-helper>
+    </div>
+    
+  </div>
+  <!-- row -->
+  <div *ngIf="errorMessage" style="color:red;">{{errorMessage}}</div>
+
+</div>
+<!-- container -->

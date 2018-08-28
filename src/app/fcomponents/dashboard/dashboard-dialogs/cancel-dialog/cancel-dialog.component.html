@@ -1,0 +1,29 @@
+<mat-dialog-content>
+  <div class="card">
+    <div class="car-header px-3 py-2 border-bottom">
+      <i class="fa fa-times float-right" aria-hidden="true" (click)="close()"></i>
+      <label class="m2">Cancel Lesson</label><br>
+      <label class="s2">Are you sure to cancel this lesson?</label>
+    </div>
+    <div class="card-body">
+      <div class="row text-center">
+        <div class="col-lg-6 col-sm-6 border-right gapBottom">
+          <div class="card-block">
+            <img src="../../../../assets/icons/cancelicon.png" alt="Cancel Icon" width="80" height="80">
+            <p class="s2 mt-2" *ngIf='!withTwelveHours'>This cancelling <b>cannot be undone</b>.</p>
+            <p class="s2 mt-2" *ngIf='withTwelveHours'>Cancelling this lesson will result in a late cancellation charge of <b>40%</b>. A cancellation <b>cannot be undone</b></p>
+          </div>
+          <button type="submit" class="btn btn-danger" (click)="save()">Cancel Lesson</button>
+        </div>
+        <div class="col-lg-6 col-sm-6 border-top gapTop">
+          <div class="card-block">
+            <img src="../../../../assets/icons/rescheduleIcon.png" alt="Cancel Icon" width="80" height="80">
+            <p class="s2 mt-2">Instead of cancelling this lesson, you can reschedule it for <b>another time</b>.</p>
+          </div>
+          <button type="button" class="btn btn-success" (click)="reschedule()">Reschedule Lesson</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>

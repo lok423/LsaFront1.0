@@ -1,0 +1,10 @@
+<mat-dialog-content class="text-center">
+  <form>
+    <div class="form-group">
+      <label for="reportArea">Tutor Report</label>
+      <textarea class="form-control" name="reportArea" rows="3" [(ngModel)]='reportContent'></textarea>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="close()">Cancel</button>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary btn-sm" (click)="save()">Save</button>
+  </form>
+</mat-dialog-content>

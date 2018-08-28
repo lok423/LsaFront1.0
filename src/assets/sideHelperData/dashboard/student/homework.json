@@ -1,0 +1,22 @@
+[
+  {
+    "pathname": "/app/dashboard/student/homework",
+    "cardContent":
+    [{
+      "initHelperMatch": "homework Header",
+      "initHelperText": "homework Body"
+    },
+    {
+      "helperMatch": "homework part 1",
+      "helperText": "homework Body 1"
+    },
+    {
+      "helperMatch": "homework part 2",
+      "helperText": "homework Body 2"
+    },
+    {
+      "helperMatch": "homework part 3",
+      "helperText": "homework Body 3"
+    }]
+  }
+]

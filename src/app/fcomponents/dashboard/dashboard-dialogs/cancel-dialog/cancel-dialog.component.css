@@ -1,0 +1,49 @@
+/* styles about border */
+.border-bottom{
+    border-bottom: 1px solid lightgrey;
+}
+.border-right{
+    border-right: 1px solid lightgrey;
+}
+.border-top{
+    border-top: 0 !important;
+}
+.myBorder {
+    border-top: 1px solid lightgrey;
+}
+/* gaps and spaces thing */
+.mat-dialog-content{
+    padding-left: 0;
+    padding-right: 0;
+}
+.card-body{
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+.card-block{
+    height: 11rem;  /* This height can fix below buttons in the same height*/
+}
+label{
+    margin-bottom: 0;
+}
+p{
+    text-align: left !important;
+}
+
+@media(max-width: 575px) {
+    .mat-dialog-content{
+        max-height: 100%;
+    }
+    .card-block{
+        height: auto;
+    }
+    .gapBottom{
+        margin-bottom: 2rem;
+    }
+    .border-top{
+        border-top: 1px solid grey;
+    }
+    .border-right{
+        border-right: 0 !important;
+    }
+}

@@ -1,0 +1,166 @@
+<!-- <div class="container">
+
+</div> -->
+<div *ngIf="viewerType == 'tutor' && accessType == 'modify'">
+  <div *ngIf="questionStatus == 'init'; then formStyle; else savedStyle"></div>
+</div>
+<div *ngIf="viewerType == 'tutor' && accessType == 'display'">
+  <div *ngIf="questionStatus == 'init'; then formStyle; else savedStyle"></div>
+</div>
+<div *ngIf="viewerType == 'tutor' && accessType == 'overview'; then overview"></div>
+<div *ngIf="viewerType == 'learner' && accessType == 'display'; then quizStyle"></div>
+
+<ng-template #formStyle>
+  <mat-card>
+  <form [formGroup]="questionForm">
+    <div>
+      <div>
+        <a>Question Title (Optional)</a>
+        <input class="form-control" formControlName="questionTitle">
+      </div>
+      <div>
+        <a>Question Text</a>
+        <textarea class="form-control" rows="5" formControlName="questionText"></textarea>
+      </div>
+      <div>
+        <a>Question Answer</a>
+        <input class="form-control" formControlName="questionAnswer">
+      </div>
+    </div>
+  </form>
+  <div class="form-btn-div">
+    <button type="button" mat-button color="warn" class="styled-btn" (click)="discardQuestion()"><i class="material-icons">
+      delete_sweep</i>Discard
+    </button>
+    <button type="button" mat-button color="primary" class="styled-btn" (click)="saveQuestion()">
+      <i class="material-icons">save_alt</i>Save
+    </button>
+  </div>
+</mat-card>
+</ng-template>
+
+<ng-template #savedStyle>
+  <div *ngIf="questionInfo.questionSaveStatus == 'saved'; else formStyle">
+    <div class="card d-block saved-quiz">
+      <mat-card>
+        <div class="pos-btn">
+          <button type="button" class="btn btn-outline-secondary" (click)="moveQuestionUp()">Up</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="moveQuestionDown()">Down</button>
+        </div>
+        <div *ngIf="questionInfo.questionContent.questionTitle" class="saved-quiz-title ">
+          <p>
+            <b>{{questionInfo.questionContent.questionTitle}}</b>
+          </p>
+        </div>
+        <div class="saved-quiz-text">
+          <div class="row" style="">
+            <div class="question-col col-col-sm-md-lg-auto">
+              <h5>{{questionInfo.questionId}}.</h5>
+            </div>
+            <div class="question-col col-10">
+              <h5 class="question">{{questionInfo.questionContent.questionText}}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="saved-quiz-ans">
+          <a>Answer</a>
+          <p>
+            {{questionInfo.questionContent.questionAnswer}}
+          </p>
+        </div>
+
+        <!--
+      <div class="btn-edit-option">
+        <button type="button" mat-raised-button class="btn btn-primary" (click)="editQuestion()">Edit</button>
+        <button type="button" mat-raised-button  class="btn btn-danger" (click)="deleteQuestion()">Delete</button>
+      </div>
+    -->
+        <mat-card-actions class="float-right">
+          <div class="row">
+            <button type="button" color="primary" mat-button (click)="editQuestion()">
+          <i class="material-icons">
+           create
+          </i>Edit</button>
+            <button type="button" color="warn" mat-button (click)="deleteQuestion()">
+          <i class="material-icons">
+           delete
+          </i>Delete</button>
+          </div>
+        </mat-card-actions>
+        <br>
+      </mat-card>
+    </div>
+
+  </div>
+  <br>
+</ng-template>
+
+<ng-template #quizStyle>
+  <mat-card>
+  <form [formGroup]="questionForm">
+    <div class="d-block saved-quiz">
+      <div *ngIf="questionInfo.questionContent.questionTitle" class="saved-quiz-title">
+        <p>
+          <b>{{questionInfo.questionContent.questionTitle}}</b>
+        </p>
+      </div>
+      <div class="saved-quiz-text">
+        <div class="row" style="">
+          <div class="question-col col-col-sm-md-lg-auto">
+            <h5>{{questionInfo.questionId}}.</h5>
+          </div>
+          <div class="question-col col-10">
+            <h5 class="question">{{questionInfo.questionContent.questionText}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="ans-div">
+        <a>Your Answer</a>
+        <input class="form-control" formControlName="answer">
+      </div>
+      <div *ngIf="displayAnswer" class="display-answer-div">
+        <a>Question Preferred Answer</a>
+        <p>
+          {{questionInfo.questionContent.questionAnswer}}
+        </p>
+      </div>
+    </div>
+  </form>
+  <div class="answer-btn-div">
+    <button type="button" mat-raised-button color="primary" (click)="displayOrHideAnswer()">
+      <a *ngIf="!displayAnswer">Show Preferred Answer</a>
+      <a *ngIf="displayAnswer">Hide Answer</a>
+    </button>
+  </div>
+</mat-card>
+<br>
+</ng-template>
+
+<ng-template #overview>
+  <div class="card d-block saved-quiz">
+    <mat-card>
+      <div *ngIf="questionInfo.questionContent.questionTitle" class="saved-quiz-title">
+        <p>
+          <b>{{questionInfo.questionContent.questionTitle}}</b>
+        </p>
+      </div>
+      <div class="saved-quiz-text">
+        <div class="row" style="">
+          <div class="question-col col-col-sm-md-lg-auto">
+            <h5>{{questionInfo.questionId}}.</h5>
+          </div>
+          <div class="question-col col-10">
+            <h5 class="question">{{questionInfo.questionContent.questionText}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="saved-quiz-ans">
+        <a>Answer</a>
+        <p>
+          {{questionInfo.questionContent.questionAnswer}}
+        </p>
+      </div>
+    </mat-card>
+  </div>
+  <br>
+</ng-template>

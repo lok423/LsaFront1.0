@@ -1,0 +1,112 @@
+.card{
+    margin-top:14px; 
+    border-width:0px; 
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+    background-color:white;
+    padding: 10px 10px 10px;
+    -webkit-filter: brightness(85%); /* Chrome, Safari, Opera */
+    filter: brightness(95%);
+    transition: 0.3s;
+}
+.card:hover{  
+    transform: scale(1.02);
+    filter: brightness(100%);
+}  
+.card a{
+    color:#2d2d2d;
+    text-decoration: none;
+}
+.searchZone{
+    font-size:18px;
+    padding:4px 4px 4px 4px;  
+}
+.btn-info{
+    font-size:18px;
+    border-radius: 4px;
+    padding:4px 12px 4px 12px;
+    height:38px;
+}
+.img{
+    position:absolute;
+    left:0;
+}
+img{
+    border-radius:4px; 
+}
+.box{
+    margin-top: 12px;
+    padding-bottom:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin:0;
+    height:85px;
+}
+.box3{
+    padding-right:20px;
+}
+.card1{
+    background:#f7f7f7;
+    padding:5px;  
+    border-radius: 4px;
+    height:100%;
+    width:100%;
+}
+.s2blue{
+    margin-top: 10px;
+    position: relative;
+    left:28px;
+}
+.name{
+    position: relative;
+    top:4px;
+}
+.statement{
+    padding-left:10px;
+}
+.readmore{
+    color: #0099FF;
+}
+
+@media (max-width: 768px) {
+    .btn-info{
+        width: 100%;
+    }
+    .img{
+        position:static;
+    }
+    .name{
+        position: absolute;
+        top:20px;
+        left:57%;
+    }
+    .btn1{
+        position: absolute;;
+        right:4%;
+        bottom:10px;
+        
+    }
+    .fake{
+        position: fixed;
+        top:0;
+    }
+    .box3{
+        padding-right:10px;
+    }
+    .box{
+        height:58px;
+    }
+}
+
+@media (max-width: 1200px) and (min-width:992px) { 
+    .box1{
+        padding-left: 20px;
+    }
+    .statement{
+        padding-left:20px;
+    }
+    .name{
+        position: relative;
+        top:6px;
+        left:4px;
+    }
+}

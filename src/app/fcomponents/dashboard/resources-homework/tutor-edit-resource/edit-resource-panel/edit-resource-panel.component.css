@@ -1,0 +1,27 @@
+.choose-area {
+  padding: 2px;
+  padding-left: 9px;
+  /* margin: 2px; */
+  text-align: center;
+}
+
+.display-panel {
+  /* padding: 5px;
+  margin: 1rem; */
+}
+
+.col-style {
+
+}
+
+@media only screen and (max-width: 576px) {
+  .col-style {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .choose-area {
+    padding-left: 15px;
+    padding-bottom: 10px;
+  }
+}

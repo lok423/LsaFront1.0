@@ -1,0 +1,46 @@
+.custom-control-indicator{
+    width:20px;
+    height:20px;
+  }
+  
+  .set{
+    height:2.1em;
+    width: 100px;
+    background-color: #0099FF;
+    font-weight: bold;
+    font-size: 15px;
+    border-width: 0px;
+    float: left;
+    margin-left: 4px;
+  }
+  .set2{
+    height:2.1em;
+    width: 170px;
+    background-color: #0099FF;
+    font-weight: bold;
+    font-size: 15px;
+    border-width: 0px;
+    margin-left: 4px;
+    float: left;
+  }
+  .header1{
+    height: 3.5em;
+  }
+  select{
+    border-width: 0px;
+    background-color: rgb(245, 245, 245);
+    margin-left: 5px;
+  }
+  @media(max-width: 576px){
+    .header1{
+      height: 8em;
+    }
+    .set{
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    .set2{
+      width: 80%;
+      margin-bottom: 5px;
+    }
+  }

@@ -7,5 +7,6 @@ export const environment = {
   baseImgUrl: 'https://proprius.co.nz/api/public',
   baseUserImgUrl: 'https://storage.googleapis.com/learnspace/user_photo/',
   //messengerApiUrl: 'https://intense-headland-70474.herokuapp.com'
-  messengerApiUrl: 'http://localhost:8080'
+  //messengerApiUrl: 'http://192.168.1.83:8080'
+  messengerApiUrl: 'http://learnspace.co.nz:9090'
 };

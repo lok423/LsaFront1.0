@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef, AfterViewChecked, AfterContentChecked,AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef, AfterViewChecked, AfterContentChecked,AfterContentInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef, MatList, MatListItem,MAT_DIALOG_DATA } from '@angular/material';
 import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
+import { MessengerHelperService } from '../../services/helpers/messenger-helper.service';
 
 import { Message, DrawImg, UploadFile, UploadImg } from '../../models/MessageModel';
 //import { User } from './shared/model/user';
@@ -24,6 +25,7 @@ import {Event} from '../../models/MessageEventModel';
 import {User} from '../../models/MessengerUserModel';
 import { environment } from '../../../environments/environment.prod';
 import { RepositoryService } from '../../services/repositories/repository.service';
+import { ResizeEvent } from 'angular-resizable-element';
 
 
 @Component({
@@ -72,7 +74,7 @@ showChatPage=true;
 searchUsers :User[]=[];
 searchText:string='';
 
-showSpinner :boolean =false;
+showSpinner :boolean =true;
 profile_status_list:boolean =false;
 profile_status:string='active';
 download_URL = "https://storage.googleapis.com/learnspacemessenger/";
@@ -82,6 +84,11 @@ download_URL = "https://storage.googleapis.com/learnspacemessenger/";
 currentUser:any ={user_id:Number,username:''};
 contactList:User[] = [];
 
+total_unread_count = 0;
+
+
+@Output() total_unread_messages: EventEmitter<number> = new EventEmitter<number>();
+@Output() dropdownClose: EventEmitter<Event> = new EventEmitter<Event>();
 
 
 //@ViewChild('scrollMe') private myScrollContainer: ElementRef;
@@ -98,7 +105,9 @@ contactList:User[] = [];
     private http: HttpClient,
     private userService:UserService,
     private repositoryService: RepositoryService,
-    private commonSupportService: CommonSupportService
+    private commonSupportService: CommonSupportService,
+    private messengerHelperService: MessengerHelperService
+
 
   ) {
       //this.loadAllUsers();
@@ -113,12 +122,15 @@ contactList:User[] = [];
     setTimeout(() => {
       this.initIoConnection();
     }, 100);
+    this.openContact();
 
   }
 
   draw() {
     const dialogRef = this.dialog.open(DrawboardComponent, {
-      width: (document.body.clientWidth) + 'px',
+      //width: (document.body.clientWidth) + 'px',
+      width: '90%',
+      height: '90%',
       data: {data : this.imageData}
     });
     console.log('-----' + document.body.clientWidth );
@@ -160,15 +172,17 @@ contactList:User[] = [];
   }
 
   selectUser(user){
-    this.selectedUser=user;
-    this.updateSelectedUser();
-    user.unreadCount=0;
-    this.socketService.updateUnreadMsg(
-      {selectedUserId:user.user_id,
-      currentUserId:this.currentUser.user_id,
-      createdAt: new Date()
-    });
     console.log(user);
+    this.selectedUser=user;
+
+    this.updateSelectedUser();
+    var count = user.unreadCount;
+    this.total_unread_count= this.total_unread_count-count;
+    this.total_unread_messages.emit(this.total_unread_count);
+    user.unreadCount=0;
+    this.updateUnreadMessage();
+
+    //console.log(user);
 
 
   }
@@ -223,6 +237,8 @@ contactList:User[] = [];
       this.messages.push(message);
       this.loadNewMsg();
       this.countInComingMsg(message);
+      this.updateUnreadMessage();
+
       console.log(message);
 
     });
@@ -243,6 +259,8 @@ contactList:User[] = [];
       this.messages.push(img);
       this.loadNewMsg();
       this.countInComingMsg(img);
+      this.updateUnreadMessage();
+
 
 
       console.log("receive draw:");
@@ -253,6 +271,8 @@ contactList:User[] = [];
         this.messages.push(file);
         this.loadNewMsg();
         this.countInComingMsg(file);
+        this.updateUnreadMessage();
+
 
 
         console.log("receive file:",file);
@@ -264,6 +284,8 @@ contactList:User[] = [];
           this.messages.push(file);
           this.loadNewMsg();
           this.countInComingMsg(file);
+          this.updateUnreadMessage();
+
 
 
           console.log("receive file:",file);
@@ -542,19 +564,40 @@ countInComingMsg(msg){
   for(var j=0;j<this.contactList.length;j++){
     if(msg.sender_id==this.contactList[j].user_id){
       this.contactList[j].unreadCount++;
+      this.total_unread_count++;
     }
 }
+this.total_unread_messages.emit(this.total_unread_count);
 }
 
 countUnreadHistory(msgList){
   for(var j=0;j<this.contactList.length;j++){
     for(var i=0;i<msgList.length;i++){
-      if(msgList[i].read==false && msgList[i].sender_id==this.contactList[j].user_id){
-        this.contactList[j].unreadCount++;
+      if(  msgList[i].sender_id==this.contactList[j].user_id){
+        if(msgList[i].read==false){
+          this.contactList[j].unreadCount++;
+          this.total_unread_count++;
+                console.log("unread +1");
+        }
+        console.log(msgList[i].sender_id,this.contactList[j].user_id,localStorage.getItem('lsaWho'));
+
       }
+/*
+      if(localStorage.getItem('lsaWho')=="1" && msgList[i].receiver_id==this.contactList[j].user_id&& msgList[i].learner_read==false){
+        this.contactList[j].unreadCount++;
+        this.total_unread_count++;
+        console.log("learner +1");
+      } if(localStorage.getItem('lsaWho')=="3" && msgList[i].sender_id==this.contactList[j].user_id&& msgList[i].tutor_read==false){
+        this.contactList[j].unreadCount++;
+        this.total_unread_count++;
+              console.log("tutor +1");
+      }*/
+
+
     }
 
 }
+this.total_unread_messages.emit(this.total_unread_count);
 }
 
 showSearchUser(key){
@@ -629,8 +672,9 @@ getContactList(){
         var assign = Object.assign({online:false,newestMsg:'',unreadCount:0, userImg: this.commonSupportService.findUserImg(user.user_id) },user);
         this.contactList.push(assign);
       }
-      console.log(this.contactList);
       this.searchUsers = this.contactList;
+      console.log(this.searchUsers);
+
   });
 }
 
@@ -659,11 +703,51 @@ dataInit() {
       }
     }, (error) => console.log(error)
   );
-
 }
 
-onChange(){
-  alert("change");
+closeMessenger(){
+  this.dropdownClose.emit();
+}
+
+
+openContact(){
+  this.messengerHelperService.trigger.subscribe(value => {
+    console.log(value);
+    for(var i=0;i<this.contactList.length;i++){
+      if(this.contactList[i].user_id == value){
+        this.selectedUser = this.contactList[i];
+        var count = this.contactList[i].unreadCount;
+        console.log(count);
+        this.total_unread_count= this.total_unread_count-count;
+        this.total_unread_messages.emit(this.total_unread_count);
+        this.contactList[i].unreadCount=0;
+        this.updateSelectedUser();
+        this.updateUnreadMessage();
+
+}
+}
+      });
+}
+
+updateUnreadMessage(){
+  if(this.selectedUser){
+    this.socketService.updateUnreadMsg(
+      {selectedUserId:this.selectedUser.user_id,
+      currentUserId:this.currentUser.user_id,
+      createdAt: new Date(),
+      role: localStorage.getItem('lsaWho')
+    });
+  }
+}
+
+messageCheck(){
+  //console.log("user click");
+  if(this.selectedUser){
+    var count = this.selectedUser.unreadCount;
+    this.total_unread_count= this.total_unread_count-count;
+    this.total_unread_messages.emit(this.total_unread_count);
+    this.selectedUser.unreadCount=0;
+  }
 }
 
 

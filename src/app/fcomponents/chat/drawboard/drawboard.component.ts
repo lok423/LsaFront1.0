@@ -85,7 +85,7 @@ export class DrawboardComponent implements AfterViewInit {
     this.system.ipad = ua.indexOf('iPad') > -1;
     this.system.android = ua.indexOf('Android') > -1;
 
-    const viewHeight = window.innerHeight || document.documentElement.clientHeight;
+    const viewHeight = window.innerHeight || document.documentElement.clientHeight ;
     const viewWidth = window.innerWidth || document.documentElement.clientWidth;
     console.log(viewHeight, viewWidth);
     if (this.system.iphone) {
@@ -101,12 +101,13 @@ export class DrawboardComponent implements AfterViewInit {
       canvasEl.height = viewHeight;
     }
 
-    canvasEl.width = canvasEl.width * 0.75;
-    canvasEl.height = canvasEl.height * 0.75;
+    canvasEl.width = canvasEl.width * 0.9;
+    canvasEl.height = canvasEl.height * 0.9 - 52;
     this.width = canvasEl.width;
     this.height = canvasEl.height;
 
     console.log(viewWidth);
+    console.log(document.documentElement.clientWidth);
 
     this.cx.lineWidth = 3;
     this.cx.lineCap = 'round';

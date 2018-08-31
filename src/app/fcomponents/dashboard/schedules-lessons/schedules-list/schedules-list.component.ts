@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { CancelDialogComponent } from '../../dashboard-dialogs/cancel-dialog/cancel-dialog.component';
 import { ReportSessionIssueDialogComponent } from '../../dashboard-dialogs/report-session-issue-dialog/report-session-issue-dialog.component';
 import { isPlatformBrowser } from '@angular/common';
+import { MessengerHelperService } from '../../../../services/helpers/messenger-helper.service';
 
 @Component({
   selector: 'app-schedules-list',
@@ -49,6 +50,7 @@ export class SchedulesListComponent implements OnInit {
     private searchService: GeneralService,
     private calendarService: CalendarSupportService,
     private learnerService: LearnerService,
+    private messengerHelperService: MessengerHelperService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true
@@ -446,10 +448,12 @@ export class SchedulesListComponent implements OnInit {
         session_times: times,
         session_day: day,
         tutor_id: tutorID,
+        tutor_user_id: tutor_user_id,
         session_update: update,
         tutor_img: tutor_img,
         learner_img: learner_img,
-        withinTwelveHours: withinTwelveHours
+        withinTwelveHours: withinTwelveHours,
+        learner_id: learnerID
       };
       return newObj;
     });
@@ -682,5 +686,31 @@ export class SchedulesListComponent implements OnInit {
   }
   rateLesson(event) {
     console.log('learner rate lesson');
+  }
+  triggerMessenger(event) {
+    let sessionID = Number(event.srcElement.id.slice(3));
+    let session_inquestion = this.findSession(this.sessionsInfo, Number(sessionID));
+    console.log(session_inquestion);
+    // tutor role:
+    if (this.role === 3) {
+      let learner_id = session_inquestion.learner_id;
+      this.changeValue(learner_id);
+      console.log(learner_id + 'sent successfully');
+    }
+    // learner role:
+    if (this.role === 1 || this.role === 2) {
+      let tutor_id = session_inquestion.tutor_user_id;
+      this.changeValue(tutor_id);
+      console.log(tutor_id + 'sent successfully');
+    }
+  }
+  // change the value in the subject behaviour
+  changeValue(data: any) {
+    let current = this.messengerHelperService.trigger.getValue();
+    if (current === 'no') {
+      this.messengerHelperService.trigger.next(data);
+    } else {
+      this.messengerHelperService.trigger.next('no');
+    }
   }
 }

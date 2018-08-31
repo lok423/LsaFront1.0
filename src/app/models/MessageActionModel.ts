@@ -8,6 +8,7 @@ export enum Action {
 export interface UpdateMsgRead {
 	  currentUserId : number,
     selectedUserId: number,
-    createdAt:Date
+    createdAt:Date,
+    role: string
 
 }

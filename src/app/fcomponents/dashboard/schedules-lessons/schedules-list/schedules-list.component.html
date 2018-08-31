@@ -82,6 +82,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
                       <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                      <a class="dropdown-item pointer" (click)='triggerMessenger($event)' id="mes{{session.session_id}}">Message</a>
                     </div>
                   </div>
                 </div>
@@ -93,6 +94,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
                       <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                      <a class="dropdown-item pointer" (click)='triggerMessenger($event)' id="mes{{session.session_id}}">Message</a>
                     </div>
                   </div>
                 </div>
@@ -104,6 +106,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <a class="dropdown-item pointer" (click)='generateReport($event)' *ngIf="session.session_status === 'completed'" id="gen{{session.session_id}}">Generate Report</a>
                       <a class="dropdown-item pointer" (click)='reportIssue($event)' *ngIf="session.session_status === 'completed'" id="iss{{session.session_id}}">Report Issue</a>
+                      <a class="dropdown-item pointer" (click)='triggerMessenger($event)' id="mes{{session.session_id}}">Message</a>
                     </div>
                   </div>
                 </div>
@@ -120,6 +123,7 @@
                   <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
                     <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                    <a class="dropdown-item pointer" (click)='triggerMessenger($event)' id="mes{{session.session_id}}">Message</a>
                   </div>
                 </div>
               </div>
@@ -131,6 +135,7 @@
                   <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item pointer" (click)="showFullcalender($event)" id="btn{{session.session_id}}">Reschedule</a>
                     <a class="dropdown-item pointer" (click)='cancelSession($event)' id="can{{session.session_id}}">Cancel</a>
+                    <a class="dropdown-item pointer" (click)='triggerMessenger($event)' id="mes{{session.session_id}}">Message</a>
                   </div>
                 </div>
               </div>
@@ -142,6 +147,7 @@
                   <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item pointer" (click)='rateLesson($event)' *ngIf="session.session_status === 'completed'" id="gen{{session.session_id}}">Rate Lesson</a>
                     <a class="dropdown-item pointer" (click)='reportIssue($event)' *ngIf="session.session_status === 'completed'" id="iss{{session.session_id}}">Report Issue</a>
+                    <a class="dropdown-item pointer" (click)='triggerMessenger($event)' id="mes{{session.session_id}}">Message</a>
                   </div>
                 </div>
               </div>

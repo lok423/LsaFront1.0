@@ -1,337 +1,356 @@
-<div *ngIf="!selectedUser;then chat; else messager">
-</div>
+<div id="chatMessenger">
+  <div *ngIf="!selectedUser;then chat; else messager" style="height:100%;">
+  </div>
 
 
-<ng-template #chat>
-  <div id="chat-container" class="container">
-    <div class="row">
-      <div id="sidepanel">
-        <div id="profile">
-          <div class="wrap">
-            <img id="profile-img" src="{{user_profile_photo}}" class="online" alt="" (click)="showPorfileStatusList()" />
-            <p>{{currentUser.username}} </p>
-            <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-            <!--<a style="float: right;color:white;" [routerLink]="['/login']" (click)="disconnect()">Logout</a>-->
+  <ng-template #chat>
+    <div id="chat-container" class="container">
+        <div id="sidepanel">
+          <div id="profile">
+            <div class="wrap">
+              <img id="profile-img" src="{{user_profile_photo}}" class="online" alt="" (click)="showPorfileStatusList()" />
+              <p>{{currentUser.username}} </p>
+              <i class="fa fa-chevron-down expand-button" aria-hidden="true" (click)="closeMessenger()"></i>
+              <!--<a style="float: right;color:white;" [routerLink]="['/login']" (click)="disconnect()">Logout</a>-->
 
-            <div id="status-options" *ngIf="profile_status_list==true">
-              <ul>
-                <li id="status-online" class="active" (click)="changeStatus('active')"><span class="status-circle"></span>
-                  <p>Online</p>
-                </li>
-                <!--
-    						<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-    						<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-              -->
-                <li id="status-offline" (click)="changeStatus('offline')"><span class="status-circle"></span>
-                  <p>Offline</p>
-                </li>
-              </ul>
-            </div>
-            <div id="expanded">
-              <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-              <input name="twitter" type="text" value="mikeross" />
-              <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-              <input name="twitter" type="text" value="ross81" />
-              <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-              <input name="twitter" type="text" value="mike.ross" />
+              <div id="status-options" *ngIf="profile_status_list==true">
+                <ul>
+                  <li id="status-online" class="active" (click)="changeStatus('active')"><span class="status-circle"></span>
+                    <p>Online</p>
+                  </li>
+                  <!--
+      						<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+      						<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+                -->
+                  <li id="status-offline" (click)="changeStatus('offline')"><span class="status-circle"></span>
+                    <p>Offline</p>
+                  </li>
+                </ul>
+              </div>
+              <div id="expanded">
+                <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+                <input name="twitter" type="text" value="mikeross" />
+                <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+                <input name="twitter" type="text" value="ross81" />
+                <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+                <input name="twitter" type="text" value="mike.ross" />
+              </div>
             </div>
           </div>
-        </div>
-        <div id="search">
-          <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input type="text" placeholder="Search contacts..." [(ngModel)]="searchText" (keyup)="showSearchUser(searchText)" />
-        </div>
-        <div id="contacts">
-          <ul>
-            <div *ngIf="showChatPage==true;then comingMsg; else contact">
-            </div>
-            <ng-template #contact>
-              <div class="spinner" *ngIf="showSpinner==true">
-                <mat-spinner></mat-spinner>
+          <div id="search">
+            <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+            <input type="text" placeholder="Search contacts..." [(ngModel)]="searchText" (keyup)="showSearchUser(searchText)" />
+          </div>
+          <div id="contacts">
+            <ul>
+              <div *ngIf="showChatPage==true;then comingMsg; else contact">
               </div>
-              <div *ngFor="let user of searchUsers">
-                <li class="contact" (click)="selectUser(user)">
-                  <div class="wrap">
-                    <span class="contact-status online" [ngClass]="{'contact-status online': user.online==true , 'contact-status': user.online==false  }"></span>
-                    <img src="{{user.userImg}}" alt="" />
-
-                    <div class="meta">
-                      <p class="name">{{user.first_name}} {{user.last_name}}</p>
-                    </div>
-                  </div>
-                </li>
-              </div>
-            </ng-template>
-
-
-            <ng-template #comingMsg>
-              <div class="spinner" *ngIf="showSpinner==true">
-                <mat-spinner></mat-spinner>
-              </div>
-              <div *ngFor="let user of searchUsers">
-                <div *ngIf="user.newestMsg">
+              <ng-template #contact>
+                <div class="spinner" *ngIf="showSpinner==true">
+                  <mat-spinner></mat-spinner>
+                </div>
+                <div *ngFor="let user of searchUsers">
                   <li class="contact" (click)="selectUser(user)">
                     <div class="wrap">
                       <span class="contact-status online" [ngClass]="{'contact-status online': user.online==true , 'contact-status': user.online==false  }"></span>
                       <img src="{{user.userImg}}" alt="" />
 
                       <div class="meta">
-                        <div *ngIf="user.unreadCount>0;then unreadCount;else noCount">
-                        </div>
-                        <ng-template #unreadCount>
-                          <p class="name" matBadge="{{user.unreadCount}}" matBadgeColor="warn" matBadgePosition="below after">{{user.first_name}} {{user.last_name}}</p>
-                        </ng-template>
-                        <ng-template #noCount>
-                          <p class="name">{{user.first_name}} {{user.last_name}} </p>
-                        </ng-template>
-                        <p class="preview" *ngIf="user.newestMsg.sender_id==currentUser.user_id; else elseuser">
-                          <span>You: </span> <span>{{user.newestMsg.msg}}</span>
-                          <span *ngIf="user.newestMsg.img">
-                            [photo]
-                          </span>
-                          <span *ngIf="user.newestMsg.file">
-                            [file]
-                          </span>
-                          <span *ngIf="user.newestMsg.drawImg">
-                            [draw]
-                          </span>
-                        </p>
-                        <p style="float:right;margin-top:-22px;">{{renderDate(user.newestMsg.createdAt)}}</p>
-                        <ng-template #elseuser>
-                          <p class="preview">{{user.newestMsg.msg}}
-                            <span *ngIf="user.newestMsg.img">
-                           [photo]
-                         </span>
-                            <span *ngIf="user.newestMsg.file">
-                           [file]
-                         </span>
-                            <span *ngIf="user.newestMsg.drawImg">
-                           [draw]
-                         </span></p>
-
-                        </ng-template>
+                        <p class="name">{{user.first_name}} {{user.last_name}}</p>
                       </div>
                     </div>
                   </li>
                 </div>
-              </div>
-            </ng-template>
+              </ng-template>
+
+
+              <ng-template #comingMsg>
+                <div class="spinner" *ngIf="showSpinner==true">
+                  <mat-spinner></mat-spinner>
+                </div>
+                <div *ngFor="let user of searchUsers">
+                  <div *ngIf="user.newestMsg">
+                    <li class="contact" (click)="selectUser(user)">
+                      <div class="wrap">
+                        <span class="contact-status online" [ngClass]="{'contact-status online': user.online==true , 'contact-status': user.online==false  }"></span>
+                        <img src="{{user.userImg}}" alt="" />
+
+                        <div class="meta">
+                          <div *ngIf="user.unreadCount>0;then unreadCount;else noCount">
+                          </div>
+                          <ng-template #unreadCount>
+                            <p class="name" matBadge="{{user.unreadCount}}" matBadgeColor="warn" matBadgePosition="below after">{{user.first_name}} {{user.last_name}}</p>
+                          </ng-template>
+                          <ng-template #noCount>
+                            <p class="name">{{user.first_name}} {{user.last_name}} </p>
+                          </ng-template>
+                          <p class="preview" *ngIf="user.newestMsg.sender_id==currentUser.user_id; else elseuser">
+                            <span>You: </span> <span>{{user.newestMsg.msg}}</span>
+                            <span *ngIf="user.newestMsg.img">
+                              [photo]
+                            </span>
+                            <span *ngIf="user.newestMsg.file">
+                              [file]
+                            </span>
+                            <span *ngIf="user.newestMsg.drawImg">
+                              [draw]
+                            </span>
+                            <span *ngIf="user.newestMsg.session_date">
+                              [Session]
+                            </span>
+                          </p>
+                          <p style="float:right;margin-top:-22px;">{{renderDate(user.newestMsg.createdAt)}}</p>
+                          <ng-template #elseuser>
+                            <p class="preview">{{user.newestMsg.msg}}
+                              <span *ngIf="user.newestMsg.img">
+                             [photo]
+                           </span>
+                              <span *ngIf="user.newestMsg.file">
+                             [file]
+                           </span>
+                              <span *ngIf="user.newestMsg.drawImg">
+                             [draw]
+                           </span>
+                           <span *ngIf="user.newestMsg.session_date">
+                             [Session]
+                           </span>
+                         </p>
+
+                          </ng-template>
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                </div>
+              </ng-template>
 
 
 
-          </ul>
-        </div>
-        <div id="bottom-bar">
-          <button (click)="showChatPage=true">Chat</button>
-          <button (click)="showChatPage=false">Contact</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #messager>
-  <div id="message-container" class="container ">
-    <div class="row">
-
-      <!--<div class="col-lg-12 col-sm-12" style="padding:0px !important;">-->
-      <div id="content" class="content">
-        <div class="contact-profile">
-          <img src="{{selectedUser.userImg}}" alt="" />
-          <p>{{selectedUser.first_name}} {{selectedUser.last_name}}</p>
-          <div class="social-media">
-
-            <i class="fa fa-chevron-left" aria-hidden="true" id="backbutton" (click)="selectedUser=null">back</i>
+            </ul>
+          </div>
+          <div id="bottom-bar">
+            <button (click)="showChatPage=true">Chat</button>
+            <button (click)="showChatPage=false">Contact</button>
           </div>
         </div>
+    </div>
+  </ng-template>
+
+  <ng-template #messager >
+    <div id="message-container" class="container " (click)="messageCheck()">
+      <div id="message-container-row" class="row">
+
+        <!--<div class="col-lg-12 col-sm-12" style="padding:0px !important;">-->
+        <div id="content" class="content">
+          <div class="contact-profile">
+            <img src="{{selectedUser.userImg}}" alt="" />
+            <p>{{selectedUser.first_name}} {{selectedUser.last_name}}</p>
+            <div class="social-media">
+
+              <i class="fa fa-chevron-left" aria-hidden="true" id="backbutton" (click)="selectedUser=null">back</i>
+            </div>
+          </div>
 
 
 
 
-        <div class="messages">
-          <ul class="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="messages.length > 0" [ngClass]="{'chat-with-upload': (selectedFile!=null || selectedImg!=null)}">
-            <div *ngFor="let message of messages">
-              <div *ngIf="(message.sender_id==currentUser.user_id && selectedUser.user_id==message.receiver_id) || selectedUser.user_id== message.sender_id">
-
-                <li [ngClass]="{'sent': (message.sender_id==currentUser.user_id && selectedUser.user_id==message.receiver_id) , 'replies': selectedUser.user_id== message.sender_id  }">
-                  <div *ngIf="(message.sender_id==currentUser.user_id && selectedUser.user_id==message.receiver_id)|| selectedUser.user_id== message.sender_id">
-                    <div *ngIf=" message.msg ">
-                      <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
-                      <p style="word-break: break-all;">
-                        {{ message.msg}} <br>
-                        <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
-                      </p>
-                    </div>
-                    <div *ngIf="message.drawImg">
-                      <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
-                      <p style="word-break: break-all;"><img src="{{message.drawImg}}" style="width:100%;" (click)="previewImg(message.drawImg)">
-                       <br>
-                        <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
-                      </p>
-                    </div>
-                    <div *ngIf="message.file">
-                      <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
-                      <p style="word-break: break-all;"> <i class="material-icons">
-                folder
-                </i>
-                        <a style="width: 100%;" href="{{download_URL}}{{message.file}}" width="100 ">{{message.filename}}</a>
-                           <br>
-                          <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
-                      </p>
-                    </div>
-                    <div *ngIf="message.img">
-                      <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
-                      <p style="width: 200px;">
-                        <img style="width: 100%;word-break: break-all;" src="{{download_URL}}{{message.img}}">
-                           <br>
-                          <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
-                      </p>
-                    </div>
-                    <!--
-                    <div class="">
-                      <span style="color:grey;">{{renderDate(message.createdAt)}}</span>
-                    </div>-->
+          <div class="messages">
+            <ul class="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="messages.length > 0" [ngClass]="{'chat-with-upload': (selectedFile!=null || selectedImg!=null)}">
+              <div *ngFor="let message of messages">
+                <div *ngIf="(message.sender_id==currentUser.user_id && selectedUser.user_id==message.receiver_id) || selectedUser.user_id== message.sender_id">
+                  <div *ngIf="message.session_date">
+                    <li>date: {{message.session_date}}
+                      <br>
+                      tutor name: {{message.tutor_name}}
+                      <br>
+                      learner name: {{message.learner_name}}
+                      <br>
+                      subject: {{message.session_subject}}
+                      <br>
+                      location: {{message.session_location}}
+                    </li>
                   </div>
 
-                </li>
+                  <li [ngClass]="{'sent': (message.sender_id==currentUser.user_id && selectedUser.user_id==message.receiver_id) , 'replies': selectedUser.user_id== message.sender_id  }">
+                    <div *ngIf="(message.sender_id==currentUser.user_id && selectedUser.user_id==message.receiver_id)|| selectedUser.user_id== message.sender_id">
+                      <div *ngIf=" message.msg ">
+                        <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
+                        <p style="word-break: break-all;">
+                          {{ message.msg}} <br>
+                          <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
+                        </p>
+                      </div>
+                      <div *ngIf="message.drawImg">
+                        <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
+                        <p style="word-break: break-all;"><img src="{{message.drawImg}}" style="width:100%;" (click)="previewImg(message.drawImg)">
+                         <br>
+                          <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
+                        </p>
+                      </div>
+                      <div *ngIf="message.file">
+                        <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
+                        <p style="word-break: break-all;"> <i class="material-icons">
+                  folder
+                  </i>
+                          <a style="width: 100%;" href="{{download_URL}}{{message.file}}" width="100 ">{{message.filename}}</a>
+                             <br>
+                            <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
+                        </p>
+                      </div>
+                      <div *ngIf="message.img">
+                        <img src="{{commonSupportService.findUserImg(message.sender_id)}}" alt="" />
+                        <p style="width: 200px;">
+                          <img style="width: 100%;word-break: break-all;" src="{{download_URL}}{{message.img}}">
+                             <br>
+                            <span style="font-size: 10px; float: right; opacity: 0.5;">{{renderDate(message.createdAt)}}</span>
+                        </p>
+                      </div>
+                      <!--
+                      <div class="">
+                        <span style="color:grey;">{{renderDate(message.createdAt)}}</span>
+                      </div>-->
+                    </div>
 
+                  </li>
+
+                </div>
               </div>
-            </div>
 
-          </ul>
-        </div>
-
+            </ul>
+          </div>
 
 
-        <div class="select row" *ngIf="selectedFile">
-          <mat-list style="width:100%;">
-            <mat-list-item>
-              <mat-icon mat-list-icon>folder</mat-icon>
-              <h4 mat-line>{{selectedFile.type}}</h4>
-              <p mat-line>{{selectedFile.name}}</p>
-            </mat-list-item>
-            <button class="card-link" type="button" (click)="onUpload('file')"><i class="material-icons">
-  cloud_upload
-  </i>Upload</button>
-            <button class="card-link" type="button" (click)="input_file_reset()"><i class="material-icons">
-  cloud_upload
-</i>Cancel</button>
 
-          </mat-list>
-        </div>
+          <div class="select row" *ngIf="selectedFile">
+            <mat-list style="width:100%;">
+              <mat-list-item>
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>{{selectedFile.type}}</h4>
+                <p mat-line>{{selectedFile.name}}</p>
+              </mat-list-item>
+              <button class="card-link" type="button" (click)="onUpload('file')"><i class="material-icons">
+    cloud_upload
+    </i>Upload</button>
+              <button class="card-link" type="button" (click)="input_file_reset()"><i class="material-icons">
+    cloud_upload
+  </i>Cancel</button>
 
-        <div class="select row" *ngIf="selectedImg">
+            </mat-list>
+          </div>
 
-          <mat-list style="width:100%;">
-            <mat-list-item>
-              <div class="">
-                <img id="output" style="width:259px;" src="{{imgUrl}}" style="    max-width: 80px;
-    height: -webkit-fill-available;" (click)="previewImg(selectedImg)">
-              </div>
-              <h4 mat-line>{{selectedImg.type}}</h4>
-              <p mat-line>{{selectedImg.name}}</p>
-            </mat-list-item>
-            <button class="card-link" type="button" (click)="onUpload('img')"><i class="material-icons">
-  cloud_upload
-  </i>Upload</button>
-            <button class="card-link" type="button" (click)="input_file_reset()"><i class="material-icons">
-  cloud_upload
-</i>Cancel</button>
+          <div class="select row" *ngIf="selectedImg">
 
-          </mat-list>
-        </div>
-        <div class="row" *ngIf="showProgressBar===true">
-          <i class="material-icons">
-folder
-</i>
-          <mat-progress-bar class="example-margin" [color]="primary" [mode]="determinate" [value]="uploadedPercentage">
-          </mat-progress-bar>
-        </div>
+            <mat-list style="width:100%;">
+              <mat-list-item>
+                <div class="">
+                  <img id="output" style="width:259px;" src="{{imgUrl}}" style="    max-width: 80px;
+      height: -webkit-fill-available;" (click)="previewImg(selectedImg)">
+                </div>
+                <h4 mat-line>{{selectedImg.type}}</h4>
+                <p mat-line>{{selectedImg.name}}</p>
+              </mat-list-item>
+              <button class="card-link" type="button" (click)="onUpload('img')"><i class="material-icons">
+    cloud_upload
+    </i>Upload</button>
+              <button class="card-link" type="button" (click)="input_file_reset()"><i class="material-icons">
+    cloud_upload
+  </i>Cancel</button>
 
-        <!-- The function panel, such as emoji, upload buttons -->
-        <!-- <div>
-            <hr style="margin: 1px;">
+            </mat-list>
+          </div>
+          <div class="row" *ngIf="showProgressBar===true">
+            <i class="material-icons">
+  folder
+  </i>
+            <mat-progress-bar class="example-margin" [color]="primary" [mode]="determinate" [value]="uploadedPercentage">
+            </mat-progress-bar>
+          </div>
 
-            <button style=" border: 0px;  outline: none; background-color:white;" (click)="clickImgUploader()">
-              <mat-icon ngbTooltip="Send a photo" triggers="hover">add_photo_alternate</mat-icon>
-            </button>
-            <input #upload_image type="file" class="form-control-file" (change)="onImgSelected($event)" style="display:none;" accept="image/*">
+          <!-- The function panel, such as emoji, upload buttons -->
+          <!-- <div>
+              <hr style="margin: 1px;">
 
-
-            <ng-template #popContent>
-              <emoji-mart set="emojione" title="Learnspace™" perLine="6" totalFrequentLines="2" [style]="{ border: '0'}" (emojiClick)="addEmojiText($event)"
-                (click)="$event.stopPropagation();"></emoji-mart>
-            </ng-template>
-            <button type="button" (click)="$event.stopPropagation();" style=" border: 0;  outline: none;" [ngbPopover]="popContent">
-              <mat-icon ngbTooltip="Emoji" triggers="hover">mood</mat-icon>
-            </button>
-
-            <button style=" border: 0px;  outline: none; background-color:white;" (click)="clickUploader()">
-              <input #upload_input type="file" class="form-control-file" (change)="onFileSelected($event)" style="display:none;">
-              <mat-icon ngbTooltip="Send a file" triggers="hover">attach_file</mat-icon>
-            </button>
-
-            <button (click)="draw(drawboard)" style=" border: 0px;  outline: none; background-color:white;">
-              <mat-icon ngbTooltip="Draw a picture" triggers="hover">border_color</mat-icon>
-            </button>
-
-            <button style=" border: 0px;  outline: none; background-color:white;" ngbPopover="Create a calendar" triggers="mouseenter:mouseleave">
-              <mat-icon color="accent" >calendar_today</mat-icon>
-            </button>
+              <button style=" border: 0px;  outline: none; background-color:white;" (click)="clickImgUploader()">
+                <mat-icon ngbTooltip="Send a photo" triggers="hover">add_photo_alternate</mat-icon>
+              </button>
+              <input #upload_image type="file" class="form-control-file" (change)="onImgSelected($event)" style="display:none;" accept="image/*">
 
 
-          </div> -->
-
-        <div style="height: 69px; width: 285px;"></div>
-
-        <div class="message-input">
-          <div class="wrap">
-            <!-- <input type="text" #inputMessage placeholder="Write your message..." [(ngModel)]="messageContent" ngValue="emoji" (keyup.enter)="sendMessage(messageContent)"
-              /> -->
-            <textarea #inputMessage autosize [maxRows]="6" placeholder="Write your message..." [(ngModel)]="messageContent" (keyup.enter)="sendMessage(messageContent)"></textarea>
-            <!--<i class="fa fa-paperclip attachment" aria-hidden="true"></i>-->
-            <!-- <button class="submit" (click)="sendMessage(messageContent)"><i class="fa fa-paper-plane" aria-hidden="true"></i></button> -->
-            <button class="submit" (click)="sendMessage(messageContent)">Send</button>
-
-            <ng-template #popContent>
-              <emoji-mart set="emojione" title="Learnspace™" perLine="6" totalFrequentLines="2" [style]="{ border: '0'}" (emojiClick)="addEmojiText($event)" (click)="$event.stopPropagation();"></emoji-mart>
-            </ng-template>
-            <button type="button" (click)="$event.stopPropagation();" style=" border: 0;  outline: none; position: absolute; bottom: 50px; right: 35px;" [ngbPopover]="popContent" placement="top-right">
+              <ng-template #popContent>
+                <emoji-mart set="emojione" title="Learnspace™" perLine="6" totalFrequentLines="2" [style]="{ border: '0'}" (emojiClick)="addEmojiText($event)"
+                  (click)="$event.stopPropagation();"></emoji-mart>
+              </ng-template>
+              <button type="button" (click)="$event.stopPropagation();" style=" border: 0;  outline: none;" [ngbPopover]="popContent">
                 <mat-icon ngbTooltip="Emoji" triggers="hover">mood</mat-icon>
               </button>
 
-            <ng-template #moreContent>
-              <button style=" border: 0px;  outline: none; background-color:white;" (click)="clickImgUploader()">
-                  <mat-icon ngbTooltip="Send a photo" triggers="hover">add_photo_alternate</mat-icon>
-                </button>
-
               <button style=" border: 0px;  outline: none; background-color:white;" (click)="clickUploader()">
-                  <mat-icon ngbTooltip="Send a file" triggers="hover">attach_file</mat-icon>
-                </button>
-
-              <button (click)="draw(drawboard)" style=" border: 0px;  outline: none; background-color:white;">
-                  <mat-icon ngbTooltip="Draw a picture" triggers="hover">border_color</mat-icon>
-                </button>
-            </ng-template>
-            <button type="button" (click)="$event.stopPropagation();" style=" border: 0;  outline: none; position: absolute; bottom: 50px; right: 5px;" [ngbPopover]="moreContent" placement="top-right">
-                <mat-icon ngbTooltip="more function" triggers="hover">add_circle_outline</mat-icon>
+                <input #upload_input type="file" class="form-control-file" (change)="onFileSelected($event)" style="display:none;">
+                <mat-icon ngbTooltip="Send a file" triggers="hover">attach_file</mat-icon>
               </button>
 
+              <button (click)="draw(drawboard)" style=" border: 0px;  outline: none; background-color:white;">
+                <mat-icon ngbTooltip="Draw a picture" triggers="hover">border_color</mat-icon>
+              </button>
+
+              <button style=" border: 0px;  outline: none; background-color:white;" ngbPopover="Create a calendar" triggers="mouseenter:mouseleave">
+                <mat-icon color="accent" >calendar_today</mat-icon>
+              </button>
+
+
+            </div> -->
+
+          <div style="height: 69px; width: 285px;"></div>
+
+          <div class="message-input">
+            <div class="wrap">
+              <!-- <input type="text" #inputMessage placeholder="Write your message..." [(ngModel)]="messageContent" ngValue="emoji" (keyup.enter)="sendMessage(messageContent)"
+                /> -->
+              <textarea #inputMessage autosize [maxRows]="6" placeholder="Write your message..." [(ngModel)]="messageContent" (keyup.enter)="sendMessage(messageContent)"></textarea>
+              <!--<i class="fa fa-paperclip attachment" aria-hidden="true"></i>-->
+              <!-- <button class="submit" (click)="sendMessage(messageContent)"><i class="fa fa-paper-plane" aria-hidden="true"></i></button> -->
+              <button class="submit" (click)="sendMessage(messageContent)">Send</button>
+
+              <ng-template #popContent>
+                <emoji-mart set="emojione" title="Learnspace™" perLine="6" totalFrequentLines="2" [style]="{ border: '0'}" (emojiClick)="addEmojiText($event)" (click)="$event.stopPropagation();"></emoji-mart>
+              </ng-template>
+              <button type="button" (click)="$event.stopPropagation();" style=" border: 0;  outline: none; position: absolute; bottom: 50px; right: 35px;" [ngbPopover]="popContent" placement="top-right">
+                  <mat-icon ngbTooltip="Emoji" triggers="hover">mood</mat-icon>
+                </button>
+
+              <ng-template #moreContent>
+                <button style=" border: 0px;  outline: none; background-color:white;" (click)="clickImgUploader()">
+                    <mat-icon ngbTooltip="Send a photo" triggers="hover">add_photo_alternate</mat-icon>
+                  </button>
+
+                <button style=" border: 0px;  outline: none; background-color:white;" (click)="clickUploader()">
+                    <mat-icon ngbTooltip="Send a file" triggers="hover">attach_file</mat-icon>
+                  </button>
+
+                <button (click)="draw(drawboard)" style=" border: 0px;  outline: none; background-color:white;">
+                    <mat-icon ngbTooltip="Draw a picture" triggers="hover">border_color</mat-icon>
+                  </button>
+              </ng-template>
+              <button type="button" (click)="$event.stopPropagation();" style=" border: 0;  outline: none; position: absolute; bottom: 50px; right: 5px;" [ngbPopover]="moreContent" placement="top-right">
+                  <mat-icon ngbTooltip="more function" triggers="hover">add_circle_outline</mat-icon>
+                </button>
+
+            </div>
           </div>
         </div>
+
       </div>
+      <input #upload_image type="file" class="form-control-file" (change)="onImgSelected($event)" style="display:none;" accept="image/*">
+      <input #upload_input type="file" class="form-control-file" (change)="onFileSelected($event)" style="display:none;">
+
+      <!--</div>-->
 
     </div>
-    <input #upload_image type="file" class="form-control-file" (change)="onImgSelected($event)" style="display:none;" accept="image/*">
-    <input #upload_input type="file" class="form-control-file" (change)="onFileSelected($event)" style="display:none;">
 
-    <!--</div>-->
-
-  </div>
-
-  <!-- <div *ngIf="emoji_status==true">
-    <emoji-mart set="emojione" title="Learnspace™" (emojiClick)="addEmojiText($event)"></emoji-mart>
-  </div> -->
+    <!-- <div *ngIf="emoji_status==true">
+      <emoji-mart set="emojione" title="Learnspace™" (emojiClick)="addEmojiText($event)"></emoji-mart>
+    </div> -->
 
 
-</ng-template>
+  </ng-template>
+</div>

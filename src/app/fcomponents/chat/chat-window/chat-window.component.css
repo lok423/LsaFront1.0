@@ -1,0 +1,15 @@
+#chat {
+           position: fixed;
+           background-color: white;
+           opacity: 1;
+
+       }
+       .chat-corner-resize {
+           position: absolute;
+           width: 10px;
+           height: 10px;
+       }
+       #chat-top-left-resize { top: 0px; left: 0px; cursor: nw-resize;}
+       #chat-top-right-resize { top: 0px; right: 0px; cursor: ne-resize;}
+       #chat-bottom-left-resize { bottom: 0px; left: 0px; cursor: sw-resize;}
+       #chat-bottom-right-resize { bottom: 0px; right: 0px; cursor: se-resize;}

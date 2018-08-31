@@ -1,0 +1,15 @@
+<div id='chat' [style.bottom.px]='y'
+                   [style.right.px]='x'
+                   [style.width.px]='width'
+                   [style.min-width.px]= 285
+                   [style.max-width.px]= 1126
+                   [style.min-height.px]= 200
+                   [style.height.px]='height'
+                   (mousedown)='onWindowPress($event)'
+                   (mousemove)='onWindowDrag($event)' x-placement="top-right">
+                   <app-chat (dropdownClose)='closeMessenger()' (total_unread_messages)='handleUnreadCount($event)'></app-chat>
+        <div (mousedown)='onCornerClick($event, bottomRightResize)' id='chat-top-left-resize' class='chat-corner-resize'></div>
+        <div (mousedown)='onCornerClick($event, bottomLeftResize)' id='chat-top-right-resize' class='chat-corner-resize'></div>
+        <div (mousedown)='onCornerClick($event, topRightResize)' id='chat-bottom-left-resize' class='chat-corner-resize'></div>
+        <div (mousedown)='onCornerClick($event, topLeftResize)' id='chat-bottom-right-resize' class='chat-corner-resize'></div>
+    </div>

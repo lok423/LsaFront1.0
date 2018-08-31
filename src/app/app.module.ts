@@ -13,6 +13,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import {AutosizeModule} from 'ngx-autosize';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ResizableModule } from 'angular-resizable-element';
+
 
 //import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 
@@ -134,6 +136,7 @@ import { ChatComponent } from './fcomponents/chat/chat.component';
 import { DrawboardComponent } from './fcomponents/chat/drawboard/drawboard.component';
 import { PreviewImgComponent } from './fcomponents/chat/preview-img/preview-img.component';
 import { DashboardComponent } from './fcomponents/chat/chat-dash/dashboard.component';
+import { ChatWindowComponent } from './fcomponents/chat/chat-window/chat-window.component';
 
 
 
@@ -143,7 +146,7 @@ const appRoutes: Routes = [
     path: 'app', component: fcomponentsComponent,
     children: [
       // Static pages
-      { path: 'about', component: AboutComponent },
+      { path: 'about', component: ChatComponent },
       { path: 'faq', component: FaqComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'howitworks', component: HowItWorksComponent },
@@ -345,7 +348,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     PreviewImgComponent,
     DrawboardComponent,
-    ChatComponent
+    ChatComponent,
+    ChatWindowComponent
   ],
 
   imports:[
@@ -376,7 +380,8 @@ const appRoutes: Routes = [
     MatExpansionModule, MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule,
     AutosizeModule,
     PickerModule,
-    NgbModule
+    NgbModule,
+    ResizableModule
     //NgbDropdownConfig
   ],
 
